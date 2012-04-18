@@ -3988,3 +3988,10 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
+.hero-unit h1 {
+  font-size: 96px;
+}
+.hero-unit img {
+  margin: 25px 0;
+  width: 100%;
+}
