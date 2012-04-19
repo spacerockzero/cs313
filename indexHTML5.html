@@ -1,12 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8">
     <title>Jakob Anderson >> CS313 [Web Engineering II] | Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <!-- styles -->
-    <link href="css/custom.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
   </head>
 
@@ -15,10 +22,10 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a class="brand" href="index.html">Jakob Anderson | CS313</a>
+          <a class="brand" href="#">Jakob Anderson | CS313</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li><a href="index.html">Home</a></li>
+              <li class="active"><a href="index.html">Home</a></li>
               <li><a href="http://www.jakobanderson.com/about-me/">About</a></li>
               <li><a href="http://www.jakobanderson.com">Contact</a></li>
             </ul>
@@ -29,15 +36,14 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3 leftnav">
+        <div class="span3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
-              
               <li class="nav-header">Pages</li>
-              <li><a href="index.html">Home</a></li>
-              <li class="active"><a href="assignments.html">Assignment Page</a></li>
-              
+              <li class="active"><a href="index.html">Home</a></li>
+              <li><a href="assignments.html">Assignment Page</a></li>
               <li class="nav-header">Assignments</li>
+              <li><a href="assignment1.html">Assignment 1</a></li>
               <li><a href="assignment2.html">Assignment 2</a></li>
               <li><a href="assignment3.html">Assignment 3</a></li>
               <li><a href="assignment4.html">Assignment 4</a></li>
@@ -47,42 +53,32 @@
               <li><a href="assignment8.html">Assignment 8</a></li>
               <li><a href="assignment9.html">Assignment 9</a></li>
               <li><a href="assignment10.html">Assignment 10</a></li>
-
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
-        <div class="span9 mainhero">
+        <div class="span9">
 
           <div class="hero-unit">
-            <h1 id="fittext1">Assignments</h1>
-            <p>These are the assignments for this semester:</p>
-            <ul class="nav nav-list internal">
-              <li><a href="assignment2.html">Assignment 2</a></li>
-              <li><a href="assignment3.html">Assignment 3</a></li>
-              <li><a href="assignment4.html">Assignment 4</a></li>
-              <li><a href="assignment5.html">Assignment 5</a></li>
-              <li><a href="assignment6.html">Assignment 6</a></li>
-              <li><a href="assignment7.html">Assignment 7</a></li>
-              <li><a href="assignment8.html">Assignment 8</a></li>
-              <li><a href="assignment9.html">Assignment 9</a></li>
-              <li><a href="assignment10.html">Assignment 10</a></li>
-            </ul>
+            <h1 id="fittext1">Web Engineering II</h1>
+            <img src="img/Jakob_Anderson.jpg" alt="Jakob Anderson, Interactive Engineer and Web Developer">
+            <p>I am Jakob Anderson. I am a Web Design & Development Major from Tacoma, Washington. This site is the home for my CS313 : Web Engineering II projects and assignments. I "noms" web development, and I hope you like my work.</p>
+            <p><a href="assignments.html" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+          </div>
         </div><!--/span-->
 
       </div><!--/row-->
 
       <hr>
 
-      <div id="footer">
+      <footer>
         <p>&copy; Jakob Anderson 2012</p>
-      </div>
+      </footer>
 
     </div><!--/.fluid-container-->
 
     <!-- javascript -->
     <script src="js/jquery.js"></script>
     <script src="js/jquery.fittext.js"></script>
-    <script src="js/scripts.js" type="text/javascript"></script>
     <script type="text/javascript">
       $("#fittext1").fitText();
       $("#fittext2").fitText(1.2);
