@@ -1,8 +1,8 @@
 $(window).load(function() {
 
-	$('.hero-unit img').fadeIn();
-	$('.well').slideDown();
-	$('.nav-collapse li a')
+	// $('.hero-unit img').fadeIn();
+	// $('.well').slideDown();
+	// $('.nav-collapse li a')
 
 	//header contact icons animation
    $(".nav-collapse li a").hover(
