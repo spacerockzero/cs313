@@ -15,16 +15,17 @@
             	Please fill out the form with your current tastes and opinions in Sci-Fi television &amp; movies. 
             	You will see the total results of all votes after submitting your votes.
             </p>
-            
-            <form id="scifi_form" action="/" method="post">	
+            <div id="result"></div> 
+            <form name="scifi_form" id="scifi_form" action="post.php" method="post">	
 		
 				<fieldset>
 					<legend>Sci-Fi Survey Form</legend>
-					<br/>
-					<p class="gender">					
+					<hr/>
+					
+					<p class="gender radio_list">					
 						<label for="name">Gender</label>				
-						<input type="radio" name="gender" id="gender" value="male"/> Male<br/>
-						<input type="radio" name="gender" id="gender" value="female"/> Female<br/>					
+						<input type="radio" name="gender" id="gender" value="male"/><span>Male</span><br/>
+						<input type="radio" name="gender" id="gender" value="female"/><span>Female</span><br/>					
 					</p>
 					<hr/>
 
@@ -34,24 +35,62 @@
 					</p>
 					<hr/>				
 					
-					<p class="tv_franchise">	
+					<p class="tv_franchise radio_list">	
 
-						<label for="tv_franchise">TV Franchise</label>				
-						<input type="radio" name="tv_franchise" value="Battlestar Galactica"/> Battlestar Galactica<br/>
-						<input type="radio" name="tv_franchise" value="Star Trek"/> Star Trek<br/>	
-						<input type="radio" name="tv_franchise" value="Stargate"/> Stargate<br/>
-						<input type="radio" name="tv_franchise" value="Star Wars: Clone Wars Animated Series"/> Star Wars: Clone Wars Animated Series<br/>
-						<input type="radio" name="tv_franchise" value="Cowboy Bebop"/> Cowboy Bebop<br/>
-						<input type="radio" name="tv_franchise" value="Babylon 5"/> Babylon 5<br/>
-						<input type="radio" name="tv_franchise" value="Farscape"/> Farscape<br/>
-						<input type="radio" name="tv_franchise" value="Red Dwarf"/> Red Dwarf<br/>	
-						<input type="radio" name="tv_franchise" value="Fringe"/> Fringe<br/>					
+						<label for="tv_franchise">Favorite sci-fi TV Franchise</label>				
+						<input type="radio" name="tv_franchise" value="Battlestar Galactica"/><span>Battlestar Galactica</span><br/>
+						<input type="radio" name="tv_franchise" value="Star Trek"/><span>Star Trek</span><br/>	
+						<input type="radio" name="tv_franchise" value="Stargate"/><span>Stargate</span><br/>
+						<input type="radio" name="tv_franchise" value="Star Wars: Clone Wars Animated Series"/><span>Star Wars: Clone Wars Animated Series</span><br/>
+						<input type="radio" name="tv_franchise" value="Cowboy Bebop"/><span>Cowboy Bebop</span><br/>
+						<input type="radio" name="tv_franchise" value="Babylon 5"/><span>Babylon 5</span><br/>
+						<input type="radio" name="tv_franchise" value="Farscape"/><span>Farscape</span><br/>
+						<input type="radio" name="tv_franchise" value="Red Dwarf"/><span>Red Dwarf</span><br/>	
+						<input type="radio" name="tv_franchise" value="Fringe"/><span>Fringe</span><br/>					
+					</p>
+					<hr/>
+
+					<p class="star_wars_movie radio_list">	
+						<label for="star_wars_movie">Favorite Star Wars movie</label>				
+						<input type="radio" name="star_wars_movie" value="Star Wars Episode I: The Phantom Menace"/><span>Star Wars Episode I: The Phantom Menace</span><br/>
+						<input type="radio" name="star_wars_movie" value="Star Wars Episode II: Attack of the Clones"/><span>Star Wars Episode II: Attack of the Clones</span><br/>	
+						<input type="radio" name="star_wars_movie" value="Star Wars Episode III: Revenge of the Sith"/><span>Star Wars Episode III: Revenge of the Sith</span><br/>
+						<input type="radio" name="star_wars_movie" value="Star Wars Episode IV: A New Hope"/><span>Star Wars Episode IV: A New Hope</span><br/>
+						<input type="radio" name="star_wars_movie" value="Star Wars Episode V: The Empire Strikes Back"/><span>Star Wars Episode V: The Empire Strikes Back</span><br/>
+						<input type="radio" name="star_wars_movie" value="Star Wars Episode VI: Return of the Jedi"/><span>Star Wars Episode VI: Return of the Jedi</span><br/>				
+					</p>
+					<hr/>
+
+					<p class="star_trek_tv_show radio_list">	
+						<label for="star_trek_tv_show">Favorite Star Trek TV Show</label>				
+						<input type="radio" name="star_trek_tv_show" value="The Original Series"/><span>The Original Series</span><br/>
+						<input type="radio" name="star_trek_tv_show" value="The Animated Series"/><span>The Animated Series</span><br/>	
+						<input type="radio" name="star_trek_tv_show" value="The Next Generation"/><span>The Next Generation</span><br/>
+						<input type="radio" name="star_trek_tv_show" value="Deep Space Nine"/><span>Deep Space Nine</span><br/>
+						<input type="radio" name="star_trek_tv_show" value="Voyager"/><span>Voyager</span><br/>
+						<input type="radio" name="star_trek_tv_show" value="Enterprise"/><span>Enterprise</span><br/>				
+					</p>
+					<hr/>
+
+					<p class="star_trek_movie radio_list">	
+						<label for="star_trek_movie">Favorite Star Trek Movie</label>				
+						<input type="radio" name="star_trek_movie" value="Star Trek: The Motion Picture"/><span>Star Trek: The Motion Picture</span><br/>
+						<input type="radio" name="star_trek_movie" value="Star Trek II: The Wrath of Khan"/><span>Star Trek II: The Wrath of Khan</span><br/>	
+						<input type="radio" name="star_trek_movie" value="Star Trek III: The Search for Spock"/><span>Star Trek III: The Search for Spock</span><br/>
+						<input type="radio" name="star_trek_movie" value="Star Trek IV: The Voyage Home"/><span>Star Trek IV: The Voyage Home</span><br/>
+						<input type="radio" name="star_trek_movie" value="Star Trek V: The Final Frontier"/><span>Star Trek V: The Final Frontier</span><br/>
+						<input type="radio" name="star_trek_movie" value="Star Trek VI: The Undiscovered Country"/><span>Star Trek VI: The Undiscovered Country</span><br/>	
+						<input type="radio" name="star_trek_movie" value="Star Trek Generations"/><span>Star Trek Generations</span><br/>	
+						<input type="radio" name="star_trek_movie" value="Star Trek: First Contact"/><span>Star Trek: First Contact</span><br/>
+						<input type="radio" name="star_trek_movie" value="Star Trek: Insurrection"/><span>Star Trek: Insurrection</span><br/>
+						<input type="radio" name="star_trek_movie" value="Star Trek Nemesis"/><span>Star Trek Nemesis</span><br/>
+						<input type="radio" name="star_trek_movie" value="Star Trek (J.J.Abrams’ 2009 Reboot)"/><span>Star Trek (J.J.Abrams’ 2009 Reboot)</span><br/>				
 					</p>
 					<hr/>
 
 					<p class="submit">
-						<button type="submit">Submit Vote</button>
-					</p>	
+						<input name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form">
+					</p>					
 								
 				</fieldset>								
 			</form>
@@ -59,4 +98,44 @@
 <?php include('modules/footer.php');?>        
     
     </body>
+    <script type="text/javascript">
+		// $.fn.serializeObject = function()
+		// 	{
+		// 	    var o = {};
+		// 	    var a = this.serializeArray();
+		// 	    $.each(a, function() {
+		// 	        if (o[this.name] !== undefined) {
+		// 	            if (!o[this.name].push) {
+		// 	                o[this.name] = [o[this.name]];
+		// 	            }
+		// 	            o[this.name].push(this.value || '');
+		// 	        } else {
+		// 	            o[this.name] = this.value || '';
+		// 	        }
+		// 	    });
+		// 	    return o;
+		// 	};
+  //   	$(document).ready(function(){  
+  
+		//     $('#scifi_form').submit(function() {
+		//         var jsonObject = JSON.stringify($('#scifi_form').serializeObject());
+		//         return false;
+		//     });
+		  
+		// });
+
+		// $.post("assignment2.php", {json : JSON.stringify(jsonObject)});
+
+
+
+    </script>
+
+
 </html>
+
+
+
+
+
+
+

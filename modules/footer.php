@@ -6,6 +6,9 @@
       <hr>
       <footer>
         <p>&copy; Jakob Anderson 2012</p>
+        <br/>
+        <p>Some enhanced UI elements by <a href="http://lab.simurai.com/umbrui/">Simurai Lab &raquo; Umbrui</a> and <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a></p>
+        <br/>
       </footer>
 
     </div><!--/.fluid-container-->

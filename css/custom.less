@@ -27,9 +27,9 @@
 // @import "../less/close.less";
 
 // Components: Buttons & Alerts
-// @import "../less/buttons.less";
-// @import "../less/button-groups.less";
-// @import "../less/alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
+@import "../less/buttons.less";
+@import "../less/button-groups.less";
+@import "../less/alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
 
 // Components: Nav
 // @import "../less/navs.less";
@@ -325,14 +325,32 @@ div#footer {
 	}
 }
 #assignment2 {
-	color:#dfdfdf;
+	.success{  
+	    border: 2px solid #009400;  
+	    background: #B3FFB3;  
+	    color: #555;  
+	    font-weight: bold;  
+	}  
+	  
+	.error{  
+	    border: 2px solid #DE001A;  
+	    background: #FFA8B3;  
+	    color: #000;  
+	    font-weight: bold;  
+	}  
 	legend, label {
 		color:#08C;
-	}
-	legend {
-		border-bottom: 1px solid #999;
+		font-weight:700;
+		// font-family: 'VT323', cursive;
+		font-size: 200%;
+		// -webkit-font-smoothing: none;
+		color: hsl(200,100%,50%);
+		text-shadow: 0 -1px 0px hsla(200,100%,70%,1), 0 1px 0px hsla(0,0%,0%,.8), 0 0 13px hsl(200,100%,50%);
+		margin: 30px 0 15px;
+		line-height:100%;
 	}
 	.hero-unit {
+		color:#dfdfdf;
 		font: 62.5%/1 "Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif;
 		background-color: #242728;
 		background-size: 5px 5px;
@@ -340,7 +358,7 @@ div#footer {
 	}
 	#scifi_form {
 		list-style: none;
-		padding: 50px 0;
+		padding: 30px 0;
 		margin: 0;
 		font-size: 2em;
 		//text-align: center;
@@ -433,28 +451,16 @@ div#footer {
 	}
 
 	/* Assignment 2 Forms Style */
-	// input[type="number"] {
-	// 	font: 62.5%/1 "Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif;
-	// 	-webkit-appearance: none;
-	// 	outline: none;
-	// 	position: relative;
-	// 	z-index: 1;
-	// 	width: 120px;
-	// 	height: 60px;
-	// 	border-radius: 40px / 60px;
-	// 	font-family: 'VT323', cursive;
-	// 	font-size: 36px;
-	// 	line-height: 40px;
-	// 	text-align: center;
-	// 	-webkit-font-smoothing: none;
-	// 	color: #0AF;
-	// 	text-shadow: 0 -1px 0px rgba(102, 204, 255, 1), 0 1px 0px rgba(0, 0, 0, .8), 0 0 13px #0AF;
-	// 	border: 0;
-	// 	background-color: #1C2022;
-	// 	background-size: 4px 4px;
-	// 	background-image: -webkit-linear-gradient( 0deg, transparent 75%, rgba(0, 0, 0, .4) 75% ), -webkit-linear-gradient( 90deg, transparent 75%, rgba(0, 0, 0, .4) 75% );
-	// 	-webkit-box-shadow: inset 0 0 0 4px hsla(0,0%,0%,1), inset 0 0 20px 5px hsla(0,0%,0%,.5), 0 0px 0px 1px hsla(0,0%,0%,.4), 0 1px 0 hsla(0,0%,100%,.25);
-	// }
+	input[type="image"], input[type="checkbox"], input[type="radio"] {
+		top: -2px;
+		position: relative;
+		margin: 5px 0;
+	}
+	  .radio_list {
+		span {
+			margin: 0px 0px 0px 10px;
+		}
+	}
 	/* End Assignment 2 Forms Style */
 }
 
