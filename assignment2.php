@@ -1,3 +1,14 @@
+<?php
+    // switch ($_REQUEST['action']) {
+    // case 'write':
+    //     file_put_contents('scifi_results.json', json_encode($_POST['scifi_form']));
+    //     break;
+    // case 'read':
+    //     $data = unserialize(file_get_contents('scifi_results.json'));
+    //     echo json_encode($data);
+    //     break;
+//}
+?>
 <?php include('modules/header-top.php');?>
 
     <title>Jakob Anderson >> CS313 [Web Engineering II] | Assignment 2</title>
@@ -16,7 +27,7 @@
             	You will see the total results of all votes after submitting your votes.
             </p>
             <div id="result"></div> 
-            <form name="scifi_form" id="scifi_form" action="post.php" method="post">	
+            <form name="json" id="scifi_form" action="" method="post">	
 		
 				<fieldset>
 					<legend>Sci-Fi Survey Form</legend>
@@ -29,7 +40,7 @@
 					</p>
 					<hr/>
 
-					<p class="age">					
+					<!-- <p class="age">					
 						<label for="age">Age</label>	
 						<input type="number" min="0" max="120" value="20">			
 					</p>
@@ -86,10 +97,10 @@
 						<input type="radio" name="star_trek_movie" value="Star Trek Nemesis"/><span>Star Trek Nemesis</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star Trek (J.J.Abrams’ 2009 Reboot)"/><span>Star Trek (J.J.Abrams’ 2009 Reboot)</span><br/>				
 					</p>
-					<hr/>
+					<hr/> -->
 
 					<p class="submit">
-						<input name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form">
+						<input name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form" onsubmit="file_put_contents("scifiresults.json",  $_POST['json']);">
 					</p>					
 								
 				</fieldset>								
@@ -99,33 +110,49 @@
     
     </body>
     <script type="text/javascript">
-		// $.fn.serializeObject = function()
-		// 	{
-		// 	    var o = {};
-		// 	    var a = this.serializeArray();
-		// 	    $.each(a, function() {
-		// 	        if (o[this.name] !== undefined) {
-		// 	            if (!o[this.name].push) {
-		// 	                o[this.name] = [o[this.name]];
-		// 	            }
-		// 	            o[this.name].push(this.value || '');
-		// 	        } else {
-		// 	            o[this.name] = this.value || '';
-		// 	        }
-		// 	    });
-		// 	    return o;
-		// 	};
-  //   	$(document).ready(function(){  
-  
-		//     $('#scifi_form').submit(function() {
-		//         var jsonObject = JSON.stringify($('#scifi_form').serializeObject());
-		//         return false;
-		//     });
-		  
-		// });
 
-		// $.post("assignment2.php", {json : JSON.stringify(jsonObject)});
+    	$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		        if (o[this.name] !== undefined) {
+		            if (!o[this.name].push) {
+		                o[this.name] = [o[this.name]];
+		            }
+		            o[this.name].push(this.value || '');
+		        } else {
+		            o[this.name] = this.value || '';
+		        }
+		    });
+		    return o;
+		};
 
+    	$(document).ready(function(){  
+
+		});
+
+		$('#scifi_form').submit(function() {
+	       	var jsonObject = $('#scifi_form').serializeObject();
+
+			// some jQuery to write to file
+		    $.ajax({
+		        type : "POST",
+		        url : "phplib/post.php",
+		        dataType : 'json',
+		        data : {
+		            json : jsonObject
+		        }
+		    })
+		    .done(function() { alert("success"); })
+			.fail(function() { alert("error"); })
+			.always(function() { alert("complete"); });	
+			
+	    });
+
+
+
+		    
 
 
     </script>
