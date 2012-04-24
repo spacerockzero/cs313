@@ -27,7 +27,7 @@
             	You will see the total results of all votes after submitting your votes.
             </p>
             <div id="result"></div> 
-            <form name="json" id="scifi_form" action="" method="post">	
+            <form name="scifi_form" id="scifi_form" action="phplib/post.php" method="post">	
 		
 				<fieldset>
 					<legend>Sci-Fi Survey Form</legend>
@@ -100,7 +100,7 @@
 					<hr/>
 
 					<p class="submit">
-						<input id="submit" name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form" onsubmit="file_put_contents("scifiresults.json",  $_POST['json']);">
+						<input id="submit" name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form" onsubmit="ajaxFunction();">
 					</p>					
 								
 				</fieldset>								
@@ -111,22 +111,22 @@
     </body>
     <script type="text/javascript">
 
-    	$.fn.serializeObject = function()
-		{
-		    var o = {};
-		    var a = this.serializeArray();
-		    $.each(a, function() {
-		        if (o[this.name] !== undefined) {
-		            if (!o[this.name].push) {
-		                o[this.name] = [o[this.name]];
-		            }
-		            o[this.name].push(this.value || '');
-		        } else {
-		            o[this.name] = this.value || '';
-		        }
-		    });
-		    return o;
-		};
+  //   	$.fn.serializeObject = function()
+		// {
+		//     var o = {};
+		//     var a = this.serializeArray();
+		//     $.each(a, function() {
+		//         if (o[this.name] !== undefined) {
+		//             if (!o[this.name].push) {
+		//                 o[this.name] = [o[this.name]];
+		//             }
+		//             o[this.name].push(this.value || '');
+		//         } else {
+		//             o[this.name] = this.value || '';
+		//         }
+		//     });
+		//     return o;
+		// };
 		
 		// var jsonObject = $('#scifi_form').serializeObject();
 		
@@ -171,22 +171,22 @@
 			
 	    //});
 
-		$(function() {  
-		  $("#submit").click(function() {  
-		    // validate and process form here  
-		    var jsonObject = JSON.stringify($('#scifi_form').serializeObject());
+		// $(function() {  
+		//   $("#submit").click(function() {  
+		//     // validate and process form here  
+		//     var jsonObject = JSON.stringify($('#scifi_form').serializeObject());
 
-			$.ajax({  
-			  type: "POST",  
-			  url: "phplib/post.php",  
-			  data: jsonObject,  
-			  success: function() {  
-			    $('#results').append("<div>JSON object submitted successfully</div>");  
-			  }  
-			});  
-			return false; 
-		  });  
-		}); 
+		// 	$.ajax({  
+		// 	  type: "POST",  
+		// 	  url: "phplib/post.php",  
+		// 	  data: jsonObject,  
+		// 	  success: function() {  
+		// 	    $('#results').append("<div>JSON object submitted successfully</div>");  
+		// 	  }  
+		// 	});  
+		// 	return false; 
+		//   });  
+		// }); 
 		// $(function() {
 
 		// 	var jsonObject = JSON.stringify($('#scifi_form').serializeObject());
@@ -202,6 +202,41 @@
 		// 	return false; 
 
 		// });
+
+		<!-- 
+		//Browser Support Code
+		// function ajaxFunction(){
+		// 	var ajaxRequest;  // The variable that makes Ajax possible!
+			
+		// 	try{
+		// 		// Opera 8.0+, Firefox, Safari
+		// 		ajaxRequest = new XMLHttpRequest();
+		// 	} catch (e){
+		// 		// Internet Explorer Browsers
+		// 		try{
+		// 			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		// 		} catch (e) {
+		// 			try{
+		// 				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+		// 			} catch (e){
+		// 				// Something went wrong
+		// 				alert("Your browser broke!");
+		// 				return false;
+		// 			}
+		// 		}
+		// 	}
+		// 	// Create a function that will receive data sent from the server
+		// 	ajaxRequest.onreadystatechange = function(){
+		// 		if(ajaxRequest.readyState == 4){
+		// 			JSON.stringify(jsonObject) = ajaxRequest.responseText;
+		// 		}
+		// 	}
+		// 	ajaxRequest.open("GET", "phplib/post.php", true);
+		// 	ajaxRequest.send(null); 
+		// 	$('#result').append("JSON obect is " + JSON.stringify(jsonObject));
+		// }
+
+		//-->
 		    
 
 
