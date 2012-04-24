@@ -36,11 +36,11 @@
 					<p class="gender radio_list">					
 						<label for="name">Gender</label>				
 						<input type="radio" name="gender" id="gender" value="male"/><span>Male</span><br/>
-						<input type="radio" name="gender" id="gender" value="female"/><span>Female</span><br/>					
+						<input type="radio" name="gender" id="gender" value="female" checked="true"/><span>Female</span><br/>					
 					</p>
 					<hr/>
 
-					<!-- <p class="age">					
+					<p class="age">					
 						<label for="age">Age</label>	
 						<input type="number" min="0" max="120" value="20">			
 					</p>
@@ -50,7 +50,7 @@
 
 						<label for="tv_franchise">Favorite sci-fi TV Franchise</label>				
 						<input type="radio" name="tv_franchise" value="Battlestar Galactica"/><span>Battlestar Galactica</span><br/>
-						<input type="radio" name="tv_franchise" value="Star Trek"/><span>Star Trek</span><br/>	
+						<input type="radio" name="tv_franchise" value="Star Trek" checked="true"/><span>Star Trek</span><br/>	
 						<input type="radio" name="tv_franchise" value="Stargate"/><span>Stargate</span><br/>
 						<input type="radio" name="tv_franchise" value="Star Wars: Clone Wars Animated Series"/><span>Star Wars: Clone Wars Animated Series</span><br/>
 						<input type="radio" name="tv_franchise" value="Cowboy Bebop"/><span>Cowboy Bebop</span><br/>
@@ -67,7 +67,7 @@
 						<input type="radio" name="star_wars_movie" value="Star Wars Episode II: Attack of the Clones"/><span>Star Wars Episode II: Attack of the Clones</span><br/>	
 						<input type="radio" name="star_wars_movie" value="Star Wars Episode III: Revenge of the Sith"/><span>Star Wars Episode III: Revenge of the Sith</span><br/>
 						<input type="radio" name="star_wars_movie" value="Star Wars Episode IV: A New Hope"/><span>Star Wars Episode IV: A New Hope</span><br/>
-						<input type="radio" name="star_wars_movie" value="Star Wars Episode V: The Empire Strikes Back"/><span>Star Wars Episode V: The Empire Strikes Back</span><br/>
+						<input type="radio" name="star_wars_movie" value="Star Wars Episode V: The Empire Strikes Back" checked="true"/><span>Star Wars Episode V: The Empire Strikes Back</span><br/>
 						<input type="radio" name="star_wars_movie" value="Star Wars Episode VI: Return of the Jedi"/><span>Star Wars Episode VI: Return of the Jedi</span><br/>				
 					</p>
 					<hr/>
@@ -76,7 +76,7 @@
 						<label for="star_trek_tv_show">Favorite Star Trek TV Show</label>				
 						<input type="radio" name="star_trek_tv_show" value="The Original Series"/><span>The Original Series</span><br/>
 						<input type="radio" name="star_trek_tv_show" value="The Animated Series"/><span>The Animated Series</span><br/>	
-						<input type="radio" name="star_trek_tv_show" value="The Next Generation"/><span>The Next Generation</span><br/>
+						<input type="radio" name="star_trek_tv_show" value="The Next Generation" checked="true"/><span>The Next Generation</span><br/>
 						<input type="radio" name="star_trek_tv_show" value="Deep Space Nine"/><span>Deep Space Nine</span><br/>
 						<input type="radio" name="star_trek_tv_show" value="Voyager"/><span>Voyager</span><br/>
 						<input type="radio" name="star_trek_tv_show" value="Enterprise"/><span>Enterprise</span><br/>				
@@ -95,12 +95,12 @@
 						<input type="radio" name="star_trek_movie" value="Star Trek: First Contact"/><span>Star Trek: First Contact</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star Trek: Insurrection"/><span>Star Trek: Insurrection</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star Trek Nemesis"/><span>Star Trek Nemesis</span><br/>
-						<input type="radio" name="star_trek_movie" value="Star Trek (J.J.Abrams’ 2009 Reboot)"/><span>Star Trek (J.J.Abrams’ 2009 Reboot)</span><br/>				
+						<input type="radio" name="star_trek_movie" value="Star Trek (J.J.Abrams’ 2009 Reboot)" checked="true"/><span>Star Trek (J.J.Abrams’ 2009 Reboot)</span><br/>				
 					</p>
-					<hr/> -->
+					<hr/>
 
 					<p class="submit">
-						<input name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form" onsubmit="file_put_contents("scifiresults.json",  $_POST['json']);">
+						<input id="submit" name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form" onsubmit="file_put_contents("scifiresults.json",  $_POST['json']);">
 					</p>					
 								
 				</fieldset>								
@@ -127,31 +127,81 @@
 		    });
 		    return o;
 		};
+		
+		// var jsonObject = $('#scifi_form').serializeObject();
+		
+		// $(document).ready(function(){
+		// 	$('#result').append("JSON obect is " + JSON.stringify(jsonObject));
+		// });
 
-    	$(document).ready(function(){  
+  //   	$(document).ready(function(){  
 
-		});
+	 //    	// Assign handlers immediately after making the request,
+		// 	// and remember the jqxhr object for this request
+		// 	var jqxhr = $.ajax( "phplib/post.php" )
+		// 	    .done(function() { alert("success"); })
+		// 	    .fail(function() { alert("error"); })
+		// 	    .always(function() { alert("complete"); });
 
-		$('#scifi_form').submit(function() {
-	       	var jsonObject = $('#scifi_form').serializeObject();
+		// 	// perform other work here ...
 
-			// some jQuery to write to file
-		    $.ajax({
-		        type : "POST",
-		        url : "phplib/post.php",
-		        dataType : 'json',
-		        data : {
-		            json : jsonObject
-		        }
-		    })
-		    .done(function() { alert("success"); })
-			.fail(function() { alert("error"); })
-			.always(function() { alert("complete"); });	
+		// 	// Set another completion function for the request above
+		// 	jqxhr.always(function() { alert("second complete"); });
+
+		// });
+
+    	
+
+		//$('#scifi_form').submit(function() {
+	         //var jsonObject = $('#scifi_form').serializeObject();
+
+			// // some jQuery to write to file
+		 //    var jqxhr = $.ajax({
+		 //        type : "post",
+		 //        url : "phplib/post.php",
+		 //        dataType : 'json',
+		 //        data : {
+		 //            json : jsonObject
+		 //        }
+		 //    })
+		 //    .success(function() {alert("success!")})
+		 //    .done(function() { alert("done-success"); })
+			// .fail(function() { alert("error-fail"); })
+			// .always(function() { alert("complete"); });	
 			
-	    });
+	    //});
 
+		$(function() {  
+		  $("#submit").click(function() {  
+		    // validate and process form here  
+		    var jsonObject = JSON.stringify($('#scifi_form').serializeObject());
 
+			$.ajax({  
+			  type: "POST",  
+			  url: "phplib/post.php",  
+			  data: jsonObject,  
+			  success: function() {  
+			    $('#results').append("<div>JSON object submitted successfully</div>");  
+			  }  
+			});  
+			return false; 
+		  });  
+		}); 
+		// $(function() {
 
+		// 	var jsonObject = JSON.stringify($('#scifi_form').serializeObject());
+
+		// 	$.ajax({  
+		// 	  type: "POST",  
+		// 	  url: "phplib/post.php",  
+		// 	  data: jsonObject,  
+		// 	  success: function() {  
+		// 	    $('#results').append("<div>JSON object submitted successfully</div>");  
+		// 	  }  
+		// 	});  
+		// 	return false; 
+
+		// });
 		    
 
 
