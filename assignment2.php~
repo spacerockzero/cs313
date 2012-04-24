@@ -101,7 +101,7 @@
 
 					<p class="submit">
 						<input id="submit" name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form" onsubmit="ajaxFunction();">
-					</p> 					
+					</p>					
 								
 				</fieldset>								
 			</form>
