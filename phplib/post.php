@@ -1,12 +1,29 @@
 <?php
     $file = '../data/scifi_results.txt';
 
-    $json = file_get_contents($file);
+ //    $json = json_encode(file_get_contents($file));
 
-    echo "$json = ".$json;
+	// $data = json_encode($_POST);
 
- //    $data = json_decode($json);
-	// $data[] = $_POST['scifi_form'];
+	// $data += $json;
+
+	
+
+	
+	$data[] = $_POST['scifi_form'];
+
+	$inp = file_get_contents($file);
+	$tempArray = json_decode($inp,true);
+	array_push($tempArray, $data);
+	$jsonData = json_encode($tempArray,true);
+	file_put_contents($file, $jsonData);
+
+    //echo "data = ".printr ($data);
+
+	echo "jsonData = ".$jsonData;
+
+
+
 	// file_put_contents($file, json_encode($_POST));
 	
 
