@@ -27,7 +27,7 @@
             	You will see the total results of all votes after submitting your votes.
             </p>
             <div id="result"></div> 
-            <form name="scifi_form" id="scifi_form" action="" method="post">	
+            <form name="scifi_form" id="scifi_form" action="" method="GET">	
 		
 				<fieldset>
 					<legend>Sci-Fi Survey Form</legend>
@@ -38,15 +38,9 @@
 						<input type="radio" name="gender" id="gender" value="male"/><span>Male</span><br/>
 						<input type="radio" name="gender" id="gender" value="female" checked="true"/><span>Female</span><br/>					
 					</p>
-					<hr/>
-
-					<!-- <p class="age">					
-						<label for="age">Age</label>	
-						<input type="number" min="0" max="120" value="20">			
-					</p>
 					<hr/>				
 					
-					<p class="tv_franchise radio_list">	
+					 <p class="tv_franchise radio_list">	
 
 						<label for="tv_franchise">Favorite sci-fi TV Franchise</label>				
 						<input type="radio" name="tv_franchise" value="Battlestar Galactica"/><span>Battlestar Galactica</span><br/>
@@ -61,7 +55,7 @@
 					</p>
 					<hr/>
 
-					<p class="star_wars_movie radio_list">	
+					<!--<p class="star_wars_movie radio_list">	
 						<label for="star_wars_movie">Favorite Star Wars movie</label>				
 						<input type="radio" name="star_wars_movie" value="Star Wars Episode I: The Phantom Menace"/><span>Star Wars Episode I: The Phantom Menace</span><br/>
 						<input type="radio" name="star_wars_movie" value="Star Wars Episode II: Attack of the Clones"/><span>Star Wars Episode II: Attack of the Clones</span><br/>	
@@ -179,15 +173,16 @@
 			xmlHttp.open("POST", "phplib/post.php", true); 
 			
 			jsonObject = $('#scifi_form').serializeObject();
+			//jsonObject = JSON.stringify(jsonObject);
 			
-			console.log("jsonObject = " + jsonObject);
+				console.log("jsonObject = " + jsonObject);
 			
 			xmlHttp.send(jsonObject);
 		}
 
 		function HandleResponse(response)
 		{
-			console.log("response = " + response);
+				console.log("response = " + response);
 		  	document.getElementById('result').innerHTML = response;
 		  	//$('#scifi_form').fadeOut();
 		}
