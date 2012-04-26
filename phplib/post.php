@@ -1,32 +1,34 @@
 <?php
-    $file = '../data/results.txt';  
+ //    $file = '../data/results.txt';  
 
- //    $json = json_encode(file_get_contents($file));
+ // //    $json = json_encode(file_get_contents($file));
 
-	// $data = json_encode($_POST);
+	// // $data = json_encode($_POST);
 
-	// $data += $json;
+	// // $data += $json;
+
+	// $result;
 
 	
+	// $data[] = $_POST;
 
+	// $inp = file_get_contents($file);
+	// $tempArray = json_decode($inp,true);
 	
-	$data[] = $_POST;
+	// if ($tempArray != NULL){
+	// 	array_push($tempArray, $data);
+	// 	$jsonData = json_encode($tempArray,true);
+	// 	file_put_contents($file, $jsonData);
+	// 	$result = $jsonData;
+	// } else {
+	// 	file_put_contents($file, json_encode($data));
+	// 	$result = json_encode($data);
+	// }
 
-	$inp = file_get_contents($file);
-	$tempArray = json_decode($inp,true);
-	
-	if ($tempArray != NULL){
-		array_push($tempArray, $data);
-		$jsonData = json_encode($tempArray,true);
-		file_put_contents($file, $jsonData);
-	} else {
-		file_put_contents($file, json_encode($data));
-	}
+ //    //echo "data = ".printr ($data);
 
-    //echo "data = ".printr ($data);
-
-	//echo "jsonData = ".$jsonData;
-
+	// echo $result;
+	echo $_POST;
 
 
 	// file_put_contents($file, json_encode($_POST));

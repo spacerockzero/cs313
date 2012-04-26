@@ -27,7 +27,7 @@
             	You will see the total results of all votes after submitting your votes.
             </p>
             <div id="result"></div> 
-            <form name="scifi_form" id="scifi_form" action="phplib/post.php" method="post">	
+            <form name="scifi_form" id="scifi_form" action="" method="post">	
 		
 				<fieldset>
 					<legend>Sci-Fi Survey Form</legend>
@@ -40,7 +40,7 @@
 					</p>
 					<hr/>
 
-					<p class="age">					
+					<!-- <p class="age">					
 						<label for="age">Age</label>	
 						<input type="number" min="0" max="120" value="20">			
 					</p>
@@ -97,10 +97,10 @@
 						<input type="radio" name="star_trek_movie" value="Star Trek Nemesis"/><span>Star Trek Nemesis</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star Trek (J.J.Abrams’ 2009 Reboot)" checked="true"/><span>Star Trek (J.J.Abrams’ 2009 Reboot)</span><br/>				
 					</p>
-					<hr/>
+					<hr/> -->
 
 					<p class="submit">
-						<input id="submit" name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form" onsubmit="ajaxFunction();">
+						<input id="submit" name="submitForm" class="btn btn-primary btn-large" type="button" value="Submit Form" onclick="MakeRequest();">
 					</p> 					
 								
 				</fieldset>								
@@ -111,134 +111,79 @@
     </body>
     <script type="text/javascript">
 
-  //   	$.fn.serializeObject = function()
-		// {
-		//     var o = {};
-		//     var a = this.serializeArray();
-		//     $.each(a, function() {
-		//         if (o[this.name] !== undefined) {
-		//             if (!o[this.name].push) {
-		//                 o[this.name] = [o[this.name]];
-		//             }
-		//             o[this.name].push(this.value || '');
-		//         } else {
-		//             o[this.name] = this.value || '';
-		//         }
-		//     });
-		//     return o;
-		// };
+    	$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		        if (o[this.name] !== undefined) {
+		            if (!o[this.name].push) {
+		                o[this.name] = [o[this.name]];
+		            }
+		            o[this.name].push(this.value || '');
+		        } else {
+		            o[this.name] = this.value || '';
+		        }
+		    });
+		    return o;
+		};
 		
-		// var jsonObject = $('#scifi_form').serializeObject();
-		
-		// $(document).ready(function(){
-		// 	$('#result').append("JSON obect is " + JSON.stringify(jsonObject));
-		// });
-
-  //   	$(document).ready(function(){  
-
-	 //    	// Assign handlers immediately after making the request,
-		// 	// and remember the jqxhr object for this request
-		// 	var jqxhr = $.ajax( "phplib/post.php" )
-		// 	    .done(function() { alert("success"); })
-		// 	    .fail(function() { alert("error"); })
-		// 	    .always(function() { alert("complete"); });
-
-		// 	// perform other work here ...
-
-		// 	// Set another completion function for the request above
-		// 	jqxhr.always(function() { alert("second complete"); });
-
-		// });
-
-    	
-
-		//$('#scifi_form').submit(function() {
-	         //var jsonObject = $('#scifi_form').serializeObject();
-
-			// // some jQuery to write to file
-		 //    var jqxhr = $.ajax({
-		 //        type : "post",
-		 //        url : "phplib/post.php",
-		 //        dataType : 'json',
-		 //        data : {
-		 //            json : jsonObject
-		 //        }
-		 //    })
-		 //    .success(function() {alert("success!")})
-		 //    .done(function() { alert("done-success"); })
-			// .fail(function() { alert("error-fail"); })
-			// .always(function() { alert("complete"); });	
-			
-	    //});
-
-		// $(function() {  
-		//   $("#submit").click(function() {  
-		//     // validate and process form here  
-		//     var jsonObject = JSON.stringify($('#scifi_form').serializeObject());
-
-		// 	$.ajax({  
-		// 	  type: "POST",  
-		// 	  url: "phplib/post.php",  
-		// 	  data: jsonObject,  
-		// 	  success: function() {  
-		// 	    $('#results').append("<div>JSON object submitted successfully</div>");  
-		// 	  }  
-		// 	});  
-		// 	return false; 
-		//   });  
-		// }); 
-		// $(function() {
-
-		// 	var jsonObject = JSON.stringify($('#scifi_form').serializeObject());
-
-		// 	$.ajax({  
-		// 	  type: "POST",  
-		// 	  url: "phplib/post.php",  
-		// 	  data: jsonObject,  
-		// 	  success: function() {  
-		// 	    $('#results').append("<div>JSON object submitted successfully</div>");  
-		// 	  }  
-		// 	});  
-		// 	return false; 
-
-		// });
-
-		<!-- 
-		//Browser Support Code
-		// function ajaxFunction(){
-		// 	var ajaxRequest;  // The variable that makes Ajax possible!
-			
-		// 	try{
-		// 		// Opera 8.0+, Firefox, Safari
-		// 		ajaxRequest = new XMLHttpRequest();
-		// 	} catch (e){
-		// 		// Internet Explorer Browsers
-		// 		try{
-		// 			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
-		// 		} catch (e) {
-		// 			try{
-		// 				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
-		// 			} catch (e){
-		// 				// Something went wrong
-		// 				alert("Your browser broke!");
-		// 				return false;
-		// 			}
-		// 		}
-		// 	}
-		// 	// Create a function that will receive data sent from the server
-		// 	ajaxRequest.onreadystatechange = function(){
-		// 		if(ajaxRequest.readyState == 4){
-		// 			JSON.stringify(jsonObject) = ajaxRequest.responseText;
-		// 		}
-		// 	}
-		// 	ajaxRequest.open("GET", "phplib/post.php", true);
-		// 	ajaxRequest.send(null); 
-		// 	$('#result').append("JSON obect is " + JSON.stringify(jsonObject));
-		// }
-
-		//-->
+		var jsonObject = $('#scifi_form').serializeObject();
 		    
+		function getXMLHttp()
+		{
+		  var xmlHttp
 
+		  try
+		  {
+		    //Firefox, Opera 8.0+, Safari
+		    xmlHttp = new XMLHttpRequest();
+		  }
+		  catch(e)
+		  {
+		    //Internet Explorer
+		    try
+		    {
+		      xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+		    }
+		    catch(e)
+		    {
+		      try
+		      {
+		        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		      }
+		      catch(e)
+		      {
+		        alert("Your browser does not support AJAX!")
+		        return false;
+		      }
+		    }
+		  }
+		  return xmlHttp;
+		}
+
+		function MakeRequest()
+		{
+		  var xmlHttp = getXMLHttp();
+		  
+		  xmlHttp.onreadystatechange = function()
+		  {
+		    if(xmlHttp.readyState == 4)
+		    {
+		      HandleResponse(xmlHttp.responseText);
+		    }
+		  }
+
+		  xmlHttp.open("POST", "phplib/post.php", true); 
+		  xmlHttp.send(jsonObject);
+		}
+
+		function HandleResponse(response)
+		{
+			console.log(response);
+		  	//document.getElementById('result').innerHTML = response;
+		  	$('#scifi_form').fadeOut();
+		}
 
     </script>
 
