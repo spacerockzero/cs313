@@ -111,6 +111,8 @@
     </body>
     <script type="text/javascript">
 
+    	var jsonObject;
+
     	$.fn.serializeObject = function()
 		{
 		    var o = {};
@@ -128,7 +130,7 @@
 		    return o;
 		};
 		
-		var jsonObject = $('#scifi_form').serializeObject();
+
 		    
 		function getXMLHttp()
 		{
@@ -164,25 +166,30 @@
 
 		function MakeRequest()
 		{
-		  var xmlHttp = getXMLHttp();
+		  	var xmlHttp = getXMLHttp();
 		  
-		  xmlHttp.onreadystatechange = function()
-		  {
-		    if(xmlHttp.readyState == 4)
-		    {
-		      HandleResponse(xmlHttp.responseText);
-		    }
-		  }
+			xmlHttp.onreadystatechange = function()
+			{
+				if(xmlHttp.readyState == 4)
+				{
+			  		HandleResponse(xmlHttp.responseText);
+				}
+			}
 
-		  xmlHttp.open("POST", "phplib/post.php", true); 
-		  xmlHttp.send(jsonObject);
+			xmlHttp.open("POST", "phplib/post.php", true); 
+			
+			jsonObject = $('#scifi_form').serializeObject();
+			
+			console.log("jsonObject = " + jsonObject);
+			
+			xmlHttp.send(jsonObject);
 		}
 
 		function HandleResponse(response)
 		{
-			console.log(response);
-		  	//document.getElementById('result').innerHTML = response;
-		  	$('#scifi_form').fadeOut();
+			console.log("response = " + response);
+		  	document.getElementById('result').innerHTML = response;
+		  	//$('#scifi_form').fadeOut();
 		}
 
     </script>
