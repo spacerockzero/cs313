@@ -1,5 +1,5 @@
 <?php
-    $file = '../data/results.txt';
+    $file = '../data/results.txt';  
 
  //    $json = json_encode(file_get_contents($file));
 
@@ -10,17 +10,22 @@
 	
 
 	
-	$data[] = $_POST['scifi_form'];
+	$data[] = $_POST;
 
 	$inp = file_get_contents($file);
 	$tempArray = json_decode($inp,true);
-	array_push($tempArray, $data);
-	$jsonData = json_encode($tempArray,true);
-	file_put_contents($file, $jsonData);
+	
+	if ($tempArray != NULL){
+		array_push($tempArray, $data);
+		$jsonData = json_encode($tempArray,true);
+		file_put_contents($file, $jsonData);
+	} else {
+		file_put_contents($file, json_encode($data));
+	}
 
     //echo "data = ".printr ($data);
 
-	echo "jsonData = ".$jsonData;
+	//echo "jsonData = ".$jsonData;
 
 
 
