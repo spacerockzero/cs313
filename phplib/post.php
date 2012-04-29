@@ -1,24 +1,42 @@
 <?php
-    $file = '../data/results.txt';  
+    
+ 	// $file = '../data/results.txt';  
 
-	$result;
-
+	// $result;
 	
-	$data = $_POST; //$_POST is an array containing the serialized form results object
+	//$data = json_decode($_POST,true); //$_POST is an array containing the serialized form results object
 
-	$tempArray = file_get_contents($file); //$tempArray should be reading an array of PHP objects from the txt file
+
+
+	// $tempArray = json_decode(file_get_contents($file));
+
+	// //$tempArray = $fileData; //$tempArray should be reading an array of PHP objects from the txt file
 	
-	if ($tempArray != NULL){
-		array_push($tempArray, $data);
-		//$jsonData = json_encode($tempArray,true);
-		file_put_contents($file, $tempArray);
-		$result = json_encode($tempArray);
-	} else {
-		file_put_contents($file, json_encode($data));
-		$result = json_encode($data);
-	}
+	// if ($tempArray != NULL){
 
-	echo $result;
-	//echo print_r($data);
+	// 	array_push($tempArray, $data);
+	// 	$jsonData = json_encode($tempArray);
+	// 	file_put_contents($file, $jsonData);
+	// 	$result = json_encode($tempArray);
+
+	// } else {
+		
+	// 	//$data = json_encode($data);
+	// 	file_put_contents($file, json_encode($data));
+	// 	$result = json_encode($data);
+
+	// }
+
+	// $result = file_get_contents($file);
+	
+	// echo $result;
+
+
+
+	print "Gender: ".$_POST['gender']."<br/>";
+	print "Favorite sci-fi TV franchise: ".$_POST['tv_franchise']."<br/>";
+	print "Favorite Star Wars Movie: ".$_POST['star_wars_movie']."<br/>";
+	print "Favorite Star Trek TV Show: ".$_POST['star_trek_tv_show']."<br/>";
+	print "Favorite Star Trek Movie: ".$_POST['star_trek_movie']."<br/>";
 
 ?>

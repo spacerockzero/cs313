@@ -27,7 +27,7 @@
             	You will see the total results of all votes after submitting your votes.
             </p>
             <div id="result"></div> 
-            <form name="scifi_form" id="scifi_form" action="" method="GET">	
+            <form name="scifi_form" id="scifi_form" action="assignment2-post.php" method="post" accept-charset="utf-8">	
 		
 				<fieldset>
 					<legend>Sci-Fi Survey Form</legend>
@@ -55,7 +55,7 @@
 					</p>
 					<hr/>
 
-					<!--<p class="star_wars_movie radio_list">	
+					<p class="star_wars_movie radio_list">	
 						<label for="star_wars_movie">Favorite Star Wars movie</label>				
 						<input type="radio" name="star_wars_movie" value="Star Wars Episode I: The Phantom Menace"/><span>Star Wars Episode I: The Phantom Menace</span><br/>
 						<input type="radio" name="star_wars_movie" value="Star Wars Episode II: Attack of the Clones"/><span>Star Wars Episode II: Attack of the Clones</span><br/>	
@@ -89,12 +89,12 @@
 						<input type="radio" name="star_trek_movie" value="Star Trek: First Contact"/><span>Star Trek: First Contact</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star Trek: Insurrection"/><span>Star Trek: Insurrection</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star Trek Nemesis"/><span>Star Trek Nemesis</span><br/>
-						<input type="radio" name="star_trek_movie" value="Star Trek (J.J.Abrams’ 2009 Reboot)" checked="true"/><span>Star Trek (J.J.Abrams’ 2009 Reboot)</span><br/>				
+						<input type="radio" name="star_trek_movie" value="Star Trek (J.J.Abrams 2009 Reboot)" checked="true"/><span>Star Trek (J.J.Abrams’ 2009 Reboot)</span><br/>				
 					</p>
-					<hr/> -->
+					<hr/>
 
 					<p class="submit">
-						<input id="submit" name="submitForm" class="btn btn-primary btn-large" type="button" value="Submit Form" onclick="MakeRequest();">
+						<input id="submit" name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form" >
 					</p> 					
 								
 				</fieldset>								
@@ -105,87 +105,98 @@
     </body>
     <script type="text/javascript">
 
-    	var jsonObject;
-
-    	$.fn.serializeObject = function()
-		{
-		    var o = {};
-		    var a = this.serializeArray();
-		    $.each(a, function() {
-		        if (o[this.name] !== undefined) {
-		            if (!o[this.name].push) {
-		                o[this.name] = [o[this.name]];
-		            }
-		            o[this.name].push(this.value || '');
-		        } else {
-		            o[this.name] = this.value || '';
-		        }
-		    });
-		    return o;
-		};
+  //   	var jsonObject;
+    	
+    	
+  //   	$.fn.serializeObject = function()
+		// {
+		//     var o = {};
+		//     var a = this.serializeArray();
+		//     $.each(a, function() {
+		//         if (o[this.name] !== undefined) {
+		//             if (!o[this.name].push) {
+		//                 o[this.name] = [o[this.name]];
+		//             }
+		//             o[this.name].push(this.value || '');
+		//         } else {
+		//             o[this.name] = this.value || '';
+		//         }
+		//     });
+		//     return o;
+		// };
 		
 
 		    
-		function getXMLHttp()
-		{
-		  var xmlHttp
+		// function getXMLHttp()
+		// {
+		//   var xmlHttp
 
-		  try
-		  {
-		    //Firefox, Opera 8.0+, Safari
-		    xmlHttp = new XMLHttpRequest();
-		  }
-		  catch(e)
-		  {
-		    //Internet Explorer
-		    try
-		    {
-		      xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-		    }
-		    catch(e)
-		    {
-		      try
-		      {
-		        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-		      }
-		      catch(e)
-		      {
-		        alert("Your browser does not support AJAX!")
-		        return false;
-		      }
-		    }
-		  }
-		  return xmlHttp;
-		}
+		//   try
+		//   {
+		//     //Firefox, Opera 8.0+, Safari
+		//     xmlHttp = new XMLHttpRequest();
+		//   }
+		//   catch(e)
+		//   {
+		//     //Internet Explorer
+		//     try
+		//     {
+		//       xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+		//     }
+		//     catch(e)
+		//     {
+		//       try
+		//       {
+		//         xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		//       }
+		//       catch(e)
+		//       {
+		//         alert("Your browser does not support AJAX!")
+		//         return false;
+		//       }
+		//     }
+		//   }
+		//   return xmlHttp;
+		// }
 
-		function MakeRequest()
-		{
-		  	var xmlHttp = getXMLHttp();
+		// function MakeRequest()
+		// {
+		//   	var xmlHttp = getXMLHttp();
 		  
-			xmlHttp.onreadystatechange = function()
-			{
-				if(xmlHttp.readyState == 4)
-				{
-			  		HandleResponse(xmlHttp.responseText);
-				}
-			}
+		// 	xmlHttp.onreadystatechange = function()
+		// 	{
+		// 		if(xmlHttp.readyState == 4)
+		// 		{
+		// 	  		HandleResponse(xmlHttp.responseText);
+		// 		}
+		// 	}
 
-			xmlHttp.open("POST", "phplib/post.php", true); 
+		// 	xmlHttp.open("POST", "phplib/post.php", true); 
 			
-			jsonObject = $('#scifi_form').serializeObject();
-			//jsonObject = JSON.stringify(jsonObject);
+		// 	//jsonObject = $('form').serializeObject();
+		// 	//jsonObject = JSON.stringify(jsonObject);
 			
-				console.log("jsonObject = " + jsonObject);
-			
-			xmlHttp.send(jsonObject);
-		}
+		// 	var gender = document.getElementById('gender').value;
+	 //    	var tv_franchise = $('input[name=tv_franchise]:checked', '#scifi_form').val();
+	 //    	var star_wars_movie = $('input[name=star_wars_movie]:checked', '#scifi_form').val();
+	 //    	var star_trek_tv_show = $('input[name=star_trek_tv_show]:checked', '#scifi_form').val();
+	 //    	var star_trek_movie = $('input[name=star_trek_movie]:checked', '#scifi_form').val();
 
-		function HandleResponse(response)
-		{
-				console.log("response = " + response);
-		  	document.getElementById('result').innerHTML = response;
-		  	//$('#scifi_form').fadeOut();
-		}
+
+	 //    	var postObject = 'gender='+gender+'&tv_franchise='+tv_franchise+'&star_wars_movie='+star_wars_movie+'&star_trek_tv_show='+star_trek_tv_show+'&star_trek_movie='+star_trek_movie;
+
+		// 		console.log("postObject = " + postObject);
+			
+		// 	xmlHttp.send('gender='+gender+'&tv_franchise='+tv_franchise+'&star_wars_movie='+star_wars_movie+'&star_trek_tv_show='+star_trek_tv_show+'&star_trek_movie='+star_trek_movie);
+		// }
+
+		// function HandleResponse(response)
+		// {
+		// 		console.log("response = " + response);
+		//   	document.getElementById('result').innerHTML = response;
+		//   	//$('#scifi_form').fadeOut();
+		// }
+
 
     </script>
 
