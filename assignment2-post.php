@@ -1,18 +1,72 @@
 <?php
     
-    //$data = $_POST;
  	$file = 'data/results.txt'; 
 
- 	$id = $_GET['scifi_form'] || $_POST['scifi_form'];
+ 	//$_POST is a PHP array
+ 	$id = $_POST;
 
- 	$tempArray = json_decode(file_get_contents($file));
+ 	//Convert PHP array to PHP Object
+ 	$idObject = new stdClass();
+ 	foreach ($id as $key => $value)
+	{
+	    $idObject->$key = $value;
+	}
 
- 	function process_poll(){
-
- 		for  ($id=>)
+	//file is in JSON format
+ 	$fileJSON = file_get_contents($file);
+ 	
+ 	//decode file's JSON format back into a php array
+ 	$fileArray = json_decode($fileJSON);
+ 	
+ 	//check if there is an array in txt file
+ 	if ($fileJSON != '') {
+ 		//all is good
+ 	}
+ 	else {
+ 		//source file empty
+ 		$fileArray = json_decode('[]');
  	}
 
+ 	//push id object into fileArray
+ 	array_push($fileArray, $idObject);
 
+ 	//run survey value counts
+
+ 	// function counting(){
+ 	// 	$count = 0;
+ 	// 	foreach($fileArray as $object) {
+ 	// 		$count++;
+ 	// 	}
+ 	// }
+
+ 	function countOccurrences(prop){
+	 	$count = 0;
+		foreach ($fileArray as $object) {
+		    if ($object->typeId == $prop) {
+		    	$count++;
+		    }
+		}
+	}
+
+	//Gender counts
+	//$maleCount = countOccurrences("male");
+
+
+
+
+
+ 	//encode fileArray to JSON format
+ 	$fileJSON = json_encode($fileArray);
+
+ 	//write new fileJSON to results.txt
+ 	file_put_contents($file, $fileJSON);
+
+ 	
+
+ 	//print print_r($newJSON);
+ 	//print json_encode($newJSON);
+ 	print print_r($fileJSON);
+ 	print "<br/>Object occurrences: ".countOccurrences('male');
 
 ?>
 <?php include('modules/header-top.php');?>
@@ -27,27 +81,42 @@
 
 <?php include('modules/frame-top.php');?>
 
-            <h1 id="fittext3">Assignment 2: PHP Survey</h1>
-            <p>
-            	Please fill out the form with your current tastes and opinions in Sci-Fi television &amp; movies. 
-            	You will see the total results of all votes after submitting your votes.
-            </p>
+            <h1 id="fittext3">Survey Results:</h1>
             <div id="result">
-            	<?php 
-
-            	print "Gender: ".$_POST['gender']."<br/>";
-				print "Favorite sci-fi TV franchise: ".$_POST['tv_franchise']."<br/>";
-				print "Favorite Star Wars Movie: ".$_POST['star_wars_movie']."<br/>";
-				print "Favorite Star Trek TV Show: ".$_POST['star_trek_tv_show']."<br/>";
-				print "Favorite Star Trek Movie: ".$_POST['star_trek_movie']."<br/>";
-
-            	?>
+            	<h4>Gender:</h4>
+            	Male<br/>
+            	<div class="progress progress-info progress-striped" style="margin-bottom: 9px;">
+			    	<div class="bar" style="width: 0%"></div>
+			    </div>
+			    Female<br/>
+            	<div class="progress progress-info progress-striped" style="margin-bottom: 9px;">
+			    	<div class="bar" style="width: 0%"></div>
+			    </div>
             </div> 
 
 <?php include('modules/footer.php');?>        
     
     </body>
+    <script type="text/javascript">
+    	var json = <?php print $fileJSON; ?>
 
+    	//Gender counts
+    	var maleCount = genderCount('male');
+
+
+    	function genderCount(gender) {
+		   var count=0;
+		   for(var i in json){
+			   for(gender in json[i]) {
+			      if (json[i].gender = gender) {
+			         ++count;
+			      }
+			   }
+			   return count;
+			   console.log("object " + i);
+			}
+		}
+    </script>
 </html>
 
 

@@ -40,7 +40,7 @@
 					</p>
 					<hr/>				
 					
-					 <p class="tv_franchise radio_list">	
+					 <!-- <p class="tv_franchise radio_list">	
 
 						<label for="tv_franchise">Favorite sci-fi TV Franchise</label>				
 						<input type="radio" name="tv_franchise" value="Battlestar Galactica"/><span>Battlestar Galactica</span><br/>
@@ -91,7 +91,7 @@
 						<input type="radio" name="star_trek_movie" value="Star Trek Nemesis"/><span>Star Trek Nemesis</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star Trek (J.J.Abrams 2009 Reboot)" checked="true"/><span>Star Trek (J.J.Abrams’ 2009 Reboot)</span><br/>				
 					</p>
-					<hr/>
+					<hr/> -->
 
 					<p class="submit">
 						<input id="submit" name="submitForm" class="btn btn-primary btn-large" type="submit" value="Submit Form" >
