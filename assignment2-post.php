@@ -1,28 +1,28 @@
 <?php
-// session_start();
+if(isset($_POST['submitForm'])) {
+	//set cookie to prevent users from voting twice on the same browser
+	setcookie("voted", "true", time()+3600);  // set the cookie
+	//print_r($_COOKIE);
+}
+session_start();
 // print print_r($_POST)."<br/>";
+// print print_r($_SESSION)."<br/>";
+// print "cookie = ".$_COOKIE['voted']."<br/>";
+// print "session = ".$_SESSION['voted']."<br/>";
+global $voted;
 
-// global $voted;
-
-// if(isset($_POST['submitForm'])) {
-// 	echo "Just voted POST detection<br/>";
-// 	$_SESSION['voted'] = 'true';
-// } else {
-// 	echo "Entered page without posting<br/>";
-// }
-
-// if(isset($_SESSION['voted'])) {
-// 	echo "Already voted SESSION detection<br/>";
-// 	$voted = $_SESSION['voted'];
-// } else {
-// 	echo "Haven't voted yet<br/>";
-// }
+if(isset($_SESSION['voted'])) {
+	//echo "Already voted SESSION detection<br/>";
+	$voted = $_SESSION['voted'];
+} else {
+	//echo "Haven't voted yet<br/>";
+}
 
 //General Variables
  	$file = 'data/results.txt'; 
 
  	//$_POST is a PHP array
- 	//if ($voted === true){
+ 	if (isset($_POST['submitForm']) && $voted != 'true'){
 
  		$id = $_POST;
 
@@ -32,7 +32,7 @@
 		{
 		    $idObject->$key = $value;
 		}
-	//}
+	}
 
 	//file is in JSON format
  	$fileJSON = file_get_contents($file);
@@ -64,18 +64,18 @@
  	$fileArray = json_decode($fileJSON);
  	
  	//check if there is an array in txt file
- 	if ($fileJSON != '') {
- 		//all is good
- 	}
- 	else {
+ 	if ($fileJSON == '') {
  		//source file empty
  		$fileArray = json_decode('[]');
  	}
+ 	else {
+ 		//all is good
+ 	}
 
- 	//if ($voted === true){
+ 	if (isset($_POST['submitForm']) && $voted != 'true'){
 	 	//push id object into fileArray
 	 	array_push($fileArray, $idObject);
-	 //}
+	}
  	//encode fileArray to JSON format
  	$fileJSON = json_encode($fileArray);
 
@@ -175,7 +175,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=VT323">
   
-  <body id="assignment2">   
+  <body id="assignment2" class="post">   
 
 <?php include('modules/frame-top.php');?>
 
@@ -420,26 +420,26 @@
     
     </body>
     <script type="text/javascript">
-    	var json = <?php print $fileJSON; ?>
-
-    	//Gender counts
-    	var maleCount = genderCount('male');
-
-
-    	function genderCount(gender) {
-		   var count=0;
-		   for(var i in json){
-			   for(gender in json[i]) {
-			      if (json[i].gender = gender) {
-			         ++count;
-			      }
-			   }
-			   return count;
-			   console.log("object " + i);
-			}
-		}
+    	$(window).load(function(){
+    		$('.total_votes').fadeIn(); 
+    	}) 
     </script>
 </html>
+<?php
+	//Set Voted Session and cookie variables at end of page load so that it won't prevent results from displaying the first time
+	if(isset($_POST['submitForm'])) {
+		//echo "Just voted POST detection<br/>";
+
+		//Set session variable to prevent users from voting twice in a session
+		$_SESSION['voted'] = 'true';
+
+		//set cookie to prevent users from voting twice on the same browser
+		//setcookie("voted", "true", time()+3600);  // set the cookie
+		//echo "cookie voted = ".$_COOKIE['voted'];
+	} else {
+		//echo "Entered page without posting<br/>";
+	}
+?>
 
 
 

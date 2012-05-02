@@ -1,15 +1,19 @@
 <?php
 	
 	// this starts the session 
- // 	session_start();
- global $voted;
- // 	$_SESSION['voted'] = 'undefined';
-	// if($_SESSION['voted'] == 'true') {
-	// 	echo "Already voted";
-	// 	$voted = $_SESSION['voted'];
-	// } else {
-	// 	echo "Haven't voted yet";
-	// }
+ 	session_start();
+ 	// if (isset($_COOKIE)){print "cookie = ".$_COOKIE['voted']."<br/>";}
+ 	// if (isset($_SESSION)){print "session = ".$_SESSION['voted']."<br/>";}
+ 	//print print_r($_SESSION)."<br/>";
+ 	global $voted;
+
+	if (isset($_SESSION['voted']) || (isset($_COOKIE['voted']))) {
+		//echo "Already voted";
+		$voted = $_SESSION['voted'];
+	} else {
+		//echo "Haven't voted yet";
+	}
+	//print isset($_SESSION['voted'])." after cookie detect<br/>";
 ?>
 <?php include('modules/header-top.php');?>
 
@@ -24,7 +28,7 @@
 <?php include('modules/frame-top.php');?>
 
             <h1>Assignment 2: PHP Survey</h1>
-            <?php if($voted != 'false') {?>
+            <?php if($voted != 'true') {?>
             <p>
             	Please fill out the form with your current tastes and opinions in Sci-Fi television &amp; movies. 
             	You will see the total results of all votes after submitting your votes.
@@ -38,7 +42,7 @@
 					<div class="survey_group">
 					<p class="gender radio_list">					
 						<label for="name">Gender</label>				
-						<input type="radio" name="gender" id="gender" value="male"/><span>Male</span><br/>
+						<input type="radio" name="gender" id="gender" value="male" data-bvalidator="required" data-bvalidator-msg="Select a gender"/><span>Male</span><br/>
 						<input type="radio" name="gender" id="gender" value="female"/><span>Female</span><br/>					
 					</p>
 					</div><!--/survey_group-->
@@ -47,7 +51,7 @@
 					<p class="tv_franchise radio_list">	
 
 						<label for="tv_franchise">Favorite sci-fi TV Franchise</label>				
-						<input type="radio" name="tv_franchise" value="Battlestar_Galactica"/><span>Battlestar Galactica</span><br/>
+						<input type="radio" name="tv_franchise" value="Battlestar_Galactica" data-bvalidator="required" data-bvalidator-msg="Select a TV franchise"/><span>Battlestar Galactica</span><br/>
 						<input type="radio" name="tv_franchise" value="Star_Trek"/><span>Star Trek</span><br/>	
 						<input type="radio" name="tv_franchise" value="Stargate"/><span>Stargate</span><br/>
 						<input type="radio" name="tv_franchise" value="Star_Wars:_Clone_Wars_Animated_Series"/><span>Star Wars: Clone Wars Animated Series</span><br/>
@@ -63,7 +67,7 @@
 					<div class="survey_group">
 					<p class="star_wars_movie radio_list">	
 						<label for="star_wars_movie">Favorite Star Wars movie</label>				
-						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_I:_The_Phantom_Menace"/><span>Star Wars Episode I: The Phantom Menace</span><br/>
+						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_I:_The_Phantom_Menace" data-bvalidator="required" data-bvalidator-msg="Select a Star Wars movie"/><span>Star Wars Episode I: The Phantom Menace</span><br/>
 						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_II:_Attack_of_the_Clones"/><span>Star Wars Episode II: Attack of the Clones</span><br/>	
 						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_III:_Revenge_of_the_Sith"/><span>Star Wars Episode III: Revenge of the Sith</span><br/>
 						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_IV:_A_New_Hope"/><span>Star Wars Episode IV: A New Hope</span><br/>
@@ -75,7 +79,7 @@
 					<div class="survey_group">
 					<p class="star_trek_tv_show radio_list">	
 						<label for="star_trek_tv_show">Favorite Star Trek TV Show</label>				
-						<input type="radio" name="star_trek_tv_show" value="The_Original_Series"/><span>The Original Series</span><br/>
+						<input type="radio" name="star_trek_tv_show" value="The_Original_Series" data-bvalidator="required" data-bvalidator-msg="Select a Star Trek TV show"/><span>The Original Series</span><br/>
 						<input type="radio" name="star_trek_tv_show" value="The_Animated_Series"/><span>The Animated Series</span><br/>	
 						<input type="radio" name="star_trek_tv_show" value="The_Next_Generation"/><span>The Next Generation</span><br/>
 						<input type="radio" name="star_trek_tv_show" value="Deep_Space_Nine"/><span>Deep Space Nine</span><br/>
@@ -88,7 +92,7 @@
 					<div class="survey_group">
 					<p class="star_trek_movie radio_list">	
 						<label for="star_trek_movie">Favorite Star Trek Movie</label>				
-						<input type="radio" name="star_trek_movie" value="Star_Trek:_The_Motion_Picture"/><span>Star Trek: The Motion Picture</span><br/>
+						<input type="radio" name="star_trek_movie" value="Star_Trek:_The_Motion_Picture" data-bvalidator="required" data-bvalidator-msg="Select a Star Trek Movie"/><span>Star Trek: The Motion Picture</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star_Trek_II:_The_Wrath_of_Khan"/><span>Star Trek II: The Wrath of Khan</span><br/>	
 						<input type="radio" name="star_trek_movie" value="Star_Trek_III:_The_Search_for_Spock"/><span>Star Trek III: The Search for Spock</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star_Trek_IV:_The_Voyage_Home"/><span>Star Trek IV: The Voyage Home</span><br/>
@@ -120,99 +124,12 @@
 <?php include('modules/footer.php');?>        
     
     </body>
+    <script type="text/javascript" src="js/libs/jquery.bvalidator-yc.js"></script>
     <script type="text/javascript">
+		$(document).ready(function () {
+			$('#scifi_form').bValidator();
+		});
 
-  //   	var jsonObject;
-    	
-    	
-  //   	$.fn.serializeObject = function()
-		// {
-		//     var o = {};
-		//     var a = this.serializeArray();
-		//     $.each(a, function() {
-		//         if (o[this.name] !== undefined) {
-		//             if (!o[this.name].push) {
-		//                 o[this.name] = [o[this.name]];
-		//             }
-		//             o[this.name].push(this.value || '');
-		//         } else {
-		//             o[this.name] = this.value || '';
-		//         }
-		//     });
-		//     return o;
-		// };
-		
-
-		    
-		// function getXMLHttp()
-		// {
-		//   var xmlHttp
-
-		//   try
-		//   {
-		//     //Firefox, Opera 8.0+, Safari
-		//     xmlHttp = new XMLHttpRequest();
-		//   }
-		//   catch(e)
-		//   {
-		//     //Internet Explorer
-		//     try
-		//     {
-		//       xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-		//     }
-		//     catch(e)
-		//     {
-		//       try
-		//       {
-		//         xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-		//       }
-		//       catch(e)
-		//       {
-		//         alert("Your browser does not support AJAX!")
-		//         return false;
-		//       }
-		//     }
-		//   }
-		//   return xmlHttp;
-		// }
-
-		// function MakeRequest()
-		// {
-		//   	var xmlHttp = getXMLHttp();
-		  
-		// 	xmlHttp.onreadystatechange = function()
-		// 	{
-		// 		if(xmlHttp.readyState == 4)
-		// 		{
-		// 	  		HandleResponse(xmlHttp.responseText);
-		// 		}
-		// 	}
-
-		// 	xmlHttp.open("POST", "phplib/post.php", true); 
-			
-		// 	//jsonObject = $('form').serializeObject();
-		// 	//jsonObject = JSON.stringify(jsonObject);
-			
-		// 	var gender = document.getElementById('gender').value;
-	 //    	var tv_franchise = $('input[name=tv_franchise]:checked', '#scifi_form').val();
-	 //    	var star_wars_movie = $('input[name=star_wars_movie]:checked', '#scifi_form').val();
-	 //    	var star_trek_tv_show = $('input[name=star_trek_tv_show]:checked', '#scifi_form').val();
-	 //    	var star_trek_movie = $('input[name=star_trek_movie]:checked', '#scifi_form').val();
-
-
-	 //    	var postObject = 'gender='+gender+'&tv_franchise='+tv_franchise+'&star_wars_movie='+star_wars_movie+'&star_trek_tv_show='+star_trek_tv_show+'&star_trek_movie='+star_trek_movie;
-
-		// 		console.log("postObject = " + postObject);
-			
-		// 	xmlHttp.send('gender='+gender+'&tv_franchise='+tv_franchise+'&star_wars_movie='+star_wars_movie+'&star_trek_tv_show='+star_trek_tv_show+'&star_trek_movie='+star_trek_movie);
-		// }
-
-		// function HandleResponse(response)
-		// {
-		// 		console.log("response = " + response);
-		//   	document.getElementById('result').innerHTML = response;
-		//   	//$('#scifi_form').fadeOut();
-		// }
 
 
     </script>
