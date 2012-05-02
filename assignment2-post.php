@@ -420,7 +420,7 @@ if(isset($_SESSION['voted'])) {
     <script type="text/javascript">
     	$(window).load(function(){
     		$('.total_votes').fadeIn(); 
-    	}) 
+    	}); 
     </script>
 </html>
 <?php
