@@ -172,8 +172,6 @@ if(isset($_SESSION['voted'])) {
     <title>Jakob Anderson >> CS313 [Web Engineering II] | Assignment 2</title>
 
 <?php include('modules/header-bottom.php');?>
-	
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=VT323">
   
   <body id="assignment2" class="post">   
 

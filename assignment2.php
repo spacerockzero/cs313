@@ -20,8 +20,6 @@
     <title>Jakob Anderson >> CS313 [Web Engineering II] | Assignment 2</title>
 
 <?php include('modules/header-bottom.php');?>
-	
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=VT323">
   
   <body id="assignment2">   
 
@@ -124,14 +122,11 @@
 <?php include('modules/footer.php');?>        
     
     </body>
-    <script type="text/javascript" src="js/libs/jquery.bvalidator-yc.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.bvalidator-yc.js"/>
     <script type="text/javascript">
 		$(document).ready(function () {
 			$('#scifi_form').bValidator();
 		});
-
-
-
     </script>
 
 
