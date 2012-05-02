@@ -1,4 +1,16 @@
-<?php ?>
+<?php
+	
+	// this starts the session 
+ // 	session_start();
+ global $voted;
+ // 	$_SESSION['voted'] = 'undefined';
+	// if($_SESSION['voted'] == 'true') {
+	// 	echo "Already voted";
+	// 	$voted = $_SESSION['voted'];
+	// } else {
+	// 	echo "Haven't voted yet";
+	// }
+?>
 <?php include('modules/header-top.php');?>
 
     <title>Jakob Anderson >> CS313 [Web Engineering II] | Assignment 2</title>
@@ -12,6 +24,7 @@
 <?php include('modules/frame-top.php');?>
 
             <h1>Assignment 2: PHP Survey</h1>
+            <?php if($voted != 'false') {?>
             <p>
             	Please fill out the form with your current tastes and opinions in Sci-Fi television &amp; movies. 
             	You will see the total results of all votes after submitting your votes.
@@ -26,7 +39,7 @@
 					<p class="gender radio_list">					
 						<label for="name">Gender</label>				
 						<input type="radio" name="gender" id="gender" value="male"/><span>Male</span><br/>
-						<input type="radio" name="gender" id="gender" value="female" checked="true"/><span>Female</span><br/>					
+						<input type="radio" name="gender" id="gender" value="female"/><span>Female</span><br/>					
 					</p>
 					</div><!--/survey_group-->
 
@@ -35,7 +48,7 @@
 
 						<label for="tv_franchise">Favorite sci-fi TV Franchise</label>				
 						<input type="radio" name="tv_franchise" value="Battlestar_Galactica"/><span>Battlestar Galactica</span><br/>
-						<input type="radio" name="tv_franchise" value="Star_Trek" checked="true"/><span>Star Trek</span><br/>	
+						<input type="radio" name="tv_franchise" value="Star_Trek"/><span>Star Trek</span><br/>	
 						<input type="radio" name="tv_franchise" value="Stargate"/><span>Stargate</span><br/>
 						<input type="radio" name="tv_franchise" value="Star_Wars:_Clone_Wars_Animated_Series"/><span>Star Wars: Clone Wars Animated Series</span><br/>
 						<input type="radio" name="tv_franchise" value="Cowboy_Bebop"/><span>Cowboy Bebop</span><br/>
@@ -54,7 +67,7 @@
 						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_II:_Attack_of_the_Clones"/><span>Star Wars Episode II: Attack of the Clones</span><br/>	
 						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_III:_Revenge_of_the_Sith"/><span>Star Wars Episode III: Revenge of the Sith</span><br/>
 						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_IV:_A_New_Hope"/><span>Star Wars Episode IV: A New Hope</span><br/>
-						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_V:_The_Empire_Strikes_Back" checked="true"/><span>Star Wars Episode V: The Empire Strikes Back</span><br/>
+						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_V:_The_Empire_Strikes_Back"/><span>Star Wars Episode V: The Empire Strikes Back</span><br/>
 						<input type="radio" name="star_wars_movie" value="Star_Wars_Episode_VI:_Return_of_the_Jedi"/><span>Star Wars Episode VI: Return of the Jedi</span><br/>				
 					</p>
 					</div><!--/survey_group-->
@@ -64,7 +77,7 @@
 						<label for="star_trek_tv_show">Favorite Star Trek TV Show</label>				
 						<input type="radio" name="star_trek_tv_show" value="The_Original_Series"/><span>The Original Series</span><br/>
 						<input type="radio" name="star_trek_tv_show" value="The_Animated_Series"/><span>The Animated Series</span><br/>	
-						<input type="radio" name="star_trek_tv_show" value="The_Next_Generation" checked="true"/><span>The Next Generation</span><br/>
+						<input type="radio" name="star_trek_tv_show" value="The_Next_Generation"/><span>The Next Generation</span><br/>
 						<input type="radio" name="star_trek_tv_show" value="Deep_Space_Nine"/><span>Deep Space Nine</span><br/>
 						<input type="radio" name="star_trek_tv_show" value="Voyager"/><span>Voyager</span><br/>
 						<input type="radio" name="star_trek_tv_show" value="Enterprise"/><span>Enterprise</span><br/>				
@@ -85,7 +98,7 @@
 						<input type="radio" name="star_trek_movie" value="Star_Trek:_First_Contact"/><span>Star Trek: First Contact</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star_Trek:_Insurrection"/><span>Star Trek: Insurrection</span><br/>
 						<input type="radio" name="star_trek_movie" value="Star_Trek_Nemesis"/><span>Star Trek Nemesis</span><br/>
-						<input type="radio" name="star_trek_movie" value="Star_Trek_(J.J.Abrams_2009_Reboot)" checked="true"/><span>Star Trek (J.J.Abrams’ 2009 Reboot)</span><br/>				
+						<input type="radio" name="star_trek_movie" value="Star_Trek_(J.J.Abrams_2009_Reboot)"/><span>Star Trek (J.J.Abrams’ 2009 Reboot)</span><br/>				
 					</p>
 					</div><!--/survey_group-->
 					<hr class="cf"/>
@@ -97,6 +110,12 @@
 								
 				</fieldset>								
 			</form>
+
+		<?php } else { ?>
+			<p>
+            	You have already voted. <a href="assignment2-post.php">See survey results</a>
+            </p>
+		<?php } ?>
 
 <?php include('modules/footer.php');?>        
     

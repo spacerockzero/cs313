@@ -1,21 +1,65 @@
 <?php
+// session_start();
+// print print_r($_POST)."<br/>";
+
+// global $voted;
+
+// if(isset($_POST['submitForm'])) {
+// 	echo "Just voted POST detection<br/>";
+// 	$_SESSION['voted'] = 'true';
+// } else {
+// 	echo "Entered page without posting<br/>";
+// }
+
+// if(isset($_SESSION['voted'])) {
+// 	echo "Already voted SESSION detection<br/>";
+// 	$voted = $_SESSION['voted'];
+// } else {
+// 	echo "Haven't voted yet<br/>";
+// }
 
 //General Variables
  	$file = 'data/results.txt'; 
 
  	//$_POST is a PHP array
- 	$id = $_POST;
+ 	//if ($voted === true){
 
- 	//Convert PHP array to PHP Object
- 	$idObject = new stdClass();
- 	foreach ($id as $key => $value)
-	{
-	    $idObject->$key = $value;
-	}
+ 		$id = $_POST;
+
+	 	//Convert PHP array to PHP Object
+	 	$idObject = new stdClass();
+	 	foreach ($id as $key => $value)
+		{
+		    $idObject->$key = $value;
+		}
+	//}
 
 	//file is in JSON format
  	$fileJSON = file_get_contents($file);
  	
+ 	//json_encode()/json_decode() workaround for servers running < php 5.2
+	if ( !function_exists('json_decode') ){
+	    function json_decode($content, $assoc=false){
+	                require_once('phplib/JSON.php');
+	                if ( $assoc ){
+	                    $json = new Services_JSON(SERVICES_JSON_LOOSE_TYPE);
+	        } else {
+	                    $json = new Services_JSON;
+	                }
+	        return $json->decode($content);
+	    }
+	}
+
+	if ( !function_exists('json_encode') ){
+	    function json_encode($content){
+	                require_once('phplib/JSON.php');
+	                $json = new Services_JSON;
+	                
+	        return $json->encode($content);
+	    }
+	}
+
+
  	//decode file's JSON format back into a php array
  	$fileArray = json_decode($fileJSON);
  	
@@ -28,9 +72,10 @@
  		$fileArray = json_decode('[]');
  	}
 
- 	//push id object into fileArray
- 	array_push($fileArray, $idObject);
-
+ 	//if ($voted === true){
+	 	//push id object into fileArray
+	 	array_push($fileArray, $idObject);
+	 //}
  	//encode fileArray to JSON format
  	$fileJSON = json_encode($fileArray);
 
@@ -113,7 +158,8 @@
 		$starTrekXICount = countOccurrences('star_trek_movie','Star_Trek_(J.J.Abrams_2009_Reboot)');
  	
  	//DEBUG AREA
- 	// print print_r($fileJSON);
+ 	//print print_r($fileJSON)."<br/>";
+ 	//print print_r($_SESSION['voted']);
  	// print "<br/>Male occurrences: ".countOccurrences('gender','male');
  	// print "<br/>Total Votes: ".$voteTotal;
  	// echo "<br/>Male % = ". round($maleCount / $voteTotal * 100, 2);
