@@ -6,6 +6,10 @@
 # use my database on jordan
 # USE skabone;
 
+
+
+
+
 # STUDENTS TABLE SECTION
 #######################################################
 
@@ -15,14 +19,14 @@ DROP TABLE IF EXISTS students;
 # create student table
 CREATE TABLE students 
 (
-	StudentId INT(9) NOT NULL PRIMARY KEY auto_increment, 
-	FirstName VARCHAR(20), 
-	LastName VARCHAR(30),
-	MajorCode INT(4),
-	Birthdate DATE,
-	Gender CHAR(1),
-	City VARCHAR(30),
-	State VARCHAR(2)
+	StudentId   INT(9) NOT NULL PRIMARY KEY auto_increment, 
+	FirstName   VARCHAR(20), 
+	LastName    VARCHAR(30),
+	MajorCode   INT(4),
+	Birthdate   DATE,
+	Gender      CHAR(1),
+	City        VARCHAR(30),
+	State       VARCHAR(2)
 );
 
 # populate student table
@@ -57,10 +61,11 @@ INSERT INTO students VALUES (NULL,      'Gunhilda',  'Kennethberg',     1008,   
 INSERT INTO students VALUES (NULL,      'Gunnar',    'Kettilesen',      1009,   '1988-02-29',   'M',   'Anacortes',       'MI'     );
 INSERT INTO students VALUES	(NULL,      'Hallvard',  'Kjerstiman',      1010,   '1989-01-30',   'M',   'Aberdeen',        'WI'     );
 
-commit;
 
 # select all records from student table
 # SELECT * FROM students;
+
+
 
 
 
@@ -73,60 +78,136 @@ DROP TABLE IF EXISTS majors;
 # create majors table
 CREATE TABLE majors 
 (
-	MajorCode INT(4) NOT NULL PRIMARY KEY, 
-	DepartmentName VARCHAR(30),
-	CollegeName INT(4)
+	MajorCode        INT(4) NOT NULL PRIMARY KEY, 
+	MajorName        VARCHAR(30),
+	DepartmentCode   INT(4)
 );
 
-# populate student table
-INSERT INTO majors VALUES	( 1001, 'Department of Biology', 0001 );
-INSERT INTO majors VALUES	( 1002, 'Department of Psychology', 0002 );
-INSERT INTO majors VALUES	( 1003, 'Department of Architecture & Construction', 0003 );
-INSERT INTO majors VALUES	( 1004, 'Department of Computer Science and Electrical Engineering', 0003 );
-INSERT INTO majors VALUES	( 1005, 'Department of Mechanical Engineering', 0003 );
-INSERT INTO majors VALUES	( 1006, 'Department of Automotive Technology Program', 0003 );
-INSERT INTO majors VALUES	( 1007, 'Department of Computer Information Technology', 0004 );
-INSERT INTO majors VALUES	( 1008, 'Department of Business Management', 0004 );
-INSERT INTO majors VALUES	( 1009, 'Department of Art', 0005 );
-INSERT INTO majors VALUES	( 1010, 'Department of Interior Design', 0005 );
+# populate majors table
+INSERT INTO majors VALUES	( 0001,  'B.S. in Biology',                           1001  );
+INSERT INTO majors VALUES	( 0002,  'B.S. in Psychology',                        1002  );
+INSERT INTO majors VALUES	( 0003,  'B.S. in Architecture',                      1003  );
+INSERT INTO majors VALUES	( 0004,  'B.S. in Computer Science',                  1004  );
+INSERT INTO majors VALUES	( 0005,  'B.S. in Mechanical Engineering',            1005  );
+INSERT INTO majors VALUES	( 0006,  'B.S. in Automotive Technology Program',     1006  );
+INSERT INTO majors VALUES	( 0007,  'B.S. in Computer Information Technology',   1007  );
+INSERT INTO majors VALUES	( 0008,  'B.S. in Business Management',               1008  );
+INSERT INTO majors VALUES	( 0009,  'B.S. in Art',                               1009  );
+INSERT INTO majors VALUES	( 0010,  'B.S. in Interior Design',                   1010  );
 
-commit;
 
 # select all records from student table
 # SELECT * FROM majors;
 
-# MAJORS TABLE SECTION
+
+
+
+
+# COLLEGES TABLE SECTION
 #######################################################
 
 # drop majors table if it exists
 DROP TABLE IF EXISTS colleges;
 
-# create majors table
+# create colleges table
 CREATE TABLE colleges 
 (
-	MajorCode INT(4) NOT NULL PRIMARY KEY, 
-	DepartmentName VARCHAR(30),
-	CollegeName INT(4)
+	CollegeCode    INT(4) NOT NULL PRIMARY KEY, 
+	CollegeName    VARCHAR(30)
 );
 
-# populate student table
-INSERT INTO majors VALUES	( 1001, 'Department of Biology', 0001 );
-INSERT INTO majors VALUES	( 1002, 'Department of Psychology', 0002 );
-INSERT INTO majors VALUES	( 1003, 'Department of Architecture & Construction', 0003 );
-INSERT INTO majors VALUES	( 1004, 'Department of Computer Science and Electrical Engineering', 0003 );
-INSERT INTO majors VALUES	( 1005, 'Department of Mechanical Engineering', 0003 );
-INSERT INTO majors VALUES	( 1006, 'Department of Automotive Technology Program', 0003 );
-INSERT INTO majors VALUES	( 1007, 'Department of Computer Information Technology', 0004 );
-INSERT INTO majors VALUES	( 1008, 'Department of Business Management', 0004 );
-INSERT INTO majors VALUES	( 1009, 'Department of Art', 0005 );
-INSERT INTO majors VALUES	( 1010, 'Department of Interior Design', 0005 );
+# populate colleges table
+INSERT INTO colleges VALUES	( 0001,   'College of Agriculture and Life Sciences'     );
+INSERT INTO colleges VALUES	( 0002,   'College of Education and Human Development'   );
+INSERT INTO colleges VALUES	( 0003,   'College of Physical Sciences and Engineering' );
+INSERT INTO colleges VALUES	( 0004,   'College of Business and Communication'        );
+INSERT INTO colleges VALUES	( 0005,   'College of Performing and Visual Arts'        );
+
+
+
+
+
+# DEPARTMENT TABLE SECTION
+#######################################################
+
+# drop department table if it exists
+DROP TABLE IF EXISTS departments;
+
+# create department table
+CREATE TABLE departments
+(
+	DepartmentCode   INT(4) NOT NULL PRIMARY KEY, 
+	DepartmentName   VARCHAR(30),
+	CollegeCode      INT(4)
+);
+
+# populate department table
+INSERT INTO departments VALUES	( 1001,   'Department of Biology',                                       0001 );
+INSERT INTO departments VALUES	( 1002,   'Department of Psychology',                                    0002 );
+INSERT INTO departments VALUES	( 1003,   'Department of Architecture & Construction',                   0003 );
+INSERT INTO departments VALUES	( 1004,   'Department of Computer Science and Electrical Engineering',   0003 );
+INSERT INTO departments VALUES	( 1005,   'Department of Mechanical Engineering',                        0003 );
+INSERT INTO departments VALUES	( 1006,   'Department of Automotive Technology Program',                 0003 );
+INSERT INTO departments VALUES	( 1007,   'Department of Computer Information Technology',               0004 );
+INSERT INTO departments VALUES	( 1008,   'Department of Business Management',                           0004 );
+INSERT INTO departments VALUES	( 1009,   'Department of Art',                                           0005 );
+INSERT INTO departments VALUES	( 1010,   'Department of Interior Design',                               0005 );
+
+
+
+# COURSE TABLE SECTION
+#######################################################
+
+# drop courses table if it exists
+DROP TABLE IF EXISTS courses;
+
+# create courses table
+CREATE TABLE courses 
+(
+	CourseID         INT(4) NOT NULL PRIMARY KEY auto_increment, 
+	CourseCode       VARCHAR(20), 
+	CourseName       VARCHAR(30),
+	DepartmentCode   INT(4)
+);
+
+# populate courses table
+INSERT INTO courses VALUES	( NULL,   'BIO 240',     'Neurobiology',                              1001   );
+INSERT INTO courses VALUES	( NULL,   'PSYCH 376',   'Neuroscience',                              1002   );
+INSERT INTO courses VALUES	( NULL,   'CONST 230',   'Mechanical Environmental Systems',          1003   );
+INSERT INTO courses VALUES	( NULL,   'ARCH 280',    'Building Information Modeling',             1003   );
+INSERT INTO courses VALUES	( NULL,   'CS 271',      'Human-Computer Interaction',                1004   );
+INSERT INTO courses VALUES	( NULL,   'CS 306',      'Algorythms and Complexity',                 1004   );
+INSERT INTO courses VALUES	( NULL,   'CS 364',      'Software Engineering I',                    1004   );
+INSERT INTO courses VALUES	( NULL,   'CS 213',      'Web Engineering I',                         1004   );
+INSERT INTO courses VALUES	( NULL,   'CS 313',      'Web Engineering II',                        1004   );
+INSERT INTO courses VALUES	( NULL,   'CS 246',      'Software Design and Development',           1004   );
+      
+INSERT INTO courses VALUES	( NULL,   'ME 332',      'Computer Numerical Control',                1005   );
+INSERT INTO courses VALUES	( NULL,   'AUTO 231',    'Automotive Electrical Systems II',          1006   );
+INSERT INTO courses VALUES	( NULL,   'CIT 320',     'Database Design and Development',           1007   );
+INSERT INTO courses VALUES	( NULL,   'CIT 230',     'Web Design',                                1007   );
+INSERT INTO courses VALUES	( NULL,   'CIT 310',     'Object Oriented Programming II',            1007   );
+INSERT INTO courses VALUES	( NULL,   'CIT 356',     'Mobile Application Development',            1007   );
+INSERT INTO courses VALUES	( NULL,   'CIT 370',     'Systems Security I',                        1007   );
+INSERT INTO courses VALUES	( NULL,   'CIT 336',     'Web Page Development',                      1007   );
+INSERT INTO courses VALUES	( NULL,   'B 250',       'Web Business I',                            1008   );
+INSERT INTO courses VALUES	( NULL,   'ART 130',     'Introduction to Graphic Design',            1009   );
+INSERT INTO courses VALUES	( NULL,   'ID 381',      'Contemporary Architecture and Furniture',   1010   );
+
 
 commit;
 
+
 # select all records from each table
 SELECT * FROM students;
-SELECT * FROM majors;
+
 SELECT * FROM colleges;
+
+SELECT * FROM departments;
+
+SELECT * FROM majors;
+
+SELECT * FROM courses;
 
 
 

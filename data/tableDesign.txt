@@ -17,9 +17,16 @@ Majors Table
 	collegeName:
 }
 
-Class Codes Table:
+department table:
 {
-	classCode:
+	DepartmentCode:
+	DepartmentName:
+	CollegeCode:
+}
+
+Courses Table:
+{
+	courseCode:
 	departmentCode:
 	courseNumber:
 	sectionNumber:
