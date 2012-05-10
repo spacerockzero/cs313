@@ -1,0 +1,32 @@
+Students Table:
+{
+	studentId:
+	first name:
+	last name:
+	major:
+	birthdate:
+	gender:
+	city:
+	state:
+}
+
+Majors Table 
+{
+	majorCode:
+	departmentName:
+	collegeName:
+}
+
+Class Codes Table:
+{
+	classCode:
+	departmentCode:
+	courseNumber:
+	sectionNumber:
+	courseName:
+}
+
+populate tables with:
+25 students,
+10 different majors,
+15 different courses
