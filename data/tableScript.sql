@@ -60,7 +60,7 @@ INSERT INTO students VALUES	(NULL,      'Hallvard',  'Kjerstiman',      1010,   
 commit;
 
 # select all records from student table
-SELECT * FROM students;
+# SELECT * FROM students;
 
 
 
@@ -68,21 +68,98 @@ SELECT * FROM students;
 #######################################################
 
 # drop majors table if it exists
-# DROP TABLE IF EXISTS majors;
+DROP TABLE IF EXISTS majors;
 
 # create majors table
-# CREATE TABLE majors 
-# (
-# 	majorCode
-# );
+CREATE TABLE majors 
+(
+	MajorCode INT(4) NOT NULL PRIMARY KEY, 
+	DepartmentName VARCHAR(30),
+	CollegeName INT(4)
+);
 
 # populate student table
-# INSERT INTO majors 
-# (id, first_name, last_name) VALUES (1, 'John', 'Doe');
-# INSERT INTO majors 
-# (id, first_name, last_name) VALUES (2, 'Bob', 'Smith');
-# INSERT INTO majors 
-# (id, first_name, last_name) VALUES (3, 'Jane', 'Doe');
+INSERT INTO majors VALUES	( 1001, 'Department of Biology', 0001 );
+INSERT INTO majors VALUES	( 1002, 'Department of Psychology', 0002 );
+INSERT INTO majors VALUES	( 1003, 'Department of Architecture & Construction', 0003 );
+INSERT INTO majors VALUES	( 1004, 'Department of Computer Science and Electrical Engineering', 0003 );
+INSERT INTO majors VALUES	( 1005, 'Department of Mechanical Engineering', 0003 );
+INSERT INTO majors VALUES	( 1006, 'Department of Automotive Technology Program', 0003 );
+INSERT INTO majors VALUES	( 1007, 'Department of Computer Information Technology', 0004 );
+INSERT INTO majors VALUES	( 1008, 'Department of Business Management', 0004 );
+INSERT INTO majors VALUES	( 1009, 'Department of Art', 0005 );
+INSERT INTO majors VALUES	( 1010, 'Department of Interior Design', 0005 );
+
+commit;
 
 # select all records from student table
 # SELECT * FROM majors;
+
+# MAJORS TABLE SECTION
+#######################################################
+
+# drop majors table if it exists
+DROP TABLE IF EXISTS colleges;
+
+# create majors table
+CREATE TABLE colleges 
+(
+	MajorCode INT(4) NOT NULL PRIMARY KEY, 
+	DepartmentName VARCHAR(30),
+	CollegeName INT(4)
+);
+
+# populate student table
+INSERT INTO majors VALUES	( 1001, 'Department of Biology', 0001 );
+INSERT INTO majors VALUES	( 1002, 'Department of Psychology', 0002 );
+INSERT INTO majors VALUES	( 1003, 'Department of Architecture & Construction', 0003 );
+INSERT INTO majors VALUES	( 1004, 'Department of Computer Science and Electrical Engineering', 0003 );
+INSERT INTO majors VALUES	( 1005, 'Department of Mechanical Engineering', 0003 );
+INSERT INTO majors VALUES	( 1006, 'Department of Automotive Technology Program', 0003 );
+INSERT INTO majors VALUES	( 1007, 'Department of Computer Information Technology', 0004 );
+INSERT INTO majors VALUES	( 1008, 'Department of Business Management', 0004 );
+INSERT INTO majors VALUES	( 1009, 'Department of Art', 0005 );
+INSERT INTO majors VALUES	( 1010, 'Department of Interior Design', 0005 );
+
+commit;
+
+# select all records from each table
+SELECT * FROM students;
+SELECT * FROM majors;
+SELECT * FROM colleges;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
