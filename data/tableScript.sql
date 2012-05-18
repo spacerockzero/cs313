@@ -195,7 +195,35 @@ INSERT INTO courses VALUES	( NULL,   'ART 130',     'Introduction to Graphic Des
 INSERT INTO courses VALUES	( NULL,   'ID 381',      'Contemporary Architecture and Furniture',   1010   );
 
 
+
+# Add foreign keys once all tables have been built and populated
+
+ALTER TABLE students
+ADD FOREIGN KEY (MajorCode)
+REFERENCES majors(MajorCode);
+
+ALTER TABLE majors
+ADD FOREIGN KEY (DepartmentCode)
+REFERENCES departments(DepartmentCode);
+
+ALTER TABLE departments
+ADD FOREIGN KEY (CollegeCode)
+REFERENCES colleges(CollegeCode);
+
+ALTER TABLE courses
+ADD FOREIGN KEY (DepartmentCode)
+REFERENCES departments(DepartmentCode);
+
+
 commit;
+
+
+# describe all tables
+describe students;
+describe colleges;
+describe departments;
+describe majors;
+describe courses;
 
 
 # select all records from each table
