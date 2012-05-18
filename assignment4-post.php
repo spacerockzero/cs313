@@ -19,7 +19,7 @@
     print 'cannot select db<br/>';
   }
 
-  $query = "SELECT * FROM students";
+  $query = $_POST['query'];
 
   $result = mysql_query($query);
     
@@ -42,5 +42,5 @@
         echo "<br />\n"; 
      } 
   }
-  
+
 ?>
