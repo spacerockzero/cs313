@@ -10,10 +10,10 @@
 
             <h1>Assignment 4</h1>
             <h3>Input SQL query</h3>
-            
-            <form name="query_form" action="assignment4-post.php" method="POST">
+            [please use single quotes]<br/>
+            <form id="query_form" name="query_form" action="" method="POST">
               <input type="textfield" name="query" id="query_field" value="SELECT * FROM students"></textfield>
-              <input type="button" value="submit query" onclick="MakeRequest()"/>
+              <input type="submit" id="submit" value="submit query" />
             </form>
             
             <h3>Results:</h3>
@@ -21,62 +21,27 @@
 
 <?php include('modules/footer.php');?>        
     <script type="text/javascript">
-        var query;
-        function getXMLHttp()
-        {
-          var xmlHttp
-
-          try
-          {
-            //Firefox, Opera 8.0+, Safari
-            xmlHttp = new XMLHttpRequest();
-          }
-          catch(e)
-          {
-            //Internet Explorer
-            try
-            {
-              xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-            }
-            catch(e)
-            {
-              try
-              {
-                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-              }
-              catch(e)
-              {
-                alert("Your browser does not support AJAX!")
-                return false;
-              }
-            }
-          }
-          return xmlHttp;
-        }
-
-        function MakeRequest()
-        {
+        
+        //run ajax function on form submit
+        $('#query_form').submit(function() {
           
-          var xmlHttp = getXMLHttp();
-          
-          xmlHttp.onreadystatechange = function()
-          {
-            if(xmlHttp.readyState == 4)
-            {
-              HandleResponse(xmlHttp.responseText);
-            }
-          }
-          //query = document.getElementById('query_field').value;
-          query = "SELECT * FROM students";
-          xmlHttp.open("POST", "assignment4-post.php", true); 
-          xmlHttp.send(query);
-        }
+          //run my ajax wrapper method
+          ajax_query();
 
-        function HandleResponse(response)
-        {
-          console.log(response);
-          document.getElementById('result').innerHTML = response;
-          //$('#scifi_form').fadeOut();
+          //keep form from submitting normally
+          return false;
+        });
+
+        function ajax_query(){
+
+          //get value of text field
+          txt=$("#query_field").val();
+
+          //run jQuery ajax method 
+          $.post("phplib/assignment4-post.php",{query:txt},function(result){
+            //print ajax result in the result area
+            $("#result").html(result);
+          });
         }
 
     </script>
