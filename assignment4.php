@@ -11,9 +11,9 @@
             <h1 id="fittext1">Assignment 4</h1>
             <h3>Input SQL query</h3>
             
-            <form action="assignment4-post.php" method="post">
+            <form name="query_form" action="assignment4-post.php" method="post">
               <input type="textfield" name="query" id="query_field" value="SELECT * FROM students"></textfield>
-              <input type="button" value="submit query"/>
+              <input type="submit" value="submit query"/>
             </form>
             
             <h3>Results:</h3>
