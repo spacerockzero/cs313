@@ -19,7 +19,12 @@
     print 'cannot select db<br/>';
   }
 
-  $query = $_POST['query'];
+  if (isset($_POST['query_input'])){
+    $query = $_POST['query_input'];
+  } else {
+    print "Could not find POST";
+  }
+  //$query = "SELECT * FROM students";
 
   $result = mysql_query($query);
     
@@ -43,6 +48,6 @@
      } 
   }
 
-//print_r($_POST);
+//echo $_GET['query_input'];
 
 ?>
