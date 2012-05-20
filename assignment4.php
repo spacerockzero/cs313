@@ -19,7 +19,8 @@
             <h3>Results:</h3>
             <p id="result"></p>
 
-<?php include('modules/footer.php');?>        
+<?php include('modules/footer.php');?>   
+    
     <script type="text/javascript">
         
         //run ajax function on form submit
