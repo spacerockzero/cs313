@@ -32,28 +32,28 @@
 @import "../less/alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
 
 // Components: Nav
-// @import "../less/navs.less";
-// @import "../less/navbar.less";
-// @import "../less/breadcrumbs.less";
-// @import "../less/pagination.less";
-// @import "../less/pager.less";
+@import "../less/navs.less";
+@import "../less/navbar.less";
+@import "../less/breadcrumbs.less";
+@import "../less/pagination.less";
+@import "../less/pager.less";
 
-// Components: Popovers
-// @import "../less/modals.less";
-// @import "../less/tooltip.less";
-// @import "../less/popovers.less";
+//Components: Popovers
+@import "../less/modals.less";
+@import "../less/tooltip.less";
+@import "../less/popovers.less";
 
-// Components: Misc
-// @import "../less/thumbnails.less";
-// @import "../less/labels.less";
-// @import "../less/badges.less";
+//Components: Misc
+@import "../less/thumbnails.less";
+@import "../less/labels.less";
+@import "../less/badges.less";
 @import "../less/progress-bars.less";
-// @import "../less/accordion.less";
-// @import "../less/carousel.less";
-// @import "../less/hero-unit.less";
+@import "../less/accordion.less";
+@import "../less/carousel.less";
+@import "../less/hero-unit.less";
 
 // Utility classes
-//@import "../less/utilities.less"; // Has to be last to override when necessary
+@import "../less/utilities.less"; // Has to be last to override when necessary
 
 /*! Begin Jakob Anderson's Custom CSS */
 
@@ -218,6 +218,10 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 18px;
 	list-style: none;
 }
+body > .container-fluid {
+	position: relative;
+	top: 95px;
+}
 .navbar {
 	color: #999;
 	clear: both;
@@ -228,7 +232,7 @@ h1, h2, h3, h4, h5, h6 {
 		display: block;
 		float: left;
 		margin: 0 10px 0 0;
-		padding:25px 5px;
+		padding:16px 5px;
 		&> li {
 			display: block;
 			float: left;
@@ -307,7 +311,7 @@ h1, h2, h3, h4, h5, h6 {
 		line-height:1em;
 		margin-bottom:0.3em;
 	}
-	img {
+	img.hero_img {
     // display:none;
 		margin: 25px 0;
 		width:100%;
@@ -575,6 +579,17 @@ div#footer {
 	}
 	/* End Assignment 2 Forms Style */
 	
+}
+.table {
+	th {
+		text-align:center;
+	}
+	td.edit_col{
+		text-align:center;
+		a {
+			text-decoration:none;
+		}
+	}
 }
 
 

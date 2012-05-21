@@ -24,7 +24,7 @@
   <body id="assignment2">   
 
 <?php include('modules/frame-top.php');?>
-
+          <div class="cf hero-unit">
             <h1>Assignment 2: PHP Survey</h1>
             <?php if($voted != 'true') {?>
             <p>
@@ -118,7 +118,7 @@
             	You have already voted. <a href="assignment2-post.php">See survey results</a>
             </p>
 		<?php } ?>
-
+          </div>
 <?php include('modules/footer.php');?>        
     
     </body>

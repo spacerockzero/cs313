@@ -7,41 +7,124 @@
   <body id="assignment5">   
 
 <?php include('modules/frame-top.php');?>
-
-            <h1>Assignment 5</h1>
+          <div class="cf">
+            <h1>Assignment 5: DB Modification</h1>
+            <br/>
             <div id="students_table">
-            <h4>Students</h4>
-            <table>
-            	<thead>
-            		<tr>
-            			<th>StudentId</th>
-            			<th>FirstName</th>
-            			<th>LastName</th>
-            			<th>Major</th>
-            			<th>Birthdate</th>
-            			<th>Gender</th>
-            			<th>City</th>
-            			<th>State</th>
-            			<th>Edit</th>
-            		</tr>
-            	</thead>
-            	<tfoot>
-            		Table Foot
-            	</tfoot>
-            	<tbody>
-            		<tr>
-            			<td>1</td>
-            			<td>Albin</td>
-            			<td>Gustavstrohm</td>
-            			<td>1001</td>
-            			<td>1980-06-01</td>
-            			<td>M</td>
-            			<td>Tacoma</td>
-            			<td>WA</td>
-            		</tr>
-            	</tbody>
-            </table>
+              
+              <a href="?action=addStudent" class="btn btn-primary btn-large"><strong>+</strong> Add Student</a>
+
+              <h3>Students</h3>
+
+              <?php 
+
+                //Jordan Campus DB Setup
+                // $hostName = '157.201.194.254';
+                // $userName = 'skabone';
+                // $password = '';
+
+                //Home OSX MAMP DB setup
+                $hostName = 'localhost';
+                $userName = 'root';
+                $password = '@Nd3r50n15th3b055';
+
+                if (!($db=mysql_connect($hostName, $userName, $password))) {
+                  print 'cannot connect msg';
+                }
+                else
+                {
+                  //print 'successful connection<br/>';
+                }
+
+                $database = 'skabone';
+
+                if(!(mysql_select_db($database))) {
+                  //print can't connect
+                  print 'cannot select db<br/>';
+                }
+
+                
+                $query = "SELECT * FROM students";
+
+                $result = mysql_query($query);
+                  
+                if($result == false) { 
+                   user_error("Query failed: " . mysql_error() . "<br />\n$query"); 
+                } 
+                elseif(mysql_num_rows($result) == 0) { 
+                   echo "<p>Sorry, no rows were returned by your query.</p>\n"; 
+                } 
+                else { 
+                  //successfully retrieved row results
+                  //write table header
+                  ?>
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <?php 
+                          
+                          $i = 0;
+                          
+                          while ($i < mysql_num_fields($result)) {
+                              
+                              $meta = mysql_fetch_field($result, $i);
+                              
+                              if (!$meta) {
+                                  echo "No information available<br />\n";
+                              }
+                              
+                              echo "<th>".$meta->name."</th>";
+                              
+                              $i++;
+                          }
+
+                        ?>  
+                              <th>Edit</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                        <?php
+                        //print table row values
+                              
+                          while($query_row = mysql_fetch_assoc($result)) 
+                          { 
+                            ?>
+                            <tr>
+                            <?php
+                            $studentID;
+                            foreach($query_row as $key => $value) 
+                            { 
+                               echo "<td>$value</td>"; 
+                               if ($key == 'StudentId') {
+                                $studentID = $value;
+                               }
+                            } 
+                            ?>
+                            <td class="edit_col">
+                              <a href='?action=edit&id=<?php echo $studentID;?>'>
+                                <img src='img/edit.png' alt='Edit this entry'/>
+                              </a>
+                              <a href='?action=remove&id=<?php echo $studentID;?>'>
+                                <img src='img/remove.png' alt='Remove this entry'/>
+                              </a>
+                            </td>
+                          </tr>
+                            <?php
+                          } 
+                        }
+
+                        //close table
+                        ?>
+                          </tbody>
+                        </table>
+                        <?php 
+                      
+
+                    ?>
+
             </div>
+          </div>
 
 <?php include('modules/footer.php');?>        
     

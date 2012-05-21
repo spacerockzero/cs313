@@ -7,7 +7,7 @@
   <body id="assignment4">   
 
 <?php include('modules/frame-top.php');?>
-
+          <div class="cf">
             <h1>Assignment 4</h1>
             <h3>Input SQL query</h3>
             [please use single quotes]<br/>
@@ -18,7 +18,7 @@
             
             <h3>Results:</h3>
             <p id="result"></p>
-
+          </div>
 <?php include('modules/footer.php');?>   
     
     <script type="text/javascript">

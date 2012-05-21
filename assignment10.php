@@ -7,10 +7,10 @@
   <body id="assignment10">   
 
 <?php include('modules/frame-top.php');?>
-
-            <h1 id="fittext1">Assignment 10</h1>
+          <div class="cf">
+            <h1>Assignment 10</h1>
             <p></p>
-
+          </div>
 <?php include('modules/footer.php');?>        
     
   </body>

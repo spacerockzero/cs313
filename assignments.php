@@ -7,8 +7,8 @@
   <body id="assignments">   
 
     <?php include('modules/frame-top.php');?>
-
-            <h1 id="fittext1">Assignments</h1>
+          <div class="cf">
+            <h1>Assignments</h1>
             <p>These are the assignments for this semester:</p>
             <ul class="nav nav-list internal">
               <li><a href="assignment2.php">Assignment 2: PHP Survey</a></li>
@@ -21,7 +21,7 @@
               <li><a href="assignment9.php">Assignment 9</a></li>
               <li><a href="assignment10.php">Assignment 10</a></li>
             </ul>
-
+          </div>
   <?php include('modules/footer.php');?>        
     
   </body>
