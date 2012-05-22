@@ -88,7 +88,7 @@ if (isset($_POST['addStudentSubmit'])) {
 // $userName = 'skabone';
 // $password = '';
 
-$query = "SELECT * FROM students";
+$query = "SELECT * FROM students ORDER BY StudentId DESC";
 
 $result = mysql_query($query);
   
@@ -118,9 +118,14 @@ else {
             <h1>Assignment 5: DB Modification</h1>
             <br/>
             <div id="students_table">
-              <?php if($addStudent == false) { ?>
+
+              <?php 
+              //check if add student button is needed
+              if($addStudent == false) { ?>
               <a href="?action=addStudent" id="addStudentBtn" class="btn btn-primary btn-large"><strong>+</strong> Add Student</a>
-              <?php } else { ?>
+              <?php 
+              //print all forms needed
+              } else { ?>
               <div id="addStudentDiv" class="cf">
 
                 <form id="addStudent" name="addStudent" action="assignment5.php" method="post">
@@ -147,7 +152,7 @@ else {
                   </select>
 
                   <label for="Birthdate"> Birthdate</label>
-                  <input name="Birthdate" type="text" class="span2" value="02/16/12" data-date-format="mm/dd/yy" id="dp2">
+                  <input name="Birthdate" type="text" class="span2" id="dp2" value="1985-01-01">
 
 
                   <br/>
