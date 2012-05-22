@@ -11,7 +11,7 @@
   }
   else
   {
-    print 'successful connection<br/>';
+    //print 'successful connection<br/>';
   }
 
   $database = 'skabone';
@@ -48,7 +48,7 @@ if (isset($_GET['action'])) {
 if (isset($_POST['addStudentSubmit'])) {
 
   //print "inside POST return";
-  print_r($_POST);
+  //print_r($_POST);
   
   //add student
   if ($_POST['addStudentSubmit']) {
@@ -77,7 +77,7 @@ if (isset($_POST['addStudentSubmit'])) {
     }  
     else { 
       //successfully retrieved row results
-      print "successfully added record";
+      //print "successfully added record";
     }
 
   }
