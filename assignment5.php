@@ -54,18 +54,18 @@ if (isset($_POST['addStudentSubmit'])) {
   if ($_POST['addStudentSubmit']) {
     //print "inside ADD post submit";
 
-    $FirstName  = $_POST['FirstName'];
-    $LastName   = $_POST['LastName'];
-    $MajorCode  = $_POST['MajorCode'];
-    $Birthdate  = $_POST['Birthdate'];
-    $Gender     = $_POST['Gender'];
-    $City       = $_POST['City'];
-    $State      = $_POST['State'];
+    $FirstNameData  = $_POST['FirstName'];
+    $LastNameData   = $_POST['LastName'];
+    $MajorCodeData  = $_POST['MajorCode'];
+    $BirthdateData  = $_POST['Birthdate'];
+    $GenderData     = $_POST['Gender'];
+    $CityData      = $_POST['City'];
+    $StateData      = $_POST['State'];
 
     //(StudentId, FirstName, LastName, MajorCode, Birthdate, Gender, City, State)
 
     $addQuery =  "INSERT INTO students 
-                 VALUES (NULL, $FirstName, $LastName, $MajorCode, $Birthdate, $Gender, $City, $State)";
+                 VALUES (NULL, '$FirstNameData', '$LastNameData', '$MajorCodeData', '$BirthdateData', '$GenderData', '$CityData', '$StateData')";
 
     // $addQuery = "INSERT INTO students 
     //             VALUES (NULL, 'Albin', 'Gustavstrohm', 1001, '1980-06-01', 'M', 'Tacoma', 'WA')";
@@ -73,11 +73,8 @@ if (isset($_POST['addStudentSubmit'])) {
     $addResult = mysql_query($addQuery);
 
     if($addResult == false) { 
-      user_error("Query failed: " . mysql_error() . "<br />\n$addResult"); 
-    } 
-    elseif(mysql_affected_rows($addResult) == 0) { 
-      echo "<p>Sorry, no rows were affected by your query.</p>\n"; 
-    } 
+      user_error("Query failed, yo: " . mysql_error() . "<br />\n$addResult"); 
+    }  
     else { 
       //successfully retrieved row results
       print "successfully added record";
@@ -256,7 +253,9 @@ else {
     <script type="text/javascript">
       
       $(function(){
-        $('#dp2').datepicker();
+        $('#dp2').datepicker({
+            dateFormat : 'yy-mm-dd'
+        });
         $('#addStudentDiv').slideDown();
       });
   
