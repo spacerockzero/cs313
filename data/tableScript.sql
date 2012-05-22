@@ -198,9 +198,9 @@ INSERT INTO courses VALUES	( NULL,   'ID 381',      'Contemporary Architecture a
 
 # Add foreign keys once all tables have been built and populated
 
-ALTER TABLE students
-ADD FOREIGN KEY (MajorCode)
-REFERENCES majors(MajorCode);
+# ALTER TABLE students
+# ADD FOREIGN KEY (MajorCode)
+# REFERENCES majors(MajorCode);
 
 ALTER TABLE majors
 ADD FOREIGN KEY (DepartmentCode)
