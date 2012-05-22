@@ -1,4 +1,4 @@
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
       <div class="navbar-inner">
         <div class="container-fluid">
           <a class="brand" href="#">Jakob Anderson | CS313</a>

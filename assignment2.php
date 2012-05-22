@@ -25,7 +25,7 @@
 
 <?php include('modules/frame-top.php');?>
           <div class="cf hero-unit">
-            <h1>Assignment 2: PHP Survey</h1>
+            <h2>Assignment 2: PHP Survey</h2>
             <?php if($voted != 'true') {?>
             <p>
             	Please fill out the form with your current tastes and opinions in Sci-Fi television &amp; movies. 
