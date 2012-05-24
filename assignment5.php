@@ -1,16 +1,22 @@
 <?php
-//Home OSX MAMP DB setup
+  //Home OSX MAMP / Laptop LAMPP DB setup
   $hostName = 'localhost';
   $userName = 'root';
   $password = '@Nd3r50n15th3b055';
 
+  //Jordan Campus DB Setup
+  // $hostName = '157.201.194.254';
+  // $userName = 'skabone';
+  // $password = '';
+
   $queryGood = false;
+  $addStudent = false;
+  $removeStudent = false;
 
   if (!($db=mysql_connect($hostName, $userName, $password))) {
     print 'cannot connect msg';
   }
-  else
-  {
+  else {
     //print 'successful connection<br/>';
   }
 
@@ -21,27 +27,35 @@
     print 'cannot select db<br/>';
   }
 
-$addStudent = false;
+
 
 if (isset($_GET['action'])) {
-  
-  $addStudent = false;
 
-  //print "inside get action return";
-
-  //add student
+  //add student routing
   if ($_GET['action'] === 'addStudent') {
-    //print "inside ADD";
+
     $addStudent = true;
 
   }
-  //edit student
+
+  //edit student routing
   if ($_GET['action'] === 'edit') {
-    //print "inside EDIT";
+
   }
-  //remove student
+
+  //remove student routing
   if ($_GET['action'] === 'remove') {
-    //print "inside REMOVE";
+    
+    $id = $_GET['id'];
+
+    //Check for verification before deleting student record
+    if ($removeStudent === true){
+      //verification check complete, answer is yes
+      removeStudent($id);
+    } else {
+      //verification check complete/answer is no
+    }
+    
   }
 }
 
@@ -83,10 +97,19 @@ if (isset($_POST['addStudentSubmit'])) {
   }
 }
 
-//Jordan Campus DB Setup
-// $hostName = '157.201.194.254';
-// $userName = 'skabone';
-// $password = '';
+function removeStudent($id){
+      $removeQuery = "DELETE FROM STUDENTS WHERE StudentId = '$id'";
+
+      $removeResult = mysql_query($removeQuery);
+
+      if($removeResult == false) { 
+        user_error("Query failed, yo: " . mysql_error() . "<br />\n$removeResult"); 
+      }  
+      else { 
+        //successfully retrieved row results
+        print "successfully removed record";
+      }
+    }
 
 $query = "SELECT * FROM students ORDER BY StudentId DESC";
 
