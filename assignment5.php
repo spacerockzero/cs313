@@ -1,13 +1,13 @@
 <?php
   //Home OSX MAMP / Laptop LAMPP DB setup
-  $hostName = 'localhost';
-  $userName = 'root';
-  $password = '@Nd3r50n15th3b055';
+  // $hostName = 'localhost';
+  // $userName = 'root';
+  // $password = '@Nd3r50n15th3b055';
 
   //Jordan Campus DB Setup
-  // $hostName = '157.201.194.254';
-  // $userName = 'skabone';
-  // $password = '';
+  $hostName = '157.201.194.254';
+  $userName = 'skabone';
+  $password = '';
 
   $queryGood = false;
   $addStudent = false;
@@ -49,12 +49,12 @@ if (isset($_GET['action'])) {
     $id = $_GET['id'];
 
     //Check for verification before deleting student record
-    if ($removeStudent === true){
+    //if ($removeStudent === true){
       //verification check complete, answer is yes
       removeStudent($id);
-    } else {
+    //} else {
       //verification check complete/answer is no
-    }
+    //}
     
   }
 }
