@@ -81,9 +81,6 @@ if (isset($_POST['addStudentSubmit'])) {
     $addQuery =  "INSERT INTO students 
                  VALUES (NULL, '$FirstNameData', '$LastNameData', '$MajorCodeData', '$BirthdateData', '$GenderData', '$CityData', '$StateData')";
 
-    // $addQuery = "INSERT INTO students 
-    //             VALUES (NULL, 'Albin', 'Gustavstrohm', 1001, '1980-06-01', 'M', 'Tacoma', 'WA')";
-
     $addResult = mysql_query($addQuery);
 
     if($addResult == false) { 
@@ -91,14 +88,14 @@ if (isset($_POST['addStudentSubmit'])) {
     }  
     else { 
       //successfully retrieved row results
-      //print "successfully added record";
+      print "successfully added record";
     }
 
   }
 }
 
 function removeStudent($id){
-      $removeQuery = "DELETE FROM STUDENTS WHERE StudentId = '$id'";
+      $removeQuery = "DELETE FROM students WHERE StudentId = '$id'";
 
       $removeResult = mysql_query($removeQuery);
 
