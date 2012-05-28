@@ -13,8 +13,8 @@
   $addStudent = false;
   $editStudent = false;
   $removeStudent = false;
-  global $studentInfo;
-  $studentInfo = array();
+  //global $student;
+  //$student;
 
   if (!($db=mysql_connect($hostName, $userName, $password))) {
     print 'cannot connect msg';
@@ -44,8 +44,8 @@ if (isset($_GET['action'])) {
   //edit student routing
   if ($_GET['action'] === 'edit') {
     $id = $_GET['id'];
-    print "inside edit student";
-    print "<br/>id = ".$id;
+    // print "inside edit student";
+    // print "<br/>id = ".$id;
     $editStudent = true;
     selectStudent($id);
   }
@@ -117,20 +117,20 @@ function removeStudent($id){
 
 function selectStudent($id){
 
-  $query = "SELECT * FROM students where StudentId = '$id'";
+  $selectQuery = "SELECT * FROM students where StudentId = '$id'";
 
-  $result = mysql_query($query);
+  $selectResult = mysql_query($selectQuery);
     
-  if($result == false) { 
-     user_error("Query failed: " . mysql_error() . "<br />\n$query"); 
+  if($selectResult == false) { 
+     user_error("Query failed: " . mysql_error() . "<br />\n$selectQuery"); 
   } 
-  elseif(mysql_num_rows($result) == 0) { 
+  elseif(mysql_num_rows($selectResult) == 0) { 
      echo "<p>Sorry, no rows were returned by your query.</p>\n"; 
   } 
   else { 
     //successfully retrieved row results
     
-    print "<br />\n Successfully selected student with id = ".$id;
+    //print "<br />\n Successfully selected student with id = ".$id;
     
     // while ($row = mysql_fetch_assoc($result)) {
     //     echo $row['FirstName'];
@@ -141,10 +141,12 @@ function selectStudent($id){
     //     echo $row['City'];
     //     echo $row['State'];
     // }
-
-    $studentInfo = mysql_fetch_assoc($result);
+    global $student;
+    $student = mysql_fetch_assoc($selectResult);
+    
     // print_r($student);
-    echo $studentInfo['FirstName'];
+
+    // echo "<br/>\nFirstName = ".$student['FirstName']."<br/>\n";
   }
 
 }
@@ -239,47 +241,47 @@ else {
 
               <?php } if ( $editStudent == true ){ ?>
               <div id="addStudentDiv" class="cf">
-                <h3>Edit Student  <?php echo $studentInfo['FirstName']; ?></h3>
+                <h3>Edit Student</h3>
                 <form id="editStudent" name="editStudent" action="assignment5.php" method="post">
                   
                   <label for="FirstName"> First Name</label>
-                  <input type="text" name="FirstName" id="FirstName" />
+                  <input type="text" name="FirstName" id="FirstName" value="<?php echo $student['FirstName']; ?>"/>
                   
                   <label for="LastName"> Last Name</label>
-                  <input type="text" name="LastName" id="LastName" />
+                  <input type="text" name="LastName" id="LastName"  value="<?php echo $student['LastName']; ?>"/>
 
                   <br/>
                   <label for="MajorCode"> MajorCode</label>
-                  <select name="MajorCode" id="MajorCode">
-                    <option value="1001">1001 (B.S. in Biology)</option>
-                    <option value="1002">1002 (B.S. in Psychology)</option>
-                    <option value="1003">1003 (B.S. in Architecture)</option>
-                    <option value="1004">1004 (B.S. in Computer Science)</option>
-                    <option value="1005">1005 (B.S. in Mechanical Engineering)</option>
-                    <option value="1006">1006 (B.S. in Automotive Technology)</option>
-                    <option value="1007">1007 (B.S. in Computer Information Technology)</option>
-                    <option value="1008">1008 (B.S. in Business Management)</option>
-                    <option value="1009">1009 (B.S. in Art)</option>
-                    <option value="1010">1010 (B.S. in Interior Design)</option>
+                  <select name="MajorCode" id="MajorCode" >
+                    <option value="1001" <?php if ($student['MajorCode'] == 1001) {echo "selected='selected'";} ?>>1001 (B.S. in Biology)</option>
+                    <option value="1002" <?php if ($student['MajorCode'] == 1002) {echo "selected='selected'";} ?>>1002 (B.S. in Psychology)</option>
+                    <option value="1003" <?php if ($student['MajorCode'] == 1003) {echo "selected='selected'";} ?>>1003 (B.S. in Architecture)</option>
+                    <option value="1004" <?php if ($student['MajorCode'] == 1004) {echo "selected='selected'";} ?>>1004 (B.S. in Computer Science)</option>
+                    <option value="1005" <?php if ($student['MajorCode'] == 1005) {echo "selected='selected'";} ?>>1005 (B.S. in Mechanical Engineering)</option>
+                    <option value="1006" <?php if ($student['MajorCode'] == 1006) {echo "selected='selected'";} ?>>1006 (B.S. in Automotive Technology)</option>
+                    <option value="1007" <?php if ($student['MajorCode'] == 1007) {echo "selected='selected'";} ?>>1007 (B.S. in Computer Information Technology)</option>
+                    <option value="1008" <?php if ($student['MajorCode'] == 1008) {echo "selected='selected'";} ?>>1008 (B.S. in Business Management)</option>
+                    <option value="1009" <?php if ($student['MajorCode'] == 1009) {echo "selected='selected'";} ?>>1009 (B.S. in Art)</option>
+                    <option value="1010" <?php if ($student['MajorCode'] == 1010) {echo "selected='selected'";} ?>>1010 (B.S. in Interior Design)</option>
                   </select>
 
                   <label for="Birthdate"> Birthdate</label>
-                  <input name="Birthdate" type="text" class="span2" id="dp2" value="1985-01-01">
+                  <input name="Birthdate" type="text" class="span2" id="dp2" value="<?php echo $student['Birthdate']; ?>">
 
 
                   <br/>
                   <label for="Gender"> Gender</label>
                   <select name="Gender" id="Gender">
-                    <option value="M">M</option>
-                    <option value="F">F</option>
+                    <option value="M" <?php if ($student['Gender'] == 'M') {echo "selected='selected'";} ?>>M</option>
+                    <option value="F" <?php if ($student['Gender'] == 'F') {echo "selected='selected'";} ?>>F</option>
                   </select>
 
                   <br/>
                   <label for="City"> City</label>
-                  <input type="text" name="City" id="City" />
+                  <input type="text" name="City" id="City" value="<?php echo $student['City']; ?>"/>
 
                   <label for="State"> State</label>
-                  <input type="text" name="State" id="State" />
+                  <input type="text" name="State" id="State" value="<?php echo $student['State']; ?>"/>
                   <br/>
                   <br/>
                   <a id="editStudentCancel" name="editStudentCancel" href="assignment5.php" class="btn btn-danger btn-large" type="button" >Cancel</a>
