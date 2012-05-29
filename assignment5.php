@@ -1,4 +1,25 @@
 <?php
+  session_start();
+
+  global $removeStudent, $errors, $messages;
+
+  $queryGood = false;
+  $addStudent = false;
+  $editStudent = false;
+  $removeStudent = false;
+
+  $errors = array();
+  $messages = array();
+
+  if (isset($_SESSION['errors'])) {
+
+    $errors = $_SESSION['errors'];
+
+  } if (isset($_SESSION['messages'])) {
+
+    $messages = $_SESSION['messages'];
+
+  }
   //Home OSX MAMP / Laptop LAMPP DB setup
   $hostName = 'localhost';
   $userName = 'root';
@@ -9,15 +30,7 @@
   // $userName = 'skabone';
   // $password = '';
 
-  $queryGood = false;
-  $addStudent = false;
-  $editStudent = false;
-  global $removeStudent;
-  $removeStudent = false;
-  //global $student;
-  //$student;
-  $errors = array();
-  $messages = array();
+  
 
   if (!($db=mysql_connect($hostName, $userName, $password))) {
     $errors['connect_db_error'] = 'cannot connect msg';
@@ -47,8 +60,6 @@ if (isset($_GET['action'])) {
   //edit student routing
   if ($_GET['action'] === 'edit') {
     $id = $_GET['id'];
-    // print "inside edit student";
-    // print "<br/>id = ".$id;
     $editStudent = true;
     selectStudent($id);
   }
@@ -96,11 +107,11 @@ if (isset($_POST['addStudentSubmit'])) {
     $addResult = mysql_query($addQuery);
 
     if($addResult == false) { 
-      user_error("Query failed, yo: " . mysql_error() . "<br />\n$addResult"); 
+      $errors['add_fail'] =  "Query failed, yo: " . mysql_error() . "<br />\n$addResult"; 
     }  
     else { 
       //successfully retrieved row results
-      print "successfully added record";
+      $messages['add_success'] =  "successfully added record";
     }
 
   }
@@ -142,11 +153,11 @@ if (isset($_POST['editStudentSubmit'])) {
     $editResult = mysql_query($editQuery);
 
     if($editResult == false) { 
-      user_error("Query failed, yo: " . mysql_error() . "<br />\n$editResult"); 
+      $errors['edit_fail'] =  "Query failed, yo: " . mysql_error() . "<br />\n$editResult"; 
     }  
     else { 
       //successfully retrieved row results
-      print "successfully modified record";
+      $messages['edit_success'] =   "successfully modified record";
     }
 
   }
@@ -162,16 +173,19 @@ if (isset($_POST['removeStudentSubmit'])) {
 }
 
 function removeStudent($id){
+  
   $removeQuery = "DELETE FROM students WHERE StudentId = '$id'";
 
   $removeResult = mysql_query($removeQuery);
 
   if($removeResult == false) { 
-    user_error("Query failed, yo: " . mysql_error() . "<br />\n$removeResult"); 
+    global $errors;
+    $errors['remove_fail'] =  "Query failed, yo: " . mysql_error() . "<br />\n$removeResult"; 
   }  
   else { 
     //successfully retrieved row results
-    print "successfully removed record";
+    global $messages;
+    $messages['remove_success'] = "successfully removed record";
   }
 }
 
@@ -182,31 +196,17 @@ function selectStudent($id){
   $selectResult = mysql_query($selectQuery);
     
   if($selectResult == false) { 
-     user_error("Query failed: " . mysql_error() . "<br />\n$selectQuery"); 
+     $errors['select_query_fail'] =  "Query failed: " . mysql_error() . "<br />\n$selectQuery"; 
   } 
   elseif(mysql_num_rows($selectResult) == 0) { 
-     echo "<p>Sorry, no rows were returned by your query.</p>\n"; 
+     $errors['select_row_fail'] =   "<p>Sorry, no rows were returned by your query.</p>\n"; 
   } 
   else { 
     //successfully retrieved row results
-    
-    //print "<br />\n Successfully selected student with id = ".$id;
-    
-    // while ($row = mysql_fetch_assoc($result)) {
-    //     echo $row['FirstName'];
-    //     echo $row['LastName'];
-    //     echo $row['MajorCode'];
-    //     echo $row['Birthdate'];
-    //     echo $row['Gender'];
-    //     echo $row['City'];
-    //     echo $row['State'];
-    // }
+
     global $student;
     $student = mysql_fetch_assoc($selectResult);
-    
-    // print_r($student);
 
-    // echo "<br/>\nFirstName = ".$student['FirstName']."<br/>\n";
   }
 
 }
@@ -216,10 +216,10 @@ $query = "SELECT * FROM students ORDER BY StudentId DESC";
 $result = mysql_query($query);
   
 if($result == false) { 
-   user_error("Query failed: " . mysql_error() . "<br />\n$query"); 
+   $errors['print_select_query_fail'] =  "Query failed: " . mysql_error() . "<br />\n$query"; 
 } 
 elseif(mysql_num_rows($result) == 0) { 
-   echo "<p>Sorry, no rows were returned by your query.</p>\n"; 
+   $errors['print_select_row_fail'] = "<p>Sorry, no rows were returned by your query.</p>\n"; 
 } 
 else { 
   //successfully retrieved row results
@@ -243,6 +243,16 @@ else {
             <div id="students_table">
 
               <?php 
+              if (count($errors) != 0) {
+                foreach ($errors as $k => $v) {
+                    echo '<div class="alert alert-error"><button class="close" data-dismiss="alert">×</button>'.$k.': '.$v.'</div>';
+                }
+              }
+              if (count($messages) != 0) {
+                foreach ($messages as $k => $v) {
+                    echo '<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button>'.$k.': '.$v.'</div>';
+                }
+              }
               //check if add student button is needed
               if($addStudent == false && $editStudent == false) { ?>
               <a href="?action=addStudent" id="addStudentBtn" class="btn btn-primary btn-large"><strong>+</strong> Add Student</a>
@@ -254,14 +264,14 @@ else {
                 <form id="addStudent" name="addStudent" action="assignment5.php" method="post">
                   
                   <label for="FirstName"> First Name</label>
-                  <input type="text" name="FirstName" id="FirstName" />
+                  <input type="text" name="FirstName" id="FirstName" data-bvalidator="required" data-bvalidator-msg="Please enter a first name"/>
                   
                   <label for="LastName"> Last Name</label>
-                  <input type="text" name="LastName" id="LastName" />
+                  <input type="text" name="LastName" id="LastName" data-bvalidator="required" data-bvalidator-msg="Please enter a last name"/>
 
                   <br/>
                   <label for="MajorCode"> MajorCode</label>
-                  <select name="MajorCode" id="MajorCode">
+                  <select name="MajorCode" id="MajorCode" data-bvalidator="required" data-bvalidator-msg="Please select a major">
                     <option value="1001">1001 (B.S. in Biology)</option>
                     <option value="1002">1002 (B.S. in Psychology)</option>
                     <option value="1003">1003 (B.S. in Architecture)</option>
@@ -275,22 +285,22 @@ else {
                   </select>
 
                   <label for="Birthdate"> Birthdate</label>
-                  <input name="Birthdate" type="text" class="span2" id="dp2" value="1985-01-01">
+                  <input name="Birthdate" type="text" class="span2" id="dp2" value="1985-01-01" data-bvalidator="required" data-bvalidator-msg="Please enter a birthdate">
 
 
                   <br/>
                   <label for="Gender"> Gender</label>
-                  <select name="Gender" id="Gender">
+                  <select name="Gender" id="Gender" data-bvalidator="required" data-bvalidator-msg="Please select a gender">
                     <option value="M">M</option>
                     <option value="F">F</option>
                   </select>
 
                   <br/>
                   <label for="City"> City</label>
-                  <input type="text" name="City" id="City" />
+                  <input type="text" name="City" id="City" data-bvalidator="required" data-bvalidator-msg="Please enter a valid city name"/>
 
                   <label for="State"> State</label>
-                  <input type="text" name="State" id="State" />
+                  <input type="text" name="State" id="State" data-bvalidator="required, maxlength[10]" data-bvalidator-msg="Please enter a valid state abbreviation"/>
                   <br/>
                   <br/>
                   <a id="addStudentCancel" name="addStudentCancel" href="assignment5.php" class="btn btn-danger btn-large" type="button" >Cancel</a>
@@ -440,6 +450,7 @@ else {
 
 <?php include('modules/footer.php');?>        
     <script type="text/javascript" src="js/libs/jquery-ui-1.8.20.custom.min.js"></script>
+    <!-- <script type="text/javascript" src="js/libs/jquery.bvalidator-yc.js"/> -->
     <script type="text/javascript">
       
       $(function(){
@@ -450,5 +461,20 @@ else {
       });
   
     </script>
+    <script type="text/javascript">
+    // $(document).ready(function () {
+    //   $('form').bValidator();
+    // });
+    </script>
   </body>
 </html>
+<?php
+  // //copy errors array to session
+  // //$_SESSION['errors'] = $errors;
+  // //delete current errors array
+  // $errors = '';
+  // //copy messages array to session
+  // //$_SESSION['messages'] = $messages;
+  // //delete current messages array
+  // $messages = '';
+?>

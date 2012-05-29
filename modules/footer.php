@@ -21,3 +21,4 @@
       $("#fittext2").fitText(1.2);
       $("#fittext3").fitText(1.1, { minFontSize: 30, maxFontSize: '96px' });
     </script>
+    <script src="js/libs/twitter_bootstrap/bootstrap-alert.js"></script>
