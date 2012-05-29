@@ -1,17 +1,18 @@
 <?php
   //Home OSX MAMP / Laptop LAMPP DB setup
-  // $hostName = 'localhost';
-  // $userName = 'root';
-  // $password = '@Nd3r50n15th3b055';
+  $hostName = 'localhost';
+  $userName = 'root';
+  $password = '@Nd3r50n15th3b055';
 
   //Jordan Campus DB Setup
-  $hostName = '157.201.194.254';
-  $userName = 'skabone';
-  $password = '';
+  // $hostName = '157.201.194.254';
+  // $userName = 'skabone';
+  // $password = '';
 
   $queryGood = false;
   $addStudent = false;
   $editStudent = false;
+  global $removeStudent;
   $removeStudent = false;
   //global $student;
   //$student;
@@ -54,7 +55,7 @@ if (isset($_GET['action'])) {
 
   //remove student routing
   if ($_GET['action'] === 'remove') {
-    
+    $removeStudent = false;
     $id = $_GET['id'];
 
     //Check for verification before deleting student record
@@ -64,6 +65,7 @@ if (isset($_GET['action'])) {
     } else {
       //verification check complete/answer is no
       $removeStudent = true;
+      selectStudent($id);
     }
     
   }
@@ -147,6 +149,15 @@ if (isset($_POST['editStudentSubmit'])) {
       print "successfully modified record";
     }
 
+  }
+}
+
+if (isset($_POST['removeStudentSubmit'])) {
+  if ($_POST['removeStudentSubmit']) {
+    //Already checked for verification before deleting student record
+    //Now Delete it!!!
+    $id = $_POST['StudentId'];
+    removeStudent($id);
   }
 }
 
@@ -347,7 +358,8 @@ else {
                   <form id="removeStudent" name="removeStudent" action="assignment5.php" method="post">
                     <p>Are you sure you want to remove student "<?php echo $student['FirstName'].' '.$student['LastName']; ?>"?</p>
                     <a id="editStudentCancel" name="editStudentCancel" href="assignment5.php" class="btn btn-danger btn-large" type="button" >Cancel</a>
-                    <input type="submit" class="btn btn-primary btn-large" value="Remove Student"/>
+                    <input type="hidden" name="StudentId" value="<?php echo $student['StudentId']?>"/>
+                    <input type="submit" name="removeStudentSubmit" class="btn btn-primary btn-large" value="Remove Student"/>
                   </form>
                 </div>
               <?php } ?>
