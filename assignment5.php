@@ -1,13 +1,13 @@
 <?php
   //Home OSX MAMP / Laptop LAMPP DB setup
-  $hostName = 'localhost';
-  $userName = 'root';
-  $password = '@Nd3r50n15th3b055';
+  // $hostName = 'localhost';
+  // $userName = 'root';
+  // $password = '@Nd3r50n15th3b055';
 
   //Jordan Campus DB Setup
-  // $hostName = '157.201.194.254';
-  // $userName = 'skabone';
-  // $password = '';
+  $hostName = '157.201.194.254';
+  $userName = 'skabone';
+  $password = '';
 
   $queryGood = false;
   $addStudent = false;
@@ -15,9 +15,11 @@
   $removeStudent = false;
   //global $student;
   //$student;
+  $errors = array();
+  $messages = array();
 
   if (!($db=mysql_connect($hostName, $userName, $password))) {
-    print 'cannot connect msg';
+    $errors['connect_db_error'] = 'cannot connect msg';
   }
   else {
     //print 'successful connection<br/>';
@@ -27,7 +29,7 @@
 
   if(!(mysql_select_db($database))) {
     //print can't connect
-    print 'cannot select db<br/>';
+    $errors['select_db_error'] = 'cannot select db<br/>';
   }
 
 
@@ -56,12 +58,13 @@ if (isset($_GET['action'])) {
     $id = $_GET['id'];
 
     //Check for verification before deleting student record
-    //if ($removeStudent === true){
+    if ($removeStudent === true){
       //verification check complete, answer is yes
       removeStudent($id);
-    //} else {
+    } else {
       //verification check complete/answer is no
-    //}
+      $removeStudent = true;
+    }
     
   }
 }
@@ -96,6 +99,52 @@ if (isset($_POST['addStudentSubmit'])) {
     else { 
       //successfully retrieved row results
       print "successfully added record";
+    }
+
+  }
+}
+
+if (isset($_POST['editStudentSubmit'])) {
+
+  //print "inside POST return";
+  //print_r($_POST);
+  
+  //add student
+  if ($_POST['editStudentSubmit']) {
+    //print "inside ADD post submit";
+
+    $id             = $_POST['StudentId'];
+    $FirstName  = $_POST['FirstName'];
+    $LastName   = $_POST['LastName'];
+    $MajorCode  = $_POST['MajorCode'];
+    $Birthdate  = $_POST['Birthdate'];
+    $Gender     = $_POST['Gender'];
+    $City      = $_POST['City'];
+    $State      = $_POST['State'];
+
+    //(StudentId, FirstName, LastName, MajorCode, Birthdate, Gender, City, State)
+
+    $editQuery =   "UPDATE students
+                    SET FirstName='$FirstName', LastName='$LastName', MajorCode='$MajorCode', Birthdate='$Birthdate', Gender='$Gender', City='$City', State='$State'
+                    WHERE StudentID = '$id'";
+
+
+                    // "UPDATE students
+                    // SET FirstName='$FirstName', LastName='$LastName, MajorCode='$MajorCode', Birthdate='$Birthdate', Gender='$Gender', City='$City', State='$State'
+                    // WHERE StudentID = '$id'";
+
+                // "INSERT INTO students 
+                //  VALUES (NULL, '$FirstName', '$LastName', '$MajorCode', '$Birthdate', '$Gender', '$City', '$State')
+                //  WHERE StudentID = '$id'";
+
+    $editResult = mysql_query($editQuery);
+
+    if($editResult == false) { 
+      user_error("Query failed, yo: " . mysql_error() . "<br />\n$editResult"); 
+    }  
+    else { 
+      //successfully retrieved row results
+      print "successfully modified record";
     }
 
   }
@@ -244,6 +293,9 @@ else {
                 <h3>Edit Student</h3>
                 <form id="editStudent" name="editStudent" action="assignment5.php" method="post">
                   
+                  <label for="StudentId"> StudentId</label>
+                  <input type="text" name="StudentId" id="StudentId" value="<?php echo $student['StudentId']; ?>" readonly="readonly"/><br/>
+
                   <label for="FirstName"> First Name</label>
                   <input type="text" name="FirstName" id="FirstName" value="<?php echo $student['FirstName']; ?>"/>
                   
@@ -289,6 +341,15 @@ else {
 
                 </form>
               </div>
+              <?php } if ($removeStudent == true){ ?>
+                <div id="addStudentDiv" class="cf">
+                  <h3>Edit Student</h3>
+                  <form id="removeStudent" name="removeStudent" action="assignment5.php" method="post">
+                    <p>Are you sure you want to remove student "<?php echo $student['FirstName'].' '.$student['LastName']; ?>"?</p>
+                    <a id="editStudentCancel" name="editStudentCancel" href="assignment5.php" class="btn btn-danger btn-large" type="button" >Cancel</a>
+                    <input type="submit" class="btn btn-primary btn-large" value="Remove Student"/>
+                  </form>
+                </div>
               <?php } ?>
               <h3>Students</h3>
               <?php 
