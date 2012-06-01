@@ -12,6 +12,12 @@
             <p></p>
             <form action="http://157.201.194.254:8080/cs313/servlet/s12.skabone.assign06">
               
+              <label for="username">Username</label>
+              <input type="text" name="username" id="username" /> 
+
+              <label for="password">Password</label>
+              <input type="password" name="password" id="password" /> 
+
             </form>
           </div>
 <?php include('modules/footer.php');?>        
