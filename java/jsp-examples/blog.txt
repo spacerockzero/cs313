@@ -1,0 +1,22 @@
+<forum>
+<blogEntry>
+<username>Scott</username>
+<date>2012-05-31 10:49:16</date>
+<text>This is from CS313. Class Today</text>
+</blogEntry>
+<blogEntry>
+<username>Steve</username>
+<date>2012-05-31 09:40:24</date>
+<text>Was there a test today?</text>
+</blogEntry>
+<blogEntry>
+<username>Dave</username>
+<date>2012-05-31 09:32:33</date>
+<text>What is going on!</text>
+</blogEntry>
+<blogEntry>
+<username>Scott</username>
+<date>2012-05-31 09:31:27</date>
+<text>This is may entry</text>
+</blogEntry>
+</forum>
