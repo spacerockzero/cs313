@@ -18,6 +18,8 @@
               <label for="password">Password</label>
               <input type="password" name="password" id="password" /> 
 
+              <input type="submit" name="submit" />
+
             </form>
           </div>
 <?php include('modules/footer.php');?>        
