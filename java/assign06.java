@@ -21,9 +21,11 @@ public class assign06 extends HttpServlet {
       Enumeration e = request.getParameterNames();
       PrintWriter out = res.getWriter ();
       while (e.hasMoreElements()) {
-        String name = (String)e.nextElement();
-        String value = request.getParameter(name);
-        out.println(name + " = " + value);
+        String username = request.getParameter ("username");
+        String password = request.getParameter ("password");
+        // String name = (String)e.nextElement();
+        // String value = request.getParameter(name);
+        out.println(username + ", " + password);
       }
     }              
 }
