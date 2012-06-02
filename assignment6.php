@@ -10,7 +10,7 @@
           <div class="cf">
             <h1>Assignment 6</h1>
             <p></p>
-            <form action="http://157.201.194.254:8080/cs313/servlet/s12.skabone.assign06" method="post">
+            <form action="http://localhost:1025/cs313/servlet/s12.skabone.assign06" method="post">
               
               <label for="username">Username</label>
               <input type="text" name="username" id="username" /> 

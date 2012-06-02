@@ -12,7 +12,7 @@ public class assign06 extends HttpServlet {
     {
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
-      out.println("GET Request. No Form Data Posted");
+      out.println("GET Request. No Form Data Posted, son");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse res)
@@ -20,12 +20,12 @@ public class assign06 extends HttpServlet {
     {
       Enumeration e = request.getParameterNames();
       PrintWriter out = res.getWriter ();
-      while (e.hasMoreElements()) {
+      //while (e.hasMoreElements()) {
         String username = request.getParameter ("username");
         String password = request.getParameter ("password");
         // String name = (String)e.nextElement();
         // String value = request.getParameter(name);
         out.println(username + ", " + password);
-      }
+      //}
     }              
 }
