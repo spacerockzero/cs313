@@ -11,7 +11,8 @@
             <h1>Assignment 6</h1>
             <p></p>
             <form action="http://localhost:1025/cs313/servlet/s12.skabone.assign06" method="post">
-              
+              <h3>Login Authentication</h3>
+              <em>username=skabone, password=skabone</em>
               <label for="username">Username</label>
               <input type="text" name="username" id="username" /> 
 
