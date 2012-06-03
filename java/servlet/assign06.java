@@ -21,8 +21,9 @@ public class assign06 extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException
     {
-      
-      String filename = "users.txt";
+      //create/set file
+      File filename = new File("tomcat/webapps/cs313/WEB-INF/classes/s12/skabone/users.dat");
+      response.setContentType("text/html");
       ServletContext context = getServletContext();
       
       InputStream inp = context.getResourceAsStream(filename);
@@ -33,6 +34,7 @@ public class assign06 extends HttpServlet {
         PrintWriter pw = response.getWriter();
         pw.println("<html><head><title>Read Text File</title></head><body bgcolor='cyan'></body></html>");
         String text = "";
+        
         while ((text = reader.readLine()) != null) {
           pw.println("<h2><i><b>"+text+"</b></i></b><br>");
         }
@@ -41,22 +43,21 @@ public class assign06 extends HttpServlet {
       // response.setContentType("text/html");
       // PrintWriter out = response.getWriter();
       // out.println("GET Request. No Form Data Posted, son");
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse res)
     throws IOException, ServletException
     {
 
-      
-
-      //Enumeration e = request.getParameterNames();
       // PrintWriter out = res.getWriter ();
 
-      //   //collect username and pass from inputs
-      //   String username = request.getParameter ("username");
-      //   String password = request.getParameter ("password");
+      // //collect username and pass from inputs
+      // String username = request.getParameter ("username");
+      // String password = request.getParameter ("password");
 
-      //   //print input values
-      //   out.println(username + ", " + password);
+      // //print input values
+      // out.println(username + ", " + password);
+
     }              
 }
