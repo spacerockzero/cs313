@@ -10,47 +10,14 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-// import java.io.BufferedReader;
-// import java.io.IOException;
-// import java.io.InputStream;
-// import java.io.InputStreamReader;
-// import java.io.PrintWriter;
-// import javax.servlet.ServletContext;
-// import javax.servlet.ServletException;
-// import javax.servlet.http.HttpServlet;
-// import javax.servlet.http.HttpServletRequest;
-// import javax.servlet.http.HttpServletResponse;
-
 public class assign06 extends HttpServlet {
 
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException
     {
-      // //create/set file
-      // // File filename = new File("tomcat/webapps/cs313/WEB-INF/classes/s12/skabone/users.dat");
-      // response.setContentType("text/html");
-      // // ServletContext context = getServletContext();
-      
-      // // InputStream inp = context.getResourceAsStream(filename);
-      
-      // if (inp != null) {
-      //   // InputStreamReader isr = new InputStreamReader(inp);
-      //   // BufferedReader reader = new BufferedReader(isr);
-      //   // PrintWriter pw = response.getWriter();
-      //   pw.println("<html><head><title>Read Text File</title></head><body bgcolor='cyan'></body></html>");
-      //   String text = "";
-        
-      //   while ((text = reader.readLine()) != null) {
-      //     pw.println("<h2><i><b>"+text+"</b></i></b><br>");
-      //   }
-
-      //   pw.println("</body></html>");
-      // }
-      
-      // response.setContentType("text/html");
-      // PrintWriter out = response.getWriter();
-      // out.println("GET Request. No Form Data Posted, son");
-
+      response.setContentType("text/html");
+      PrintWriter out = response.getWriter();
+      out.println("GET Request. No Form Data Posted, son");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -65,17 +32,17 @@ public class assign06 extends HttpServlet {
       String submittedUsername = request.getParameter ("username");
       String submittedPassword = request.getParameter ("password");
 
-      //print input values
+      //print input values for debugging
       //out.println("submitted username = " + submittedUsername + ", submitted password = " + submittedPassword);
       
-      //check if username is correct
+      //check if username is correct for debugging
       // if (username.equals(submittedUsername)) {
       //   out.println("Username " + submittedUsername + " is correct");
       // } else {
       //   out.println("Username " + submittedUsername + " is incorrect. Try again");
       // }
       
-      // //check if password is correct
+      // //check if password is correct for debugging
       // if (password.equals(submittedPassword)) {
       //   out.println("Password " + submittedPassword + " is correct");
       // } else {
@@ -84,9 +51,19 @@ public class assign06 extends HttpServlet {
 
       //check if username & pass are correct, then redirect accordingly.
       if (username.equals(submittedUsername) && password.equals(submittedPassword)) {
+        
+        //start new session, assign attribute of username to session variable
+        HttpSession session = request.getSession(true);
+        
+        if (session.isNew()){
+          session.setAttribute("username", submittedUsername);
+        }
+
+        //send successful login to success page.
         response.sendRedirect("http://localhost:1024/~skabone/assignment6success.php");
       }
       else {
+        //send unsuccessful login back to login page
         response.sendRedirect("http://localhost:1024/~skabone/assignment6retry.php");
       }
     }              
