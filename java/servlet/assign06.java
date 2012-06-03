@@ -57,7 +57,7 @@ public class assign06 extends HttpServlet {
     throws IOException, ServletException
     {
       String username = "skabone";
-      String password = "password";
+      String password = "skabone";
 
       PrintWriter out = response.getWriter ();
 
@@ -66,18 +66,28 @@ public class assign06 extends HttpServlet {
       String submittedPassword = request.getParameter ("password");
 
       //print input values
-      out.println(submittedUsername + ", " + submittedPassword);
-      if (username == submittedUsername) {
-        out.println("Username " + submittedUsername + " is correct");
-      } else {
-        out.println("Username " + submittedUsername + " is incorrect. Try again");
-      }
-      if (password == submittedPassword) {
-        out.println("Password " + submittedPassword + " is correct");
-      } else {
-        out.println("Password " + submittedPassword + " is incorrect. Try again");
-      }
+      //out.println("submitted username = " + submittedUsername + ", submitted password = " + submittedPassword);
+      
+      //check if username is correct
+      // if (username.equals(submittedUsername)) {
+      //   out.println("Username " + submittedUsername + " is correct");
+      // } else {
+      //   out.println("Username " + submittedUsername + " is incorrect. Try again");
+      // }
+      
+      // //check if password is correct
+      // if (password.equals(submittedPassword)) {
+      //   out.println("Password " + submittedPassword + " is correct");
+      // } else {
+      //   out.println("Password " + submittedPassword + " is incorrect. Try again");
+      // }
 
-
+      //check if username & pass are correct, then redirect accordingly.
+      if (username.equals(submittedUsername) && password.equals(submittedPassword)) {
+        response.sendRedirect("http://localhost:1024/~skabone/assignment6success.php");
+      }
+      else {
+        response.sendRedirect("http://localhost:1024/~skabone/assignment6retry.php");
+      }
     }              
 }
