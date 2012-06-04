@@ -26,88 +26,58 @@ public class assign06 extends HttpServlet {
       PrintWriter out = response.getWriter ();
 
       String filename = "/WEB-INF/classes/s12/skabone/users.dat";
-      // String filename = "/WEB-INF/web.xml";
+
       String username = "";
       String password = "";  
       
       ServletContext context = getServletContext();
        
-      //
-      // First get the file InputStream using ServletContext.getResourceAsStream()
-      // method.
-      //
+      // First get the file InputStream using ServletContext.getResourceAsStream() method.
       InputStream is = context.getResourceAsStream(filename);
       if (is != null) {
         InputStreamReader isr = new InputStreamReader(is);
         BufferedReader reader = new BufferedReader(isr);
-        //PrintWriter writer = response.getWriter();
+
         String text = "";
          
-        //
-        // We read the file line by line and later will be displayed on the 
-        // browser page.
-        //
+        // We read the file line by line and later will be displayed on the browser page.
+        int i = 0;
         while ((text = reader.readLine()) != null) {
-            //out.println(text);
-          for (Int i = 0; i<2; i++) {
-            
-            if (i.equals(0)){
+            //out.println(text); 
+            if (i % 2 == 0){
               username = text;
-              out.println("username = " + username);
-            } else if (i.equals(1)) {
+              // out.println("username = " + username);
+            } else if (i % 2 == 1) {
               password = text;
-              out.println("password = " + password);
+              // out.println("password = " + password);
             }
-
-          }//end for
+          i = i+1;
         }//end while
 
       } else {
         out.println("Something is very wrong with file reader");
       }
 
-      // String username = "skabone";
-      // String password = "skabone";
+      //collect username and pass from inputs
+      String submittedUsername = request.getParameter ("username");
+      String submittedPassword = request.getParameter ("password");
 
-      // PrintWriter out = response.getWriter ();
-
-      // //collect username and pass from inputs
-      // String submittedUsername = request.getParameter ("username");
-      // String submittedPassword = request.getParameter ("password");
-
-      // //print input values for debugging
-      // //out.println("submitted username = " + submittedUsername + ", submitted password = " + submittedPassword);
-      
-      // //check if username is correct for debugging
-      // // if (username.equals(submittedUsername)) {
-      // //   out.println("Username " + submittedUsername + " is correct");
-      // // } else {
-      // //   out.println("Username " + submittedUsername + " is incorrect. Try again");
-      // // }
-      
-      // // //check if password is correct for debugging
-      // // if (password.equals(submittedPassword)) {
-      // //   out.println("Password " + submittedPassword + " is correct");
-      // // } else {
-      // //   out.println("Password " + submittedPassword + " is incorrect. Try again");
-      // // }
-
-      // //check if username & pass are correct, then redirect accordingly.
-      // if (username.equals(submittedUsername) && password.equals(submittedPassword)) {
+      //check if username & pass are correct, then redirect accordingly.
+      if (username.equals(submittedUsername) && password.equals(submittedPassword)) {
         
-      //   //start new session, assign attribute of username to session variable
-      //   HttpSession session = request.getSession(true);
+        //start new session, assign attribute of username to session variable
+        HttpSession session = request.getSession(true);
         
-      //   if (session.isNew()){
-      //     session.setAttribute("username", submittedUsername);
-      //   }
+        if (session.isNew()){
+          session.setAttribute("username", submittedUsername);
+        }
 
-      //   //send successful login to success page.
-      //   response.sendRedirect("http://localhost:1024/~skabone/assignment6success.php");
-      // }
-      // else {
-      //   //send unsuccessful login back to login page
-      //   response.sendRedirect("http://localhost:1024/~skabone/assignment6retry.php");
-      // }
+        //send successful login to success page.
+        response.sendRedirect("http://localhost:1024/~skabone/assignment6success.php");
+      }
+      else {
+        //send unsuccessful login back to login page
+        response.sendRedirect("http://localhost:1024/~skabone/assignment6retry.php");
+      }
     }              
 }
