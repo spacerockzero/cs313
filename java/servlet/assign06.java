@@ -66,13 +66,21 @@ public class assign06 extends HttpServlet {
       // Do we allow that user?
       if (allowUser(formUsername, formPassword) == false) {
         // Not allowed, so report he's unauthorized
-        out.println("auth fail!" + formUsername);
-        out.println(users);
+        //out.println("auth fail!" + formUsername);
+        //out.println(users);
+        res.sendRedirect("http://localhost:1024/~skabone/assignment6retry.php");
       }
       else if (allowUser(formUsername, formPassword) == true){
         // Allowed, so show him the secret stuff
-        out.println("auth success!" + formUsername);
-        out.println(users);
+        // out.println("auth success!" + formUsername);
+        // out.println(users);
+        //start new session, assign attribute of username to session variable
+        HttpSession session = req.getSession(true);
+
+        if (session.isNew()){
+         session.setAttribute("username", formUsername);
+        }
+        res.sendRedirect("http://localhost:1024/~skabone/assignment6success.php");
       }
     }//end if
   }//end doPost
