@@ -41,16 +41,20 @@ public class assign06 extends HttpServlet {
         String text = "";
          
         // We read the file line by line and later will be displayed on the browser page.
+        Map m1 = new HashMap();
+        
         int i = 0;
         while ((text = reader.readLine()) != null) {
             //out.println(text); 
             if (i % 2 == 0){
               username = text;
+              user += username;
               // out.println("username = " + username);
             } else if (i % 2 == 1) {
               password = text;
               // out.println("password = " + password);
             }
+            m1.put(username, password);
           i = i+1;
         }//end while
 
@@ -61,23 +65,36 @@ public class assign06 extends HttpServlet {
       //collect username and pass from inputs
       String submittedUsername = request.getParameter ("username");
       String submittedPassword = request.getParameter ("password");
-
-      //check if username & pass are correct, then redirect accordingly.
-      if (username.equals(submittedUsername) && password.equals(submittedPassword)) {
-        
-        //start new session, assign attribute of username to session variable
-        HttpSession session = request.getSession(true);
-        
-        if (session.isNew()){
-          session.setAttribute("username", submittedUsername);
+      
+      Set set = m1.keySet();  
+        Iterator iter = set.iterator();
+      
+      while (iter.hasNext()) {  
+            Integer i = (Integer)iter.next();  
+            String s = m1.get(i);  
+            System.out.println(s);  
         }
-
-        //send successful login to success page.
-        response.sendRedirect("http://localhost:1024/~skabone/assignment6success.php");
-      }
-      else {
-        //send unsuccessful login back to login page
-        response.sendRedirect("http://localhost:1024/~skabone/assignment6retry.php");
-      }
+      
+      System.out.println();
+      System.out.println("Elements of Map");
+      System.out.print(m1);
+      
+      //check if username & pass are correct, then redirect accordingly.
+//      if (username.equals(submittedUsername) && password.equals(submittedPassword)) {
+//        
+//        //start new session, assign attribute of username to session variable
+//        HttpSession session = request.getSession(true);
+//        
+//        if (session.isNew()){
+//          session.setAttribute("username", submittedUsername);
+//        }
+//
+//        //send successful login to success page.
+//        response.sendRedirect("http://localhost:1024/~skabone/assignment6success.php");
+//      }
+//      else {
+//        //send unsuccessful login back to login page
+//        response.sendRedirect("http://localhost:1024/~skabone/assignment6retry.php");
+//      }
     }              
 }
