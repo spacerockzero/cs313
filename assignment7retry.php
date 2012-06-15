@@ -8,7 +8,7 @@
 
 <?php include('modules/frame-top.php');?>
           <div class="cf">
-            <h1>Assignment 6: Login FAILURE!!!</h1>
+            <h1>Assignment 7: Login FAILURE!!!</h1>
             <p>Please try to log in again with proper credentials!</p>
             <form action="http://localhost:1025/cs313/servlet/s12.skabone.assign06" method="post">
               <h3>Login Authentication</h3>
