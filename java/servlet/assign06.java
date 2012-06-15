@@ -35,21 +35,21 @@ public class assign06 extends HttpServlet {
     PrintWriter out = res.getWriter();
 
     // Do we allow that user?
-    if (!allowUser(username)) {
+    if (!allowUser(username, password)) {
       // Not allowed, so report he's unauthorized
-      out.println("auth fail!");
-      out.println(users);
+      out.println("auth fail!" + username);
+      //out.println(users);
     }
     else {
       // Allowed, so show him the secret stuff
-      out.println("auth success!");
-      out.println(users);
+      out.println("auth success!" + username);
+      //out.println(users);
     }
   }//end doGet
 
   // This method checks the user information sent in the Authorization
   // header against the database of users maintained in the users Hashtable.
-  protected boolean allowUser(String username) throws IOException {
+  protected boolean allowUser(String username, String password) throws IOException {
     if (username == null) return false;  // no auth
 
     // Check our user list to see if that user and password are "allowed"
