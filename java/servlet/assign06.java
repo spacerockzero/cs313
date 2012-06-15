@@ -18,9 +18,9 @@ public class assign06 extends HttpServlet {
     super.init(config);
 
     // Names and passwords are case sensitive!
-    users.put("skabone", "password");
-    users.put("steven",  "password");
-    users.put("stewart", "password");
+    // users.put("skabone", "password");
+    // users.put("steven",  "password");
+    // users.put("stewart", "password");
 
   }//end init
 
@@ -28,32 +28,62 @@ public class assign06 extends HttpServlet {
                                throws ServletException, IOException 
   {
     //collect username and pass from inputs
-    String username = req.getParameter("username");
-    String password = req.getParameter("password");
+    String formUsername = req.getParameter("username");
+    String formPassword = req.getParameter("password");
 
-    res.setContentType("text/plain");
-    PrintWriter out = res.getWriter();
+    //get user data file
+    String filename = "/WEB-INF/classes/s12/skabone/users.dat";
 
-    // Do we allow that user?
-    if (!allowUser(username, password)) {
-      // Not allowed, so report he's unauthorized
-      out.println("auth fail!" + username);
-      //out.println(users);
-    }
-    else {
-      // Allowed, so show him the secret stuff
-      out.println("auth success!" + username);
-      //out.println(users);
-    }
-  }//end doGet
+    ServletContext context = getServletContext();
+
+    // First get the file InputStream using ServletContext.getResourceAsStream() method.
+    InputStream is = context.getResourceAsStream(filename);
+    
+    if (is != null) {
+      InputStreamReader isr = new InputStreamReader(is);
+      BufferedReader reader = new BufferedReader(isr);
+
+      String text = "";
+      String username = "";
+      String password = "";
+       
+      // We read the file line by line and later will be displayed on the browser page.
+      int i = 0;
+      while ((text = reader.readLine()) != null) {
+        if (i % 2 == 0){
+          username = text;
+        } else if (i % 2 == 1) {
+          password = text;
+        }
+        // Put elements to the map 
+        users.put(username, password);
+        i = i+1;
+      }//end while
+
+      res.setContentType("text/plain");
+      PrintWriter out = res.getWriter();
+
+      // Do we allow that user?
+      if (allowUser(formUsername, formPassword) == false) {
+        // Not allowed, so report he's unauthorized
+        out.println("auth fail!" + formUsername);
+        out.println(users);
+      }
+      else if (allowUser(formUsername, formPassword) == true){
+        // Allowed, so show him the secret stuff
+        out.println("auth success!" + formUsername);
+        out.println(users);
+      }
+    }//end if
+  }//end doPost
 
   // This method checks the user information sent in the Authorization
   // header against the database of users maintained in the users Hashtable.
-  protected boolean allowUser(String username, String password) throws IOException {
-    if (username == null) return false;  // no auth
+  protected boolean allowUser(String formUsername, String formPassword) throws IOException {
+    if (formUsername == null) return false;  // no username
 
-    // Check our user list to see if that user and password are "allowed"
-    if (password.equals(users.get(username)))
+    // Check our user list to see if that user and password are valid
+    if (formPassword.equals(users.get(formUsername)))
       return true;
     else
       return false;
