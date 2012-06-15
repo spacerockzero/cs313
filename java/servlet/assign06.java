@@ -8,7 +8,6 @@ import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-//import com.oreilly.servlet.Base64Decoder;
 
 @SuppressWarnings("unchecked")
 public class assign06 extends HttpServlet {
@@ -19,48 +18,42 @@ public class assign06 extends HttpServlet {
     super.init(config);
 
     // Names and passwords are case sensitive!
-    users.put("Wallace:cheese",     "allowed");
-    users.put("Gromit:sheepnapper", "allowed");
-    users.put("Penguin:evil",       "allowed");
+    users.put("skabone", "password");
+    users.put("steven",  "password");
+    users.put("stewart", "password");
+
   }//end init
 
-  public void doGet(HttpServletRequest req, HttpServletResponse res)
-                               throws ServletException, IOException {
+  public void doPost(HttpServletRequest req, HttpServletResponse res)
+                               throws ServletException, IOException 
+  {
+    //collect username and pass from inputs
+    String username = req.getParameter("username");
+    String password = req.getParameter("password");
+
     res.setContentType("text/plain");
     PrintWriter out = res.getWriter();
 
-    // Get Authorization header
-    String auth = req.getHeader("Authorization");
-
     // Do we allow that user?
-    if (!allowUser(auth)) {
+    if (!allowUser(username)) {
       // Not allowed, so report he's unauthorized
-      res.setHeader("WWW-Authenticate", "BASIC realm=\"users\"");
-      res.sendError(res.SC_UNAUTHORIZED);
-      // Could offer to add him to the allowed user list
+      out.println("auth fail!");
+      out.println(users);
     }
     else {
       // Allowed, so show him the secret stuff
-      out.println("Top-secret stuff");
+      out.println("auth success!");
+      out.println(users);
     }
   }//end doGet
 
   // This method checks the user information sent in the Authorization
   // header against the database of users maintained in the users Hashtable.
-  protected boolean allowUser(String auth) throws IOException {
-    if (auth == null) return false;  // no auth
-
-    if (!auth.toUpperCase().startsWith("BASIC "))
-      return false;  // we only do BASIC
-
-    // Get encoded user and password, comes after "BASIC "
-    //String userpassEncoded = auth.substring(6);
-
-    // Decode it, using any base 64 decoder (we use com.oreilly.servlet)
-    //String userpassDecoded = Base64Decoder.decode(userpassEncoded);
+  protected boolean allowUser(String username) throws IOException {
+    if (username == null) return false;  // no auth
 
     // Check our user list to see if that user and password are "allowed"
-    if ("allowed".equals(users.get(auth.substring(6))))
+    if (password.equals(users.get(username)))
       return true;
     else
       return false;
