@@ -8,9 +8,10 @@ import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import com.oreilly.servlet.Base64Decoder;
+//import com.oreilly.servlet.Base64Decoder;
 
-public class CustomAuth extends HttpServlet {
+@SuppressWarnings("unchecked")
+public class assign06 extends HttpServlet {
 
   Hashtable users = new Hashtable();
 
@@ -53,13 +54,13 @@ public class CustomAuth extends HttpServlet {
       return false;  // we only do BASIC
 
     // Get encoded user and password, comes after "BASIC "
-    String userpassEncoded = auth.substring(6);
+    //String userpassEncoded = auth.substring(6);
 
     // Decode it, using any base 64 decoder (we use com.oreilly.servlet)
-    String userpassDecoded = Base64Decoder.decode(userpassEncoded);
+    //String userpassDecoded = Base64Decoder.decode(userpassEncoded);
 
     // Check our user list to see if that user and password are "allowed"
-    if ("allowed".equals(users.get(userpassDecoded)))
+    if ("allowed".equals(users.get(auth.substring(6))))
       return true;
     else
       return false;
