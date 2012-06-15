@@ -12,89 +12,84 @@ import javax.servlet.http.*;
 
 public class assign06 extends HttpServlet {
 
+  // public void doPost(HttpServletRequest request, HttpServletResponse response)
+  // throws IOException, ServletException
+  // {
+  //   response.setContentType("text/html");
+  //   PrintWriter out = response.getWriter();
+  //   out.println("GET Request. No Form Data Posted, son");
+  // }
+
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException
-    {
-      response.setContentType("text/html");
-      PrintWriter out = response.getWriter();
-      out.println("GET Request. No Form Data Posted, son");
-    }
+  {
+    PrintWriter out = response.getWriter ();
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws IOException, ServletException
-    {
-      PrintWriter out = response.getWriter ();
+    String filename = "/WEB-INF/classes/s12/skabone/users.dat";
 
-      String filename = "/WEB-INF/classes/s12/skabone/users.dat";
+    String username = "";
+    String password = "";  
+    
+    ServletContext context = getServletContext();
+     
+    // First get the file InputStream using ServletContext.getResourceAsStream() method.
+    InputStream is = context.getResourceAsStream(filename);
+    if (is != null) {
+      InputStreamReader isr = new InputStreamReader(is);
+      BufferedReader reader = new BufferedReader(isr);
 
-      String username = "";
-      String password = "";  
-      
-      ServletContext context = getServletContext();
+      String text = "";
        
-      // First get the file InputStream using ServletContext.getResourceAsStream() method.
-      InputStream is = context.getResourceAsStream(filename);
-      if (is != null) {
-        InputStreamReader isr = new InputStreamReader(is);
-        BufferedReader reader = new BufferedReader(isr);
+      // We read the file line by line and later will be displayed on the browser page.
+      //Map m1 = new HashMap();
+      
+      
 
-        String text = "";
-         
-        // We read the file line by line and later will be displayed on the browser page.
-        Map m1 = new HashMap();
-        
+      public scanUsers() {
         int i = 0;
+        boolean isValid = false;
         while ((text = reader.readLine()) != null) {
             //out.println(text); 
             if (i % 2 == 0){
               username = text;
-              user += username;
               // out.println("username = " + username);
             } else if (i % 2 == 1) {
               password = text;
               // out.println("password = " + password);
             }
-            m1.put(username, password);
+            if (username.equals(submittedUsername) && password.equals(submittedPassword)) {
+              isValid = true;
+            }
           i = i+1;
         }//end while
+        return isValid;
+      }//end scanUsers()
 
-      } else {
-        out.println("Something is very wrong with file reader");
-      }
+    } else {
+      out.println("Something is very wrong with file reader");
+    }
 
-      //collect username and pass from inputs
-      String submittedUsername = request.getParameter ("username");
-      String submittedPassword = request.getParameter ("password");
-      
-      Set set = m1.keySet();  
-        Iterator iter = set.iterator();
-      
-      while (iter.hasNext()) {  
-            Integer i = (Integer)iter.next();  
-            String s = m1.get(i);  
-            System.out.println(s);  
-        }
-      
-      System.out.println();
-      System.out.println("Elements of Map");
-      System.out.print(m1);
-      
-      //check if username & pass are correct, then redirect accordingly.
-//      if (username.equals(submittedUsername) && password.equals(submittedPassword)) {
-//        
-//        //start new session, assign attribute of username to session variable
-//        HttpSession session = request.getSession(true);
-//        
-//        if (session.isNew()){
-//          session.setAttribute("username", submittedUsername);
-//        }
-//
-//        //send successful login to success page.
-//        response.sendRedirect("http://localhost:1024/~skabone/assignment6success.php");
-//      }
-//      else {
-//        //send unsuccessful login back to login page
-//        response.sendRedirect("http://localhost:1024/~skabone/assignment6retry.php");
-//      }
-    }              
+    //collect username and pass from inputs
+    String submittedUsername = request.getParameter ("username");
+    String submittedPassword = request.getParameter ("password");
+    
+    
+    //check if username & pass are correct, then redirect accordingly.
+     if (scanUsers() == true) {
+       
+       //start new session, assign attribute of username to session variable
+       HttpSession session = request.getSession(true);
+       
+       if (session.isNew()){
+         session.setAttribute("username", submittedUsername);
+       }
+
+       //send successful login to success page.
+       response.sendRedirect("http://localhost:1024/~skabone/assignment6success.php");
+     }
+     else {
+       //send unsuccessful login back to login page
+       response.sendRedirect("http://localhost:1024/~skabone/assignment6retry.php");
+     }
+  }              
 }
