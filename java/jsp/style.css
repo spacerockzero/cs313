@@ -2,3 +2,6 @@
   width:950px;
   margin:0 auto;
 }
+#post_title_form, #post_body_form {
+  width:600px;
+}
