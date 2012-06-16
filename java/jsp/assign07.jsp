@@ -7,6 +7,7 @@
     <div class="cf">
       <h1>Assignment 7</h1>
       <p>Under Construction for Assignment 8. Please be patient as I tear things apart and put them back together again.<br/> --Jakob Anderson</p>
+      Hello, <%= session.getAttribute( "username" ) %>
     </div>    
   </body>
 </html>

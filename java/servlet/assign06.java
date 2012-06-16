@@ -79,9 +79,9 @@ public class assign06 extends HttpServlet {
         //start new session, assign attribute of username to session variable
         HttpSession session = req.getSession(true);
 
-        if (session.isNew()){
-         session.setAttribute("username", formUsername);
-        }
+        //if (session.isNew()){
+        session.setAttribute("username", formUsername);
+        //}
         res.sendRedirect("http://localhost:1025/cs313/jsp/s12/skabone/assign07.jsp");
       }
     }//end if
