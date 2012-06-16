@@ -69,7 +69,7 @@ public class assign06 extends HttpServlet {
         //out.println("auth fail!" + formUsername);
         //out.println(users);
 
-        res.sendRedirect("http://localhost:1024/~skabone/assignment6retry.php");
+        res.sendRedirect("http://localhost:1024/~skabone/assignment7retry.php");
       }
       else if (allowUser(formUsername, formPassword) == true){
         // AUTH FAIL !!!
