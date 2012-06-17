@@ -4,7 +4,12 @@
     public void createXmlTree(Document doc, String username, String title, String body, String timeDate ) 
       throws Exception 
     {
-    System.out.println(username);
+
+    File file = new File("/home/ercanbracks/tomcat55/tomcat/webapps/cs313/jsp/s12/skabone/content.xml");
+    boolean fileExists = false;
+    if (file.exists()){fileExists = true;}
+
+    //System.out.println(username);
     Element root = doc.createElement("post");
     doc.appendChild(root);
 
@@ -43,7 +48,7 @@
     transformer.transform(source, result);
     String xmlString = sw.toString();
 
-    File file = new File("/home/ercanbracks/tomcat55/tomcat/webapps/cs313/jsp/s12/skabone/content.xml");
+    
     BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));
     bw.write(xmlString);
     bw.flush();

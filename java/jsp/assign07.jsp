@@ -5,15 +5,14 @@
     String redirectURL = "http://localhost:1024/~skabone/assignment7retry.php";
     response.sendRedirect(redirectURL);
   }
-//   DocumentBuilderFactory docFactory = 
-//   DocumentBuilderFactory.newInstance();
-//   DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-//   Document doc = docBuilder.parse
-// ("/home/ercanbracks/tomcat55/tomcat/webapps/cs313/jsp/s12/skabone/content.xml");
+  // DocumentBuilderFactory docFactory = 
+  // DocumentBuilderFactory.newInstance();
+  // DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+  // Document doc = docBuilder.parse("/home/ercanbracks/tomcat55/tomcat/webapps/cs313/jsp/s12/skabone/content.xml");
 
   Object username=session.getAttribute( "username" );
   String newPost=(String)session.getAttribute( "newPost" );
-
+  session.setAttribute("newPost", "false");
 %>
 <%!
   // public boolean isTextNode(Node n){
@@ -96,7 +95,7 @@
             <!-- display success message if post was submitted successfully -->
             <% if("true".equals(newPost)) { %>
             <div class="alert alert-success">
-              <button type="button" class="close" data-dismiss="alert">×</button>
+              <button type="button" class="close" data-dismiss="alert">x</button>
               <strong>Well done!</strong> You successfully posted a new entry.
             </div>
             <% } %>
@@ -125,6 +124,9 @@
               
 
               <div class="post">
+
+
+
                 <h3>Fear of a Bot Planet</h3>
                 <div class="meta">posted by Skabone, 06.01.2012</div>
                 <div class="post_body_text">
