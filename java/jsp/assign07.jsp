@@ -1,3 +1,20 @@
+<%@page import="org.w3c.dom.*, javax.xml.parsers.*" %>
+<%
+  if (session.getAttribute( "username" ) == null){
+    String redirectURL = "http://localhost:1024/~skabone/assignment7retry.php";
+    response.sendRedirect(redirectURL);
+  }
+  DocumentBuilderFactory docFactory = 
+  DocumentBuilderFactory.newInstance();
+  DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+  Document doc = docBuilder.parse
+("/home/ercanbracks/tomcat55/tomcat/webapps/cs313/jsp/s12/skabone/content.xml");
+%>
+<%!
+  public boolean isTextNode(Node n){
+  return n.getNodeName().equals("#text");
+  }
+%>
 <!doctype html>
 <html>
   <head>
@@ -9,12 +26,13 @@
     <div class="cf">
       <h1>Assignment 7</h1>
       <p>Under Construction for Assignment 8. Please be patient as I tear things apart and put them back together again.<br/> --Jakob Anderson</p>
-      
+      <hr/>
+
       <h3>Hello, <%= session.getAttribute( "username" ) %></h3>
       
       <!-- display previous posts from all users -->
       <form name="post" id="post" action="createXML.jsp" method="POST">
-
+        <h3>Add new post</h3>
         <label for="post_title">Post Title</label>
         <input name="post_title" id="post_title_form" type="text" cols="80"/>
         <br/>
@@ -22,12 +40,41 @@
         <label for="post_body">Post Body</label>
         <textarea name="post_body" id="post_body_form" rows="20" cols="80"></textarea><br/>
         
+        <input type="hidden" id="username" name="username" value="<%= session.getAttribute( "username" ) %>"/>
+
         <input name="submit" id="submit_form" type="submit" value="Submit new post"/>
+        
 
       </form>
 
       <!-- display previous posts from all users -->
       <div id="all_posts">
+        <%
+          Element  element = doc.getDocumentElement(); 
+          NodeList postNodes = element.getChildNodes(); 
+          for (int i=0; i<postNodes.getLength(); i++){
+            Node post = postNodes.item(i);
+            if (isTextNode(post))
+            continue;
+            NodeList PostList = post.getChildNodes(); 
+            %>
+        <div class="post">
+            <%
+            for (int j=0; j<PostList.getLength(); j++ ){
+              Node node = PostList.item(j);
+              if ( isTextNode(node)) 
+              continue;
+              %>
+              <div><%= node.getFirstChild().getNodeValue() %></div>
+              <%
+            } 
+            %>
+        </div><!-- end post -->
+            <%
+            }
+          %>
+        
+
         <div class="post">
           <h3>Fear of a Bot Planet</h3>
           <div class="meta">posted by Skabone, 06.01.2012</div>

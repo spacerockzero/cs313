@@ -1,36 +1,30 @@
 <%@page import="java.io.*,org.w3c.dom.*,javax.xml.parsers.*,javax.xml.transform.*, javax.xml.transform.dom.*,javax.xml.transform.stream.*"%>  
 
   <%!
-    public void createXmlTree(Document doc, String name, String address, String contact, String email ) 
+    public void createXmlTree(Document doc, String username, String title, String body ) 
       throws Exception 
     {
-    System.out.println(name);
+    System.out.println(username);
     Element root = doc.createElement("post");
     doc.appendChild(root);
 
-    Element child1 = doc.createElement("Name");
+    Element child1 = doc.createElement("username");
     root.appendChild(child1);
 
-    Text text1 = doc.createTextNode(name);
+    Text text1 = doc.createTextNode(username);
     child1.appendChild(text1);
 
-    Element child2 = doc.createElement("Address");
+    Element child2 = doc.createElement("title");
     root.appendChild(child2);
 
-    Text text2 = doc.createTextNode(address);
+    Text text2 = doc.createTextNode(title);
     child2.appendChild(text2);
 
-    Element child3 = doc.createElement("ContactNo");
+    Element child3 = doc.createElement("body");
     root.appendChild(child3);
 
-    Text text3 = doc.createTextNode(contact);
+    Text text3 = doc.createTextNode(body);
     child3.appendChild(text3);
-
-    Element child4 = doc.createElement("Email");
-    root.appendChild(child4);
-
-    Text text4 = doc.createTextNode(email);
-    child4.appendChild(text4);
 
     TransformerFactory factory = TransformerFactory.newInstance();
     Transformer transformer = factory.newTransformer();
@@ -51,18 +45,21 @@
 
   }%>
 <%
-  String name=request.getParameter("name");
-  String address=request.getParameter("address");
-  String contact=request.getParameter("contact");
-  String email=request.getParameter("email");
+
+  String username=request.getParameter("username");
+  String title=request.getParameter("post_title");
+  String body=request.getParameter("post_body");
+
   try{
-    System.out.println(name);
+    System.out.println(username);
     DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
     DocumentBuilder docBuilder = builderFactory.newDocumentBuilder();
     Document doc = docBuilder.newDocument();
-    createXmlTree(doc,name,address,contact,email);
+    createXmlTree(doc,username,title,body);
 
-    out.println("<b>Xml File Created Successfully</b>");
+    //out.println("<b>Xml File Created Successfully</b>");
+    String redirectURL = "http://localhost:1025/cs313/jsp/s12/skabone/assign07.jsp";
+    response.sendRedirect(redirectURL);
   }
   catch(Exception e){
     System.out.println(e);

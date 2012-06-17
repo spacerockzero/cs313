@@ -2,6 +2,12 @@
   width:950px;
   margin:0 auto;
 }
+#post {
+  padding: 20px;
+  background:lightBlue;
+  border: 3px solid #777;
+  border-radius: 20px;
+}
 #post_title_form, #post_body_form {
-  width:600px;
+  width:98%;
 }
