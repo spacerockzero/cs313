@@ -24,3 +24,5 @@
           %>
 
           <%@page import="org.w3c.dom.*, javax.xml.parsers.*" %>
+
+          transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");

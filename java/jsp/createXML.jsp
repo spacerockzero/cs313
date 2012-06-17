@@ -39,7 +39,7 @@
 
     TransformerFactory factory = TransformerFactory.newInstance();
     Transformer transformer = factory.newTransformer();
-
+    
     transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
     StringWriter sw = new StringWriter();

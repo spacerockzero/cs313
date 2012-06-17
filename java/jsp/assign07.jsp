@@ -1,4 +1,3 @@
-
 <%
   //if user came to page without a login, send them back to login page
   if (session.getAttribute( "username" ) == null){
