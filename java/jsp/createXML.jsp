@@ -1,7 +1,7 @@
 <%@page import="java.io.*,org.w3c.dom.*,javax.xml.parsers.*,javax.xml.transform.*, javax.xml.transform.dom.*,javax.xml.transform.stream.*"%>  
 
   <%!
-    public void createXmlTree(Document doc, String username, String title, String body ) 
+    public void createXmlTree(Document doc, String username, String title, String body, String timeDate ) 
       throws Exception 
     {
     System.out.println(username);
@@ -26,6 +26,12 @@
     Text text3 = doc.createTextNode(body);
     child3.appendChild(text3);
 
+    Element child4 = doc.createElement("timeDate");
+    root.appendChild(child4);
+
+    Text text4 = doc.createTextNode(timeDate);
+    child4.appendChild(text4);
+
     TransformerFactory factory = TransformerFactory.newInstance();
     Transformer transformer = factory.newTransformer();
 
@@ -38,7 +44,7 @@
     String xmlString = sw.toString();
 
     File file = new File("/home/ercanbracks/tomcat55/tomcat/webapps/cs313/jsp/s12/skabone/content.xml");
-    BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+    BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));
     bw.write(xmlString);
     bw.flush();
     bw.close();
@@ -49,15 +55,18 @@
   String username=request.getParameter("username");
   String title=request.getParameter("post_title");
   String body=request.getParameter("post_body");
+  String timeDate=request.getParameter("date_time");
 
   try{
     System.out.println(username);
     DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
     DocumentBuilder docBuilder = builderFactory.newDocumentBuilder();
     Document doc = docBuilder.newDocument();
-    createXmlTree(doc,username,title,body);
+    createXmlTree(doc,username,title,body,timeDate);
 
-    //out.println("<b>Xml File Created Successfully</b>");
+    String newPost = "true";
+    session.setAttribute("newPost", newPost);
+    
     String redirectURL = "http://localhost:1025/cs313/jsp/s12/skabone/assign07.jsp";
     response.sendRedirect(redirectURL);
   }
