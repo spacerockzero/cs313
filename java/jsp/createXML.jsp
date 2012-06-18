@@ -6,8 +6,8 @@
     {
 
     File file = new File("/home/ercanbracks/tomcat55/tomcat/webapps/cs313/jsp/s12/skabone/content.xml");
-    boolean fileExists = false;
-    if (file.exists()){fileExists = true;}
+    //boolean fileExists = false;
+    //if (file.exists()){fileExists = true;}
 
     //System.out.println(username);
     Element root = doc.createElement("post");
@@ -49,7 +49,7 @@
     String xmlString = sw.toString();
 
     
-    BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));
+    BufferedWriter bw = new BufferedWriter(new FileWriter(file));
     bw.write(xmlString);
     bw.flush();
     bw.close();

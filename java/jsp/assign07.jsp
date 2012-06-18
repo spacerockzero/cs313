@@ -1,3 +1,4 @@
+<%@page import="javax.xml.parsers.*,org.w3c.dom.*" %>
 <%
   //if user came to page without a login, send them back to login page
   if (session.getAttribute( "username" ) == null){
@@ -91,8 +92,9 @@
 
             <h3>Hello, <%= session.getAttribute( "username" ) %></h3>
             
-            <!-- display success message if post was submitted successfully -->
+            
             <% if("true".equals(newPost)) { %>
+            <!-- display success message if post was submitted successfully -->
             <div class="alert alert-success">
               <button type="button" class="close" data-dismiss="alert">x</button>
               <strong>Well done!</strong> You successfully posted a new entry.
@@ -120,12 +122,41 @@
             <!-- display previous posts from all users -->
             <div id="all_posts">
               
-              
+              <%
+                try{
+                String XmlPath = "jsp/s12/skabone/content.xml";
+                %>
+                <%!
+                Document doc;
+                String getXMLValue(String name) {
+                NodeList nlist=doc.getElementsByTagName(name);
+                String value = nlist.item(0).getFirstChild().getNodeValue();
+                return value;
+                }
+                %>
+                <%
+                String appPath = application.getRealPath("/");
+                DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
+                DocumentBuilder db=dbf.newDocumentBuilder();
+                
+                doc=db.parse(appPath + XmlPath);
+                
+                String usernameVar    = getXMLValue("username");
+                String titleVar       = getXMLValue("title");
+                String bodyVar        = getXMLValue("body");
+                String timeDateVar    = getXMLValue("timeDate");
+                
+                %>
+                <div class="post">
+                  <h3><%=titleVar%></h3>
+                  <div class="meta">posted by <%=usernameVar%>, <%=timeDateVar%></div>
+                  <div class="post_body_text"><%=bodyVar%></div>
+                <%
+                }catch(Exception e){
+                  out.println("The Error is: " + e);
+                }%>
 
               <div class="post">
-
-
-
                 <h3>Fear of a Bot Planet</h3>
                 <div class="meta">posted by Skabone, 06.01.2012</div>
                 <div class="post_body_text">
