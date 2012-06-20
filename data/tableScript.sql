@@ -195,16 +195,42 @@ INSERT INTO courses VALUES	( NULL,   'ART 130',     'Introduction to Graphic Des
 INSERT INTO courses VALUES	( NULL,   'ID 381',      'Contemporary Architecture and Furniture',   1010   );
 
 
+# REGISTEREDCOURSES TABLE SECTION
+#######################################################
+
+# drop courses table if it exists
+DROP TABLE IF EXISTS registeredcourses;
+
 # create RegisteredCourses table
 CREATE TABLE registeredcourses 
 (
-	ID               INT(4) NOT NULL PRIMARY KEY auto_increment, 
+	ID               INT(4) PRIMARY KEY auto_increment, 
 	StudentId        INT(9) NOT NULL, 
 	CourseCode       VARCHAR(20) NOT NULL
 );
 
 # populate registeredcourses table
-INSERT INTO courses VALUES	( NULL, 'BIO 240', 'Neurobiology', 1001 );
+INSERT INTO registeredcourses VALUES	( NULL, 1,  'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 2,  'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 3,  'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 5,  'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 8,  'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 13, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 21, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 2,  'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 4,  'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 6,  'CS 271' );
+
+INSERT INTO registeredcourses VALUES	( NULL, 8,  'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 10, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 12, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 14, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 16, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 18, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 20, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 22, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 24, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL, 13, 'CS 271' );
 
 
 # Add foreign keys once all tables have been built and populated
