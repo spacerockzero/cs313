@@ -195,13 +195,19 @@ INSERT INTO courses VALUES	( NULL,   'ART 130',     'Introduction to Graphic Des
 INSERT INTO courses VALUES	( NULL,   'ID 381',      'Contemporary Architecture and Furniture',   1010   );
 
 
+# create RegisteredCourses table
+CREATE TABLE registeredcourses 
+(
+	ID               INT(4) NOT NULL PRIMARY KEY auto_increment, 
+	StudentId        INT(9) NOT NULL, 
+	CourseCode       VARCHAR(20) NOT NULL
+);
+
+# populate registeredcourses table
+INSERT INTO courses VALUES	( NULL, 'BIO 240', 'Neurobiology', 1001 );
+
 
 # Add foreign keys once all tables have been built and populated
-
-# ALTER TABLE students
-# ADD FOREIGN KEY (MajorCode)
-# REFERENCES majors(MajorCode);
-
 ALTER TABLE majors
 ADD FOREIGN KEY (DepartmentCode)
 REFERENCES departments(DepartmentCode);
@@ -213,6 +219,14 @@ REFERENCES colleges(CollegeCode);
 ALTER TABLE courses
 ADD FOREIGN KEY (DepartmentCode)
 REFERENCES departments(DepartmentCode);
+
+ALTER TABLE registeredcourses
+ADD FOREIGN KEY (StudentId)
+REFERENCES students(StudentId);
+
+ALTER TABLE registeredcourses
+ADD FOREIGN KEY (CourseCode)
+REFERENCES courses(CourseCode);
 
 
 commit;

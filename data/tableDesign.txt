@@ -33,6 +33,14 @@ Courses Table:
 	courseName:
 }
 
+RegisteredCourses:
+{
+	id:
+	studentID:
+	courseCode:
+	SectionNumber:
+}
+
 populate tables with:
 25 students,
 10 different majors,
