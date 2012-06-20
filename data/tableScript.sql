@@ -286,6 +286,7 @@ describe colleges;
 describe departments;
 describe majors;
 describe courses;
+describe registeredcourses;
 
 
 # select all records from each table
@@ -298,6 +299,8 @@ SELECT * FROM departments;
 SELECT * FROM majors;
 
 SELECT * FROM courses;
+
+SELECT * FROM registeredcourses;
 
 
 

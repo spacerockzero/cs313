@@ -1,4 +1,4 @@
-<%@page import="java.sql.*" %>
+<%/*@page import="java.sql.*"*/ %>
 <!doctype html>
 <!--[if lt IE 7]> 
 <html class="no-js ie6 oldie" lang="en"> 
@@ -66,7 +66,7 @@
         <div class="span9 mainhero">
           <div class="cf">
             <h1>Assignment 8</h1>
-            
+
             <!-- register new class for this user -->
             <form name="post" id="post" action="createXML.jsp" method="POST">
               <h3>Class registration</h3>
