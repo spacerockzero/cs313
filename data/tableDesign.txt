@@ -44,4 +44,4 @@ populate tables with:
 25 students,
 10 different majors,
 15 different courses
-20 registered courses
+40 registered courses

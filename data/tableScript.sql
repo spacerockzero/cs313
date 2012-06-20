@@ -210,27 +210,49 @@ CREATE TABLE registeredcourses
 );
 
 # populate registeredcourses table
-INSERT INTO registeredcourses VALUES	( NULL, 1,  'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 2,  'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 3,  'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 5,  'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 8,  'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 13, 'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 21, 'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 2,  'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 4,  'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 6,  'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL,  1, 'CS 271'    );
+INSERT INTO registeredcourses VALUES	( NULL,  2, 'CIT 320'   );
+INSERT INTO registeredcourses VALUES	( NULL,  3, 'ID 381'    );
+INSERT INTO registeredcourses VALUES	( NULL,  5, 'CIT 370'   );
+INSERT INTO registeredcourses VALUES	( NULL,  8, 'BIO 240'   );
+INSERT INTO registeredcourses VALUES	( NULL, 13, 'PSYCH 376' );
+INSERT INTO registeredcourses VALUES	( NULL, 21, 'CONST 230' );
+INSERT INTO registeredcourses VALUES	( NULL,  2, 'ARCH 280'  );
+INSERT INTO registeredcourses VALUES	( NULL,  4, 'CS 306'    );
+INSERT INTO registeredcourses VALUES	( NULL,  6, 'CS 271'    );
 
-INSERT INTO registeredcourses VALUES	( NULL, 8,  'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 10, 'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 12, 'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 14, 'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 16, 'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 18, 'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 20, 'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 22, 'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 24, 'CS 271' );
-INSERT INTO registeredcourses VALUES	( NULL, 13, 'CS 271' );
+INSERT INTO registeredcourses VALUES	( NULL,  8, 'CS 364'    );
+INSERT INTO registeredcourses VALUES	( NULL, 10, 'CS 213'    );
+INSERT INTO registeredcourses VALUES	( NULL, 12, 'CS 313'    );
+INSERT INTO registeredcourses VALUES	( NULL, 14, 'ME 332'    );
+INSERT INTO registeredcourses VALUES	( NULL, 16, 'CIT 310'   );
+INSERT INTO registeredcourses VALUES	( NULL, 18, 'CIT 356'   );
+INSERT INTO registeredcourses VALUES	( NULL, 20, 'CIT 370'   );
+INSERT INTO registeredcourses VALUES	( NULL, 22, 'CIT 336'   );
+INSERT INTO registeredcourses VALUES	( NULL, 24, 'B 250'     );
+INSERT INTO registeredcourses VALUES	( NULL, 13, 'AUTO 231'  );
+
+INSERT INTO registeredcourses VALUES	( NULL,  1,  'CS 271'    );
+INSERT INTO registeredcourses VALUES	( NULL,  2, 'CIT 320'   );
+INSERT INTO registeredcourses VALUES	( NULL,  3, 'ID 381'    );
+INSERT INTO registeredcourses VALUES	( NULL,  4, 'CIT 370'   );
+INSERT INTO registeredcourses VALUES	( NULL,  5, 'BIO 240'   );
+INSERT INTO registeredcourses VALUES	( NULL,  6, 'CS 364'    );
+INSERT INTO registeredcourses VALUES	( NULL,  7, 'CS 213'    );
+INSERT INTO registeredcourses VALUES	( NULL,  8, 'CS 313'    );
+INSERT INTO registeredcourses VALUES	( NULL,  9, 'ME 332'    );
+INSERT INTO registeredcourses VALUES	( NULL, 10, 'CIT 310'   );
+
+INSERT INTO registeredcourses VALUES	( NULL, 11, 'CS 364'    );
+INSERT INTO registeredcourses VALUES	( NULL, 12, 'CS 213'    );
+INSERT INTO registeredcourses VALUES	( NULL, 13, 'CS 313'    );
+INSERT INTO registeredcourses VALUES	( NULL, 14, 'ME 332'    );
+INSERT INTO registeredcourses VALUES	( NULL, 15, 'CIT 310'   );
+INSERT INTO registeredcourses VALUES	( NULL, 16, 'CIT 356'   );
+INSERT INTO registeredcourses VALUES	( NULL, 17, 'CIT 370'   );
+INSERT INTO registeredcourses VALUES	( NULL, 18, 'CIT 336'   );
+INSERT INTO registeredcourses VALUES	( NULL, 19, 'B 250'     );
+INSERT INTO registeredcourses VALUES	( NULL, 20, 'AUTO 231'  );
 
 
 # Add foreign keys once all tables have been built and populated
