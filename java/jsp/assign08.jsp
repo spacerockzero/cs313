@@ -1,4 +1,13 @@
-<%/*@page import="java.sql.*"*/ %>
+<%
+//select all students
+
+//select one student's current classes
+
+//add a class for one student
+
+//remove a class for one student
+%>
+
 <!doctype html>
 <!--[if lt IE 7]> 
 <html class="no-js ie6 oldie" lang="en"> 
@@ -27,7 +36,7 @@
     <link href="style.css" rel="stylesheet"/>
     <script src="http://localhost:1024/~skabone/js/libs/modernizr.js" type="text/javascript"></script>
   </head>
-  <body id="assignment7">   
+  <body id="assignment8">   
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -67,15 +76,38 @@
           <div class="cf">
             <h1>Assignment 8</h1>
 
-            <!-- register new class for this user -->
-            <form name="post" id="post" action="createXML.jsp" method="POST">
-              <h3>Class registration</h3>
+            <h3>Class registration</h3>
 
+            <!-- select a user -->
+            <form name="select_student_form" id="post" action="assign08.jsp" method="POST">
+              <label for="student">Students</label>
+              <select name="student" id="student">
+                <option value="1">Albin Gustavstrohm</option>
+                <option value="2">Alvar Haakonsen</option>
+                <option value="3">Anders Halldorsson</option>
+                <option value="4">Annika Hedvigsen</option>
+                <option value="5">Asbjorn Hegeson</option>
+                <option value="6">Astrid Helgagren</option>
+                <option value="7">Axel Hemmingsson</option>
+                <option value="8">Beata Henrikssen</option>
+                <option value="9">Bergljot Henrikeson</option>
+                <option value="10">Bernhardt Heinrichtssen</option>
+              </select>
+              <input name="select_student" type="submit" value="Select Student" class="btn btn-primary btn-large"/>
             </form>
-
+            <h4><%  if (request.getParameter("student") != null && request.getParameter("student") != null) {
+                      if (!(request.getParameter("student").equals("")) && !(request.getParameter("student").equals(""))) {
+                        %>
+                          <h1>Inside Successful POST</h1>
+                          <p>StudentID = <%=request.getParameter("student")%>
+                        <%
+                      }
+                    }%></h4>
             <!-- display records from all selected users -->
             <div id="records">
-              
+              <% 
+                
+              %>
             </div>
           </div>
         </div><!--/span-->
