@@ -1,4 +1,15 @@
+<%@page language="java" import="java.sql.*" %>
 <%
+  String DRIVER = "org.gjt.mm.mysql.Driver";
+  Class.forName(DRIVER).newInstance();
+
+
+  Connection con=null;
+  ResultSet rst=null;
+  Statement stmt=null;
+
+  
+
 //select all students
 
 //select one student's current classes
@@ -82,7 +93,28 @@
             <form name="select_student_form" id="post" action="assign08.jsp" method="POST">
               <label for="student">Students</label>
               <select name="student" id="student">
-                <option value="1">Albin Gustavstrohm</option>
+                <%
+                //print out list of students from db to select from
+                try{
+                  String url="jdbc:mysql://jordan/skabone?user=skabone&password=";
+
+                  int i=1;
+                  con=DriverManager.getConnection(url);
+                  stmt=con.createStatement();
+                  rst=stmt.executeQuery("select * from students");
+                  while(rst.next()){ 
+                  %>
+                    <option value="<%=rst.getString(1)%>"><%=rst.getString(2)%> <%=rst.getString(3)%></option>
+                  <%
+                  }
+                  rst.close();
+                  stmt.close();
+                  con.close();
+                }catch(Exception e){
+                  System.out.println(e.getMessage());
+                }
+                %>
+                <!-- <option value="1">Albin Gustavstrohm</option>
                 <option value="2">Alvar Haakonsen</option>
                 <option value="3">Anders Halldorsson</option>
                 <option value="4">Annika Hedvigsen</option>
@@ -91,14 +123,14 @@
                 <option value="7">Axel Hemmingsson</option>
                 <option value="8">Beata Henrikssen</option>
                 <option value="9">Bergljot Henrikeson</option>
-                <option value="10">Bernhardt Heinrichtssen</option>
+                <option value="10">Bernhardt Heinrichtssen</option> -->
               </select>
               <input name="select_student" type="submit" value="Select Student" class="btn btn-primary btn-large"/>
             </form>
             <h4><%  if (request.getParameter("student") != null && request.getParameter("student") != null) {
                       if (!(request.getParameter("student").equals("")) && !(request.getParameter("student").equals(""))) {
                         %>
-                          <h1>Inside Successful POST</h1>
+                          <h1>Student Selected</h1>
                           <p>StudentID = <%=request.getParameter("student")%>
                         <%
                       }
