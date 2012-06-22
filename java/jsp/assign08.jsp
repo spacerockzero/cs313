@@ -8,15 +8,60 @@
   ResultSet rst=null;
   Statement stmt=null;
 
-  
+  try{
+    String url="jdbc:mysql://jordan/skabone?user=skabone&password=";
+
+    int i=1;
+    con=DriverManager.getConnection(url);
+    stmt=con.createStatement();
+    
+    rst.close();
+    stmt.close();
+    con.close();
+  }catch(Exception e){
+    System.out.println(e.getMessage());
+  }
 
 //select all students
-
+  String studentID = "0";
+  String studentName = "BLORG!!!";
 //select one student's current classes
 
 //add a class for one student
-
+%>
+<%
 //remove a class for one student
+  if (request.getParameter("drop") != null) {
+    if (!(request.getParameter("drop").equals(""))) {
+      //String dropStudentID = request.getParameter("studentID");
+      String regClassID = request.getParameter("regClassID");
+      %>regClassID = <%=regClassID%>
+%>
+<%      
+      try{
+        String url="jdbc:mysql://jordan/skabone?user=skabone&password=";
+        int i=1;
+        con=DriverManager.getConnection(url);
+        stmt=con.createStatement();
+
+        String query = "DELETE from registeredcourses where ID = " + regClassID + "";
+        int delete=stmt.executeUpdate(query);
+        if(delete == 1){
+          %><script>alert("Row is deleted!");</script><%
+          //System.out.println("Row is deleted.");
+        } else {
+          %><script>alert("Row is not deleted!");</script><%
+          //System.out.println("Row is not deleted.");
+        }
+        //delete.close();
+        stmt.close();
+        con.close();
+      }catch(Exception e){
+        System.out.println(e.getMessage());
+      }
+
+    }
+  }
 %>
 
 <!doctype html>
@@ -91,16 +136,11 @@
 
             <!-- select a user -->
             <form name="select_student_form" id="post" action="assign08.jsp" method="POST">
-              <label for="student">Students</label>
+              <label for="student">Select a students to register classes for</label>
               <select name="student" id="student">
                 <%
                 //print out list of students from db to select from
                 try{
-                  String url="jdbc:mysql://jordan/skabone?user=skabone&password=";
-
-                  int i=1;
-                  con=DriverManager.getConnection(url);
-                  stmt=con.createStatement();
                   rst=stmt.executeQuery("select * from students");
                   while(rst.next()){ 
                   %>
@@ -127,32 +167,79 @@
               </select>
               <input name="select_student" type="submit" value="Select Student" class="btn btn-primary btn-large"/>
             </form>
-            <h4><%  if (request.getParameter("student") != null && request.getParameter("student") != null) {
-                      if (!(request.getParameter("student").equals("")) && !(request.getParameter("student").equals(""))) {
-                        %>
-                          <h1>Student Selected</h1>
-                          <p>StudentID = <%=request.getParameter("student")%>
-                        <%
+            <%  if (request.getParameter("student") != null && request.getParameter("student") != null) {
+                  if (!(request.getParameter("student").equals("")) && !(request.getParameter("student").equals(""))) {
+                  studentID = request.getParameter("student");
+                    %>
+                      <% 
+                      //print out list of classes this student has taken
+                      try{
+                        String url="jdbc:mysql://jordan/skabone?user=skabone&password=";
+                        int i=1;
+                        con=DriverManager.getConnection(url);
+                        stmt=con.createStatement();
+
+                        String query = "select * from students where StudentID = " + studentID + "";
+                        rst=stmt.executeQuery(query);
+                        while(rst.next()){ 
+                          studentName = rst.getString(2) + " " + rst.getString(3);
+                        }
+                        rst.close();
+                        stmt.close();
+                        con.close();
+                      }catch(Exception e){
+                        System.out.println(e.getMessage());
                       }
-                    }%></h4>
-            <!-- display records from all selected users -->
-            <div id="records">
-              <% 
-                
-              %>
-            </div>
+                    %><h1><%=studentName%></h1>
+                      <!-- <p>StudentID = <%=request.getParameter("student")%> -->
+                    <%
+                  %>
+            
+                  <!-- display records from all selected users -->
+                  <div id="classes">
+                    <table>
+                      <thead>
+                        <th>Course Code</th>
+                        <th> </th>
+                      </thead>
+                    <% 
+                      //print out list of classes this student has taken
+                      try{
+                        String url="jdbc:mysql://jordan/skabone?user=skabone&password=";
+                        int i=1;
+                        con=DriverManager.getConnection(url);
+                        stmt=con.createStatement();
+
+                        String query = "select * from registeredcourses where StudentID = " + studentID + "";
+                        rst=stmt.executeQuery(query);
+                        while(rst.next()){ 
+                        %>
+                          <tr><td><%=rst.getString(3)%></td><td><a href="?drop=true&regClassID=<%=rst.getString(1)%>">DROP</a></td></tr>
+                        <%
+                        }
+                        rst.close();
+                        stmt.close();
+                        con.close();
+                      }catch(Exception e){
+                        System.out.println(e.getMessage());
+                      }
+                    %>
+                  </div>
+                  <%
+                  }
+                }%>
           </div>
         </div><!--/span-->
 
       </div><!--/row-->
 
       <hr>
-      <footer>
+      <!-- <footer>
         <p>&copy; Jakob Anderson 2012</p>
         <br/>
         <p>Some enhanced UI elements by <a href="http://lab.simurai.com/umbrui/">Simurai Lab &raquo; Umbrui</a> and <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a></p>
         <br/>
-      </footer>
+      </footer> -->
 
     </div><!--/.fluid-container-->
 
