@@ -25,9 +25,55 @@
 //select all students
   String studentID = "0";
   String studentName = "BLORG!!!";
+  if (request.getParameter("student") != null && request.getParameter("student") != null) {
+    if (!(request.getParameter("student").equals("")) && !(request.getParameter("student").equals(""))) {
+    studentID = request.getParameter("student");
+    %><!-- studentID = <%=studentID%> --><%
+    //start new session, assign attribute of username to session variable
+    //HttpSession session = req.getSession(true);
+
+    //if (session.isNew()){
+    session.setAttribute("studentID", studentID);
+    }
+  }
+  studentID=(String)session.getAttribute( "studentID" );
 //select one student's current classes
 
 //add a class for one student
+if (request.getParameter("class") != null) {
+    if (!(request.getParameter("class").equals(""))) {
+      String classID = request.getParameter("class");
+      %><!-- classID = <%=classID%>, studentID = <%=studentID%> -->
+%>
+<%      
+      try{
+        String url="jdbc:mysql://jordan/skabone?user=skabone&password=";
+        int i=1;
+        con=DriverManager.getConnection(url);
+        stmt=con.createStatement();
+        //INSERT INTO registeredcourses VALUES  ( NULL,  1, 'CS 271'    );
+        //INSERT INTO registeredcourses VALUES (NULL, 1, (SELECT CourseCode FROM courses WHERE CourseID = 9 ))
+        String query = "INSERT INTO registeredcourses VALUES (NULL, " + studentID + ", (SELECT CourseCode FROM courses WHERE CourseID = " + classID + " ))";
+        int update=stmt.executeUpdate(query);
+        if(update == 1){
+          %><script>alert("Row is inserted!");</script><%
+          String redirectURL = "assign08.jsp";
+          response.sendRedirect(redirectURL);
+          //System.out.println("Row is deleted.");
+        } else {
+          %><script>alert("Row is not inserted!");</script><%
+          String redirectURL = "assign08.jsp";
+          response.sendRedirect(redirectURL);
+          //System.out.println("Row is not deleted.");
+        }
+        stmt.close();
+        con.close();
+      }catch(Exception e){
+        System.out.println(e.getMessage());
+      }
+
+    }
+  }
 %>
 <%
 //remove a class for one student
@@ -48,9 +94,13 @@
         int delete=stmt.executeUpdate(query);
         if(delete == 1){
           %><script>alert("Row is deleted!");</script><%
+          String redirectURL = "assign08.jsp";
+          response.sendRedirect(redirectURL);
           //System.out.println("Row is deleted.");
         } else {
           %><script>alert("Row is not deleted!");</script><%
+          String redirectURL = "assign08.jsp";
+          response.sendRedirect(redirectURL);
           //System.out.println("Row is not deleted.");
         }
         //delete.close();
@@ -63,7 +113,6 @@
     }
   }
 %>
-
 <!doctype html>
 <!--[if lt IE 7]> 
 <html class="no-js ie6 oldie" lang="en"> 
@@ -136,8 +185,9 @@
 
             <!-- select a user -->
             <form name="select_student_form" id="post" action="assign08.jsp" method="POST">
-              <label for="student">Select a students to register classes for</label>
+              <label for="student">Select a student to register classes for</label>
               <select name="student" id="student">
+                <option value="0">Select A Student to Begin</option>
                 <%
                 //print out list of students from db to select from
                 try{
@@ -169,10 +219,10 @@
             </form>
             <%  if (request.getParameter("student") != null && request.getParameter("student") != null) {
                   if (!(request.getParameter("student").equals("")) && !(request.getParameter("student").equals(""))) {
-                  studentID = request.getParameter("student");
+                  //studentID = request.getParameter("student");
                     %>
                       <% 
-                      //print out list of classes this student has taken
+                      //print out student name
                       try{
                         String url="jdbc:mysql://jordan/skabone?user=skabone&password=";
                         int i=1;
@@ -194,8 +244,36 @@
                       <!-- <p>StudentID = <%=request.getParameter("student")%> -->
                     <%
                   %>
-            
-                  <!-- display records from all selected users -->
+                  <!-- select a registeredClass to register for this student -->
+                  <form name="select_classes_form" id="post" action="assign08.jsp" method="POST">
+                    <label for="class">Select a class to register for this student</label>
+                    <select name="class" id="class">
+                      <%
+                      //print out list of students from db to select from
+                      try{
+                        String url="jdbc:mysql://jordan/skabone?user=skabone&password=";
+                        int i=1;
+                        con=DriverManager.getConnection(url);
+                        stmt=con.createStatement();
+
+                        rst=stmt.executeQuery("select * from courses");
+                        while(rst.next()){ 
+                        %>
+                          <option value="<%=rst.getString(1)%>"><%=rst.getString(2)%> :: <%=rst.getString(3)%></option>
+                        <%
+                        }
+                        rst.close();
+                        stmt.close();
+                        con.close();
+                      }catch(Exception e){
+                        System.out.println(e.getMessage());
+                      }
+                      %>
+                    </select>
+                    <input name="select_class" type="submit" value="Add Course" class="btn btn-primary btn-large"/>
+                  </form>
+
+                  <!-- display records from this selected user -->
                   <div id="classes">
                     <table>
                       <thead>
